@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Bitirme_2</string>
+    <string name="wellcome_to_e_tech_education">Wellcome to e-Tech Education</string>
+    <string name="do_you_have_a_account_sign_on">Do you have a account? Sign on.</string>
+    <string name="click_here_and_register">Click here and register.</string>
+    <string name="user_name_or_mail_address">User Name or Mail Address</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
 </resources>
