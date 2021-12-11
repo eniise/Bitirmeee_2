@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bitirme_2"
-        <activity android:name="Controller.LoginController" android:theme="@style/Theme.Bitirme_2">
+        <activity android:name="controller.RegisterController" android:theme="@style/Theme.Bitirme_2"> </activity>
+        <activity android:name="controller.LoginController" android:theme="@style/Theme.Bitirme_2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

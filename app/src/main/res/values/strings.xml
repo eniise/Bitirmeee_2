@@ -6,4 +6,9 @@
     <string name="user_name_or_mail_address">User Name or Mail Address</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="e_techeducation_registration_page">e-TechEducation Registration Page</string>
+    <string name="name">Name</string>
+    <string name="sur_name">Sur name</string>
+    <string name="e_mail_address">E-Mail Address</string>
 </resources>
