@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        >
+        <ImageView
+            android:id="@+id/urunResim"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/txtTrainerName"
+            android:layout_width="111dp"
+            android:layout_height="24dp"
+            android:layout_alignBottom="@+id/urunResim"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="129dp"
+            android:layout_marginBottom="123dp"
+            android:layout_toEndOf="@+id/urunResim"
+            android:text="NULL" />
+
+        <TextView
+            android:id="@+id/txtTrainerDetail"
+            android:layout_width="235dp"
+            android:layout_height="100dp"
+            android:layout_alignBottom="@+id/urunResim"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="59dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="-4dp"
+            android:layout_toEndOf="@+id/urunResim"
+            android:text="NULL"
+
+            android:textStyle="italic" />
+
+        <ImageButton
+            android:id="@+id/btnSepeteAt"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="41dp"
+            android:layout_height="30dp"
+            android:layout_alignTop="@+id/urunResim"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="156dp"
+            android:layout_marginEnd="280dp"
+            android:src="@drawable/ic_baseline_share_24"
+            android:textColor="@color/black"
+            android:textSize="6pt" />
+
+        <ImageButton
+            android:id="@+id/btnSepeteAt2"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="41dp"
+            android:layout_height="30dp"
+            android:layout_alignTop="@+id/urunResim"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="153dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_baseline_favorite_24"
+            android:textColor="@color/black"
+            android:textSize="6pt" />
+
+        <ImageButton
+            android:id="@+id/btnUrunIncele"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="31dp"
+            android:layout_alignBottom="@+id/txtTrainerDetail"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="161dp"
+            android:layout_marginEnd="350dp"
+            android:layout_marginBottom="-34dp"
+            android:fontFamily="sans-serif"
+            android:includeFontPadding="false"
+            android:src="@drawable/ic_baseline_mail_24"
+            android:textColor="@color/black"
+            android:textSize="6pt" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
