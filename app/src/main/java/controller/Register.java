@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 import com.enise.bitirme_2.R;
 
-public class RegisterController extends Activity {
+public class Register extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
