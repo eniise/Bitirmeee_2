@@ -11,4 +11,6 @@
     <string name="name">Name</string>
     <string name="sur_name">Sur name</string>
     <string name="e_mail_address">E-Mail Address</string>
+    <string name="map_filtering">Map Filtering</string>
+    <string name="detail_filtering">Detail Filtering</string>
 </resources>
