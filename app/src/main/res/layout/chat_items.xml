@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        >
+
+        <ImageView
+            android:id="@+id/urunResim"
+            android:layout_width="64dp"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:id="@+id/txtTrainerName"
+            android:layout_width="275dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@+id/urunResim"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="53dp"
+            android:layout_marginBottom="7dp"
+            android:layout_toEndOf="@+id/urunResim"
+            android:enabled="false"
+            android:fontFamily="sans-serif-thin"
+            android:text="NULL"
+            android:textColor="#000000" />
+
+        <ImageButton
+            android:id="@+id/btnSepeteAt2"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="41dp"
+            android:layout_height="30dp"
+            android:layout_alignTop="@+id/urunResim"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/ic_baseline_send_24"
+            android:textColor="@color/black"
+            android:textSize="6pt" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
