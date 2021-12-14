@@ -3,6 +3,7 @@ package controller;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -48,7 +49,8 @@ public class Main extends Activity {
                 Toast.makeText(context,"Detaylı arama sayfası detail",Toast.LENGTH_LONG).show();
                 break;
             case R.id.MapFiltering:
-                Toast.makeText(context,"Detaylı arama sayfası map",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context,Maps.class);
+                startActivity(intent);
                 break;
         }
         return true;

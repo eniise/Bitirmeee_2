@@ -3,16 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.enise.bitirme_2">
 
-    <application tools:ignore="ExtraText">
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.Bitirme_2"
-        <activity android:name="controller.Register" android:theme="@style/Theme.Bitirme_2"> </activity>
-        <activity android:name="controller.Main" android:theme="@style/Theme.Bitirme_2"> </activity>
-        <activity android:name="controller.Login" android:theme="@style/Theme.Bitirme_2">
+
+    <application tools:ignore="ExtraText"
+        android:allowBackup="true">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA-99NRffwvYNWfROFtGC3x6gX0ve6WBzI" />
+        <activity
+            android:name="controller.Register"
+            android:theme="@style/Theme.Bitirme_2" />
+        <activity
+            android:name="controller.Main"
+            android:theme="@style/Theme.Bitirme_2" />
+        <activity
+            android:name="controller.Maps"
+            android:theme="@style/Theme.Bitirme_2" />
+        <activity
+            android:name="controller.Login"
+            android:exported="true"
+            android:theme="@style/Theme.Bitirme_2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
