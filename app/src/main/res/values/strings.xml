@@ -13,4 +13,6 @@
     <string name="e_mail_address">E-Mail Address</string>
     <string name="map_filtering">Map Filtering</string>
     <string name="detail_filtering">Detail Filtering</string>
+    <string name="yonlendir">Yönlendir</string>
+    <string name="hayir">Hayır</string>
 </resources>
