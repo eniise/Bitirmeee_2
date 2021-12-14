@@ -69,7 +69,7 @@ public class Maps extends AppCompatActivity implements OnMapReadyCallback {
                             .setNegativeButton(R.string.hayir, ((dialog, which) -> {
                                 Toast.makeText(context,"Madem öyle defol başka bir ilçe bul.",Toast.LENGTH_LONG).show();
                             }))
-                            .setIcon(android.R.drawable.ic_dialog_info)
+                            .setIcon(R.drawable.ic_baseline_info_24)
                             .show();
                 }
                 catch (IndexOutOfBoundsException e){
