@@ -48,36 +48,38 @@ public class Maps extends AppCompatActivity implements OnMapReadyCallback {
         LatLng antep = new LatLng(37.0587509, 37.3100968);
         mMap.addMarker(new MarkerOptions()
                 .position(antep)
-                .title("Gülseren"));
+                .title("Gaziantep"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(antep));
         mMap.setOnMapClickListener(latLng -> {
-            Geocoder gcd = new Geocoder(context, Locale.getDefault());
             try {
-                List<Address> addresses = gcd.getFromLocation(latLng.latitude, latLng.longitude, 1);
-                try {
-                    String adress = addresses.get(0).getAddressLine(0);
-                    String find_ilce = Pattern.compile("[\\,\"]")
-                            .split(adress)[2]
-                            .split(" ")[2]
-                            .split("/")[0];
-                    new AlertDialog.Builder(context)
-                            .setTitle("İlçe bulundu")
-                            .setMessage(find_ilce+" isimli ilçeye tıkladınız, bu ilçedeki öğretmenler anasayfada listelensin mi?")
-                            .setPositiveButton(R.string.yonlendir, (dialog, which) -> {
-                                Toast.makeText(context,"API geliştireyim seni yönlendiririm.",Toast.LENGTH_LONG).show();
-                            })
-                            .setNegativeButton(R.string.hayir, ((dialog, which) -> {
-                                Toast.makeText(context,"Madem öyle defol başka bir ilçe bul.",Toast.LENGTH_LONG).show();
-                            }))
-                            .setIcon(R.drawable.ic_baseline_info_24)
-                            .show();
-                }
-                catch (IndexOutOfBoundsException e){
-                    Toast.makeText(context,"Tıkladığın yerden ilçe bilgisi alamadım. Başka bir yere tıkla.",Toast.LENGTH_LONG).show();
-                }
-            } catch (IOException e) {
+                Geocoder gcd = new Geocoder(context, Locale.getDefault());
+                GetDistrict(gcd,latLng.latitude,latLng.longitude);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
+    }
+    private void GetDistrict(Geocoder gcd,double lat, double lon){
+        try {
+            List<Address> addresses = gcd.getFromLocation(lat, lon, 1);
+            String find_ilce = Pattern.compile("[\\,\"]")
+                    .split(addresses.get(0).getAddressLine(0))[2]
+                    .split(" ")[2]
+                    .split("/")[0];
+            new AlertDialog.Builder(context)
+                    .setTitle("İlçe bulundu")
+                    .setMessage(find_ilce+" isimli ilçeye tıkladınız, bu ilçedeki öğretmenler anasayfada listelensin mi?")
+                    .setPositiveButton(R.string.yonlendir, (dialog, which) -> {
+                        Toast.makeText(context,"API geliştireyim seni yönlendiririm.",Toast.LENGTH_LONG).show();
+                    })
+                    .setNegativeButton(R.string.hayir, ((dialog, which) -> {
+                        Toast.makeText(context,"Madem öyle defol başka bir ilçe bul.",Toast.LENGTH_LONG).show();
+                    }))
+                    .setIcon(R.drawable.ic_baseline_info_24)
+                    .show();
+        }
+        catch (IndexOutOfBoundsException | IOException e){
+            Toast.makeText(context,"Tıkladığın yerden ilçe bilgisi alamadım. Başka bir yere tıkla.",Toast.LENGTH_LONG).show();
+        }
     }
 }
