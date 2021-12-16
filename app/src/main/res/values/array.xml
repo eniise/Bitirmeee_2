@@ -15,4 +15,15 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
+    <string-array name="district">
+        <item>Şahinbey</item>
+        <item>Şehitkamil</item>
+        <item>Araban</item>
+        <item>İslahiye</item>
+        <item>Karkamış</item>
+        <item>Nizip</item>
+        <item>Nurdağı</item>
+        <item>Oğuzeli</item>
+        <item>Yavuzeli</item>
+    </string-array>
 </resources>
