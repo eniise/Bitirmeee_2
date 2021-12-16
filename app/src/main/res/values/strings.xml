@@ -16,4 +16,13 @@
     <string name="yonlendir">Yönlendir</string>
     <string name="hayir">Hayır</string>
     <string name="time_interval">Time Interval</string>
+    <string name="enter_a_course_detail">Enter a course detail</string>
+    <string name="district">District</string>
+    <string name="enter_a_course_name">Enter a course name</string>
+    <string name="online">Online</string>
+    <string name="other_place">Other Place</string>
+    <string name="trainer_home">Trainer Home</string>
+    <string name="student_home">Student Home</string>
+    <string name="enter_a_cost">Enter a cost</string>
+    <string name="course_upload">Course Upload</string>
 </resources>
