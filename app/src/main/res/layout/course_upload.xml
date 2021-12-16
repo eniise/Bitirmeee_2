@@ -177,8 +177,8 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName2"
-        android:layout_width="220dp"
-        android:layout_height="39dp"
+        android:layout_width="257dp"
+        android:layout_height="42dp"
         android:ems="10"
         android:hint="@string/enter_a_cost"
         android:inputType="textPersonName"
