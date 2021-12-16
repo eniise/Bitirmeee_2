@@ -5,6 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="107dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="88dp"
+        android:text="Edit Course"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.878"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintVertical_bias="0.142" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="114dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="88dp"
+        android:text="Course Upload"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView2"
+        app:layout_constraintVertical_bias="0.888" />
+
     <ImageView
         android:id="@+id/imgProfile"
         android:layout_width="wrap_content"
@@ -53,9 +79,13 @@
         app:layout_constraintVertical_bias="0.016" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="413dp"
-        android:layout_height="521dp"
+        android:id="@+id/recyclerView2"
+        android:layout_width="410dp"
+        android:layout_height="452dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        tools:layout_editor_absoluteX="1dp" />
+        app:layout_constraintVertical_bias="0.095" />
 </androidx.constraintlayout.widget.ConstraintLayout>
