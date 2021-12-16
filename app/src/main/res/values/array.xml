@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="timeInterval">
+        <item>09:00–12:00</item>
+        <item>12:00–15:00</item>
+        <item>15:00–18:00</item>
+        <item>18:00–21:00</item>
+    </string-array>
+    <string-array name="weekDays">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+</resources>

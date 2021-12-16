@@ -15,4 +15,5 @@
     <string name="detail_filtering">Detail Filtering</string>
     <string name="yonlendir">Yönlendir</string>
     <string name="hayir">Hayır</string>
+    <string name="time_interval">Time Interval</string>
 </resources>
