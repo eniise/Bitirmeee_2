@@ -25,4 +25,6 @@
     <string name="student_home">Student Home</string>
     <string name="enter_a_cost">Enter a cost</string>
     <string name="course_upload">Course Upload</string>
+    <string name="i_m_student">I am student</string>
+    <string name="i_m_trainer">I am trainer</string>
 </resources>
