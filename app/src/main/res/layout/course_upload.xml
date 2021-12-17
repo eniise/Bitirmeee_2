@@ -11,7 +11,6 @@
         android:layout_width="122dp"
         android:layout_height="34dp"
         android:entries="@array/district"
-        android:prompt="District"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.941"
@@ -25,14 +24,13 @@
         android:layout_width="122dp"
         android:layout_height="34dp"
         android:entries="@array/weekDays"
-        android:prompt="Week days"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch4"
         app:layout_constraintVertical_bias="0.043"
-        tools:ignore="HardcodedText,MissingConstraints" />
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/textView8"
@@ -139,7 +137,6 @@
         android:layout_width="114dp"
         android:layout_height="36dp"
         android:entries="@array/timeInterval"
-        android:prompt="Time Interval"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.038"
