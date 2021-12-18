@@ -3,23 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.enise.bitirme_2">
 
-
+    <permission android:name="android.permission.INTERNET"/>
     <application tools:ignore="ExtraText"
-        android:allowBackup="true">
+        android:allowBackup="true"
+        android:usesCleartextTraffic="true"
+        >
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA-99NRffwvYNWfROFtGC3x6gX0ve6WBzI" />
         <activity
-            android:name="controller.Register"
+            android:name="controllers.Register"
             android:theme="@style/Theme.Bitirme_2" />
         <activity
-            android:name="controller.Main"
+            android:name="controllers.Main"
             android:theme="@style/Theme.Bitirme_2" />
         <activity
-            android:name="controller.Maps"
+            android:name="controllers.Maps"
             android:theme="@style/Theme.Bitirme_2" />
         <activity
-            android:name="controller.Login"
+            android:name="controllers.Login"
             android:exported="true"
             android:theme="@style/Theme.Bitirme_2">
             <intent-filter>

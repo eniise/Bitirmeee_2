@@ -1,4 +1,4 @@
-package controller;
+package controllers;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

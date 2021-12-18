@@ -1,4 +1,4 @@
-package controller;
+package controllers;
 
 import android.app.Activity;
 import android.os.Bundle;
