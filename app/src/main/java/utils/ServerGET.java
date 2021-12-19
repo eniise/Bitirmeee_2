@@ -16,11 +16,11 @@ import java.net.URL;
 
 import models.User;
 
-public class JsonTask extends AsyncTask<String, String, String> {
+public class ServerGET extends AsyncTask<String, String, String> {
     public ProgressDialog progressDialog;
     private final int transactionType;
     public AsyncResponse delegate = null;
-    public JsonTask(ProgressDialog progressDialog,int transactionType, String islem){
+    public ServerGET(ProgressDialog progressDialog, int transactionType, String islem){
         this.progressDialog = progressDialog;
         this.progressDialog.setMessage(islem+", lütfen bekleyiniz.");
         this.transactionType = transactionType;
@@ -33,8 +33,6 @@ public class JsonTask extends AsyncTask<String, String, String> {
     }
 
     protected String doInBackground(String... params) {
-
-
         HttpURLConnection connection = null;
         BufferedReader reader = null;
 
@@ -69,19 +67,20 @@ public class JsonTask extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        if (progressDialog.isShowing()){
+        if (progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
-        switch (transactionType){
-            case TransactionTypes.doLogin:
-                User u = new Gson().fromJson(result,User.class);
-                StaticData.setUserData(new User(u.getUserId(),u.getMail(),u.getName(),u.getSurName(),u.getPassword(),u.getRoleID()));
-                delegate.processFinish("true");
-                break;
-            case TransactionTypes.doRegister:
-                 //user register..
-                 System.out.print(result);
-            break;
+        if (result.length() > 0) {
+            switch (transactionType) {
+                case TransactionTypes.doLogin:
+                    User u = new Gson().fromJson(result, User.class);
+                    StaticData.setUserData(new User(u.getUserId(), u.getMail(), u.getName(), u.getSurName(), u.getPassword(), u.getRoleID()));
+                    delegate.processFinish("true");
+                    break;
+            }
+        }
+        else {
+            delegate.processFinish("false");
         }
     }
 }

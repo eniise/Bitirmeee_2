@@ -1,10 +1,8 @@
 package controllers;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,13 +12,11 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.enise.bitirme_2.R;
-import com.google.android.gms.tasks.Task;
 
 import java.util.concurrent.ExecutionException;
 
-import models.User;
 import utils.AsyncResponse;
-import utils.JsonTask;
+import utils.ServerGET;
 import utils.MyAlertDialog;
 import utils.StaticData;
 import utils.TransactionTypes;
@@ -49,7 +45,7 @@ public class Login extends Activity implements AsyncResponse {
             String password = txtPassword.getText().toString();
             if(mail.length() != 0 && password.length() != 0 ) {
                 doLoginDialog = new ProgressDialog(v.getContext());
-                JsonTask task =  new JsonTask(doLoginDialog, TransactionTypes.doLogin, "Giriş yapılıyor");
+                ServerGET task =  new ServerGET(doLoginDialog, TransactionTypes.doLogin, "Giriş yapılıyor");
                 task.delegate = this;
                 try {
                     task.execute(URLs.LoginURL + "userMail="+mail+"&userPassword="+password).get();
@@ -74,11 +70,25 @@ public class Login extends Activity implements AsyncResponse {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle != null){
+            String mail = intent.getStringExtra("mail");
+            String password = intent.getStringExtra("password");
+            txtMail.setText(mail);
+            txtPassword.setText(password);
+        }
+    }
+
+    @Override
     public void processFinish(String output) {
         if(output.equals("true")){
             System.out.println(StaticData.getUserData().getMail());
             Intent intent = new Intent(this,Main.class);
             startActivity(intent);
+            finish();
         }
         if(output.equals("false")){
             new MyAlertDialog(this,"Hatalı giriş","Mail adresi veya şifre hatalı",R.drawable.ic_baseline_info_24)
