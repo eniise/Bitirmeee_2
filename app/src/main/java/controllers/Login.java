@@ -45,7 +45,7 @@ public class Login extends Activity implements AsyncResponse {
             String password = txtPassword.getText().toString();
             if(mail.length() != 0 && password.length() != 0 ) {
                 doLoginDialog = new ProgressDialog(v.getContext());
-                ServerGET task =  new ServerGET(null,doLoginDialog, TransactionTypes.doLogin, "Giriş yapılıyor");
+                ServerGET task =  new ServerGET(doLoginDialog, TransactionTypes.doLogin, "Giriş yapılıyor");
                 task.delegate = this;
                 try {
                     task.execute(URLs.LoginURL + "userMail="+mail+"&userPassword="+password).get();

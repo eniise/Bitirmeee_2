@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import models.TrainerCourse;
+import utils.ServerGET;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolder> {
     private ArrayList<TrainerCourse> mUrunlerList;
@@ -37,6 +38,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolde
         public ImageButton btnHomeShare;
         public ImageButton btnHomeLike;
         public ImageButton btnHomeStartChat;
+        public TextView txtLikesCount;
         public PostsViewHolder(View itemView) {
             super(itemView);
             mHomeTrainerImage = itemView.findViewById(R.id.homeTrainerImage);
@@ -45,6 +47,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolde
             btnHomeShare = itemView.findViewById(R.id.btnHomeShare);
             btnHomeLike = itemView.findViewById(R.id.btnHomeLike);
             btnHomeStartChat = itemView.findViewById(R.id.btnHomeStartChat);
+            txtLikesCount = itemView.findViewById(R.id.txtHomeLikesCount);
         }
     }
     public HomeAdapter(ArrayList<TrainerCourse> exampleList) {
@@ -63,6 +66,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolde
         String detail = currentItem.getmDetail().length() > 40 ? currentItem.getmDetail().substring(0,40)+"..." : currentItem.getmDetail();
         holder.txtHomeTrainerDetail.setText(detail);
         holder.txtHomeTrainerName.setText(currentItem.getmName());
+        holder.txtLikesCount.setText(String.valueOf(currentItem.getmLikeCount()));
         holder.btnHomeStartChat.setOnClickListener(v -> {
             Toast.makeText(v.getContext(),"Buraya tıklanınca chat açılacak",Toast.LENGTH_SHORT).show();
         });
@@ -77,7 +81,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolde
     public int getItemCount() {
         return mUrunlerList.size();
     }
-    @SuppressLint("StaticFieldLeak")
+
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 

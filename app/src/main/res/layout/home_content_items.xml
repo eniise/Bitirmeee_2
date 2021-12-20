@@ -35,6 +35,20 @@
             android:text="NULL" />
 
         <TextView
+            android:id="@+id/txtHomeLikesCount"
+            android:layout_width="30dp"
+            android:layout_height="21dp"
+            android:layout_alignBottom="@+id/homeTrainerImage"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="171dp"
+            android:layout_marginTop="169dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="-35dp"
+            android:layout_toEndOf="@+id/homeTrainerImage"
+            android:text="NULL" />
+
+        <TextView
             android:id="@+id/txtHomeTrainerDetail"
             android:layout_width="235dp"
             android:layout_height="100dp"
@@ -66,15 +80,16 @@
         <ImageButton
             android:id="@+id/btnHomeLike"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="41dp"
-            android:layout_height="30dp"
+            android:layout_width="38dp"
+            android:layout_height="37dp"
             android:layout_alignTop="@+id/homeTrainerImage"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="153dp"
+            android:layout_marginTop="149dp"
             android:layout_marginEnd="10dp"
             android:src="@drawable/ic_baseline_favorite_24"
             android:textColor="@color/black"
-            android:textSize="6pt" />
+            android:textSize="6pt"
+            android:tooltipText="Test" />
 
         <ImageButton
             android:id="@+id/btnHomeStartChat"

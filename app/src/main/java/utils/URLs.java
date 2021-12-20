@@ -12,4 +12,10 @@ public class URLs {
                 ServerInfo.PortNumber+
                 ServerInfo.API_LEVEL+"TrainerCourse/GetCourses?queryID="+userID);
     }
+    public static String GetCourseLikes(int queryId,int courseId){
+        return new String (ServerInfo.Host+
+                ServerInfo.PortNumber+
+                ServerInfo.API_LEVEL+
+                "TrainerCourse/GetCourseLikes?queryID="+queryId+"&courseId="+courseId);
+    }
 }

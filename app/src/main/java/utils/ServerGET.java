@@ -26,14 +26,13 @@ public class ServerGET extends AsyncTask<String, String, String> {
     public ProgressDialog progressDialog;
     private final int transactionType;
     public AsyncResponse delegate = null;
-    public ServerGET(@Nullable View rootView,ProgressDialog progressDialog, int transactionType, String islem){
+    public ServerGET(ProgressDialog progressDialog, int transactionType, String islem){
         this.progressDialog = progressDialog;
         this.progressDialog.setMessage(islem+", lütfen bekleyiniz.");
         this.transactionType = transactionType;
     }
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog.setMessage("Giriş yapılıyor...");
         progressDialog.setCancelable(false);
         progressDialog.show();
     }
@@ -88,6 +87,8 @@ public class ServerGET extends AsyncTask<String, String, String> {
                         TrainerCourse[] courses = new Gson().fromJson(result,TrainerCourse[].class);
                         ArrayList<TrainerCourse> tempList = new ArrayList<>(Arrays.asList(courses));
                         delegate.processFinish(tempList);
+                    case TransactionTypes.doGetLikesCount:
+
                     break;
                 }
             } else {

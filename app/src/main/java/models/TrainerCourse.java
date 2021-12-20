@@ -21,8 +21,10 @@ public class TrainerCourse {
     private double mCost;
     @SerializedName("detail")
     private String mDetail;
+    @SerializedName("likeCount")
+    private String mLikeCount;
 
-    public TrainerCourse(int mId, int mUserId, String mName, String mTypes, String mTimeIntervals, String mDays, String mDistrict, double mCost, String mDetail) {
+    public TrainerCourse(int mId, int mUserId, String mName, String mTypes, String mTimeIntervals, String mDays, String mDistrict, double mCost, String mDetail, String mLikeCount) {
         this.mId = mId;
         this.mUserId = mUserId;
         this.mName = mName;
@@ -32,6 +34,7 @@ public class TrainerCourse {
         this.mDistrict = mDistrict;
         this.mCost = mCost;
         this.mDetail = mDetail;
+        this.mLikeCount = mLikeCount;
     }
     public TrainerCourse(){
 
@@ -107,5 +110,13 @@ public class TrainerCourse {
 
     public void setmDetail(String mDetail) {
         this.mDetail = mDetail;
+    }
+
+    public String getmLikeCount() {
+        return mLikeCount;
+    }
+
+    public void setmLikeCount(String mLikeCount) {
+        this.mLikeCount = mLikeCount;
     }
 }

@@ -35,7 +35,7 @@ public class FragmentHome extends Fragment implements AsyncResponse {
         View rootView = inflater.inflate(R.layout.home_content, container, false);
         view = rootView;
         progressDialog = new ProgressDialog(view.getContext());
-        ServerGET serverGET = new ServerGET(rootView,progressDialog, TransactionTypes.doGetCourses,"Gönderiler yükleniyor..");
+        ServerGET serverGET = new ServerGET(progressDialog, TransactionTypes.doGetCourses,"Gönderiler yükleniyor..");
         serverGET.delegate = this;
         serverGET.execute(URLs.GetCourses(StaticData.getUserData().getUserId()));
         return rootView;
