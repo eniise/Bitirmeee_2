@@ -12,13 +12,15 @@
         layout="@layout/top_toolbar"
         android:layout_width="match_parent"
         android:layout_height="48dp" />
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="50dp"
-        />
+        android:layout_marginBottom="50dp" />
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/alt_menu"
         android:layout_width="match_parent"

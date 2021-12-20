@@ -15,10 +15,15 @@ import android.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.enise.bitirme_2.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Main extends Activity {
+import fragments.FragmentHome;
+
+public class Main extends AppCompatActivity {
     Toolbar mToolBar;
     Context context;
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -28,6 +33,8 @@ public class Main extends Activity {
         setContentView(R.layout.home_page);
         mToolBar = findViewById(R.id.toolbar);
         SetApplicationToolbar(mToolBar);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new FragmentHome()).commit();
         context = this;
     }
 
@@ -60,4 +67,26 @@ public class Main extends Activity {
         mToolBar.inflateMenu(R.menu.ust_menu);
         getActionBar().setTitle("");
     }
+    private void SetupNavigationBar(){
+        BottomNavigationView bottomNav = findViewById(R.id.alt_menu);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+    }
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            item -> {
+                Fragment selectedFragment = null;
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        selectedFragment = new FragmentHome();
+                        break;
+                    case R.id.chat:
+                        //selectedFragment = new sepet();
+                        break;
+                    case R.id.profil:
+                        //selectedFragment = new profil();
+                        break;
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        selectedFragment).commit();
+                return true;
+            };
 }

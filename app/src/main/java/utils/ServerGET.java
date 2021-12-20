@@ -3,6 +3,9 @@ package utils;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 
@@ -13,14 +16,17 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 
+import models.TrainerCourse;
 import models.User;
 
 public class ServerGET extends AsyncTask<String, String, String> {
     public ProgressDialog progressDialog;
     private final int transactionType;
     public AsyncResponse delegate = null;
-    public ServerGET(ProgressDialog progressDialog, int transactionType, String islem){
+    public ServerGET(@Nullable View rootView,ProgressDialog progressDialog, int transactionType, String islem){
         this.progressDialog = progressDialog;
         this.progressDialog.setMessage(islem+", lütfen bekleyiniz.");
         this.transactionType = transactionType;
@@ -70,16 +76,24 @@ public class ServerGET extends AsyncTask<String, String, String> {
         if (progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
-        if (result.length() > 0) {
-            switch (transactionType) {
-                case TransactionTypes.doLogin:
-                    User u = new Gson().fromJson(result, User.class);
-                    StaticData.setUserData(new User(u.getUserId(), u.getMail(), u.getName(), u.getSurName(), u.getPassword(), u.getRoleID()));
-                    delegate.processFinish("true");
+        if(result != null) {
+            if (result.length() > 0) {
+                switch (transactionType) {
+                    case TransactionTypes.doLogin:
+                        User u = new Gson().fromJson(result, User.class);
+                        StaticData.setUserData(new User(u.getUserId(), u.getMail(), u.getName(), u.getSurName(), u.getPassword(), u.getRoleID()));
+                        delegate.processFinish("true");
+                        break;
+                    case TransactionTypes.doGetCourses:
+                        TrainerCourse[] courses = new Gson().fromJson(result,TrainerCourse[].class);
+                        ArrayList<TrainerCourse> tempList = new ArrayList<>(Arrays.asList(courses));
+                        delegate.processFinish(tempList);
                     break;
+                }
+            } else {
+                delegate.processFinish("false");
             }
-        }
-        else {
+        } else {
             delegate.processFinish("false");
         }
     }

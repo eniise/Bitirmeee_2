@@ -1,5 +1,5 @@
 package utils;
 
 public interface AsyncResponse {
-    void processFinish(String output);
+    <T> void processFinish(T result);
 }

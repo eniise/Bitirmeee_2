@@ -45,7 +45,7 @@ public class Login extends Activity implements AsyncResponse {
             String password = txtPassword.getText().toString();
             if(mail.length() != 0 && password.length() != 0 ) {
                 doLoginDialog = new ProgressDialog(v.getContext());
-                ServerGET task =  new ServerGET(doLoginDialog, TransactionTypes.doLogin, "Giriş yapılıyor");
+                ServerGET task =  new ServerGET(null,doLoginDialog, TransactionTypes.doLogin, "Giriş yapılıyor");
                 task.delegate = this;
                 try {
                     task.execute(URLs.LoginURL + "userMail="+mail+"&userPassword="+password).get();
@@ -83,14 +83,14 @@ public class Login extends Activity implements AsyncResponse {
     }
 
     @Override
-    public void processFinish(String output) {
-        if(output.equals("true")){
+    public void processFinish(Object output) {
+        if(String.valueOf(output).equals("true")){
             System.out.println(StaticData.getUserData().getMail());
             Intent intent = new Intent(this,Main.class);
             startActivity(intent);
             finish();
         }
-        if(output.equals("false")){
+        if(String.valueOf(output).equals("false")){
             new MyAlertDialog(this,"Hatalı giriş","Mail adresi veya şifre hatalı",R.drawable.ic_baseline_info_24)
                     .ShowMessage()
                     .setPositiveButton(R.string.okay,((dialog, which) -> {

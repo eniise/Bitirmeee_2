@@ -71,11 +71,16 @@ public class ServerPOST extends AsyncTask<String, String, String> {
         if (progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
-        if (result.equals("true")) {
-            switch (transactionType) {
-                case TransactionTypes.doRegister:
-                    delegate.processFinish("true");
-                    break;
+        if(result != null) {
+            if (result.equals("true")) {
+                switch (transactionType) {
+                    case TransactionTypes.doRegister:
+                        delegate.processFinish("true");
+                        break;
+                }
+            }
+            else {
+                delegate.processFinish("false");
             }
         }
         else {

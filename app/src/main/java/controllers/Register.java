@@ -2,15 +2,12 @@ package controllers;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -39,21 +36,15 @@ public class Register extends Activity implements AsyncResponse {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.regis_page);
         SetLayout();
-        rdRegisterTrainer.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                    rdRegisterStudent.setChecked(false);
-                RoleId = 1;
-            }
+        rdRegisterTrainer.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked)
+                rdRegisterStudent.setChecked(false);
+            RoleId = 1;
         });
-        rdRegisterStudent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                    rdRegisterTrainer.setChecked(false);
-                RoleId = 2;
-            }
+        rdRegisterStudent.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked)
+                rdRegisterTrainer.setChecked(false);
+            RoleId = 2;
         });
         btnSignUp.setOnClickListener(v -> {
             if(DetectFreeSpace(v)){
@@ -66,8 +57,8 @@ public class Register extends Activity implements AsyncResponse {
     }
 
     @Override
-    public void processFinish(String output) {
-        if(output.equals("true")){
+    public void processFinish(Object output) {
+        if(String.valueOf(output).equals("true")){
             new MyAlertDialog(this,"Kayıt tamamlandı","Kayıt işleminiz başarılı, anasayfaya yönlendiriyorum.",R.drawable.ic_baseline_info_24)
                     .ShowMessage()
                     .setNegativeButton(R.string.okay,((dialog, which) -> {
