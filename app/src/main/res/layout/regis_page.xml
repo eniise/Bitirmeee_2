@@ -13,10 +13,10 @@
         android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.906"
+        app:layout_constraintHorizontal_bias="0.932"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRegisterPassword"
-        app:layout_constraintVertical_bias="0.302" />
+        app:layout_constraintVertical_bias="0.569" />
 
     <TextView
         android:id="@+id/textView18"
@@ -104,8 +104,33 @@
         android:text="@string/i_m_student"
         app:layout_constraintBottom_toTopOf="@+id/btnSingUp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.78"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRegisterPassword"
-        app:layout_constraintVertical_bias="0.543" />
+        app:layout_constraintVertical_bias="0.547" />
+
+    <RadioButton
+        android:id="@+id/rdRegisterGenderFamale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I am Famale"
+        app:layout_constraintBottom_toTopOf="@+id/rdRegisterTrainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.139"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRegisterPassword"
+        app:layout_constraintVertical_bias="0.612" />
+
+    <RadioButton
+        android:id="@+id/rdRegisterGenderMale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I am Male"
+        app:layout_constraintBottom_toTopOf="@+id/rdRegisterTrainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toEndOf="@+id/rdRegisterGenderFamale"
+        app:layout_constraintTop_toBottomOf="@+id/txtRegisterPassword"
+        app:layout_constraintVertical_bias="0.612" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

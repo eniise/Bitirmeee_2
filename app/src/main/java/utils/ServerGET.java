@@ -2,10 +2,6 @@ package utils;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.view.View;
-
-import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 
@@ -14,12 +10,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import adapters.HomeAdapter;
+import adapters.TrainerCourseAdapter;
 import models.TrainerCourse;
 import models.User;
 
@@ -27,13 +22,13 @@ public class ServerGET extends AsyncTask<String, String, String> {
     public ProgressDialog progressDialog;
     private final int transactionType;
     public AsyncResponse delegate = null;
-    private HomeAdapter.PostsViewHolder holder;
+    private TrainerCourseAdapter.PostsViewHolder holder;
     public ServerGET(ProgressDialog progressDialog, int transactionType, String islem){
         this.progressDialog = progressDialog;
         this.progressDialog.setMessage(islem+", please wait..");
         this.transactionType = transactionType;
     }
-    public ServerGET(int transactionType, HomeAdapter.PostsViewHolder holder){
+    public ServerGET(int transactionType, TrainerCourseAdapter.PostsViewHolder holder){
         this.transactionType = transactionType;
         this.holder = holder;
     }
@@ -48,7 +43,7 @@ public class ServerGET extends AsyncTask<String, String, String> {
     protected String doInBackground(String... params) {
         HttpURLConnection connection = null;
         BufferedReader reader = null;
-
+        System.out.println(params.length > 1 ? params[0]+" "+params[1] : params[0]);
         try {
             URL url = new URL(params[0]);
             connection = (HttpURLConnection) url.openConnection();
@@ -90,7 +85,15 @@ public class ServerGET extends AsyncTask<String, String, String> {
                 switch (transactionType) {
                     case TransactionTypes.doLogin:
                         User u = new Gson().fromJson(result, User.class);
-                        StaticData.setUserData(new User(u.getUserId(), u.getMail(), u.getName(), u.getSurName(), u.getPassword(), u.getRoleID()));
+                        StaticData.setUserData(new User(u.getUserId()
+                                , u.getMail()
+                                , u.getName()
+                                , u.getSurName()
+                                , u.getPassword()
+                                , u.getRoleID()
+                                , u.getUserProfileImageUrl()
+                                , u.isUserGender()
+                                ,u.getUserLikesCount()));
                         delegate.processFinish("true");
                         break;
                     case TransactionTypes.doGetCourses:
@@ -110,6 +113,11 @@ public class ServerGET extends AsyncTask<String, String, String> {
                             _tmp.add(holder);
                             delegate.processFinish(_tmp);
                         }
+                    break;
+                    case TransactionTypes.doGetMyLikeCourses:
+                        TrainerCourse[] myLike = new Gson().fromJson(result,TrainerCourse[].class);
+                        ArrayList<TrainerCourse> tempMyLike = new ArrayList<>(Arrays.asList(myLike));
+                        delegate.processFinish(tempMyLike);
                     break;
                 }
             } else {

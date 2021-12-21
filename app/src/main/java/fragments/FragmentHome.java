@@ -15,7 +15,7 @@ import com.enise.bitirme_2.R;
 
 import java.util.ArrayList;
 
-import adapters.HomeAdapter;
+import adapters.TrainerCourseAdapter;
 import models.TrainerCourse;
 import utils.AsyncResponse;
 import utils.ServerGET;
@@ -47,7 +47,7 @@ public class FragmentHome extends Fragment implements AsyncResponse {
         mRecyclerView = view.findViewById(R.id.homeContentRecycler);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
-        mAdapter = new HomeAdapter(_lst);
+        mAdapter = new TrainerCourseAdapter(_lst,"Home");
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
     }

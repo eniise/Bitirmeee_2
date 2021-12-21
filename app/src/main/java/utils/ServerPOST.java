@@ -3,7 +3,6 @@ package utils;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.view.View;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,15 +13,14 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-import adapters.HomeAdapter;
-import okhttp3.OkHttpClient;
+import adapters.TrainerCourseAdapter;
 
 public class ServerPOST extends AsyncTask<String, String, String> {
     private ProgressDialog progressDialog;
     private final int transactionType;
     public AsyncResponse delegate = null;
     @SuppressLint("StaticFieldLeak")
-    private HomeAdapter.PostsViewHolder postsViewHolder;
+    private TrainerCourseAdapter.PostsViewHolder postsViewHolder;
     public ServerPOST(ProgressDialog progressDialog, int transactionType, String islem) {
         if(progressDialog != null) {
             this.progressDialog = progressDialog;
@@ -30,7 +28,7 @@ public class ServerPOST extends AsyncTask<String, String, String> {
         }
         this.transactionType = transactionType;
     }
-    public ServerPOST(HomeAdapter.PostsViewHolder v, int transactionType){
+    public ServerPOST(TrainerCourseAdapter.PostsViewHolder v, int transactionType){
         this.transactionType = transactionType;
         this.postsViewHolder = v;
     }

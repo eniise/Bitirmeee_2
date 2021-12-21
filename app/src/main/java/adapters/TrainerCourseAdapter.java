@@ -1,11 +1,5 @@
 package adapters;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +13,12 @@ import com.enise.bitirme_2.R;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import models.TrainerCourse;
 import models.UserLikes;
 import utils.AsyncResponse;
+import utils.ImageDownloaderTask;
 import utils.MyAlertDialog;
 import utils.ServerGET;
 import utils.ServerPOST;
@@ -32,27 +26,27 @@ import utils.StaticData;
 import utils.TransactionTypes;
 import utils.URLs;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolder> implements AsyncResponse {
+public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdapter.PostsViewHolder> implements AsyncResponse {
     private static ArrayList<TrainerCourse> mUrunlerList;
     private  OnItemClickListener mListener;
     private View _v;
     private int _userId;
     private int _courseId;
-    private HomeAdapter.PostsViewHolder _postsViewHolder;
-    private static int _courseLikeCount;
+    private TrainerCourseAdapter.PostsViewHolder _postsViewHolder;
     private static TrainerCourse course;
+    private String mPage;
     @Override
     public <T> void processFinish(T result) {
         //if user like course && finished class type == holder set ui favorite
-        if(mGetClassType(result) == HomeAdapter.PostsViewHolder.class){
-            HomeAdapter.PostsViewHolder holder = (HomeAdapter.PostsViewHolder) result;
+        if(mGetClassType(result) == TrainerCourseAdapter.PostsViewHolder.class){
+            TrainerCourseAdapter.PostsViewHolder holder = (TrainerCourseAdapter.PostsViewHolder) result;
             holder.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_24);
         }
         //else if user not like course && finished class type == arraylist set ui favorite null
         else if(mGetClassType(result)  == ArrayList.class){
             ArrayList<T> _tmp = (ArrayList<T>) result;
             boolean _status = (boolean) _tmp.get(0);
-            HomeAdapter.PostsViewHolder holder = (HomeAdapter.PostsViewHolder) _tmp.get(1);
+            TrainerCourseAdapter.PostsViewHolder holder = (TrainerCourseAdapter.PostsViewHolder) _tmp.get(1);
             if(!_status)
                 holder.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_null_24);
         }
@@ -74,7 +68,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolde
                 int getLike = course.getmLikeCount()+1;
                 _postsViewHolder.txtLikesCount.setText(String.valueOf(getLike));
                 course.setmLikeCount(getLike);
-                System.out.println("like -> "+course.getmLikeCount());
             }
         }
 
@@ -108,27 +101,26 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolde
             txtLikesCount = itemView.findViewById(R.id.txtHomeLikesCount);
         }
     }
-    public HomeAdapter(ArrayList<TrainerCourse> exampleList) {
+    public TrainerCourseAdapter(ArrayList<TrainerCourse> exampleList, String page) {
+        mPage = page;
         mUrunlerList = exampleList;
     }
     @Override
-    public HomeAdapter.@NotNull PostsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_content_items, parent, false);
+    public TrainerCourseAdapter.@NotNull PostsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.trainer_course_items, parent, false);
         return new PostsViewHolder(v);
     }
     @Override
-    public void onBindViewHolder(HomeAdapter.@NotNull PostsViewHolder holder, int position) {
+    public void onBindViewHolder(TrainerCourseAdapter.@NotNull PostsViewHolder holder, int position) {
         TrainerCourse currentItem = mUrunlerList.get(position);
         _postsViewHolder = holder;
-        //test image downloader task method from url
-        //@DownloadImageTask class
         ServerGET isLikeCourseAsync = new ServerGET(TransactionTypes.isUserCourseLikeControl,holder);
         isLikeCourseAsync.delegate = this;
         isLikeCourseAsync.execute(URLs.isUserLikeCourse(
                 StaticData.getUserData().getUserId(),
                 currentItem.getmId()
         ));
-        new DownloadImageTask(holder.mHomeTrainerImage).execute("https://img.favpng.com/14/3/22/stock-photography-computer-icons-user-png-favpng-TWgLj8kmcdnekcpWySfpV97h3.jpg");
+        new ImageDownloaderTask(holder.mHomeTrainerImage).execute("https://img.favpng.com/14/3/22/stock-photography-computer-icons-user-png-favpng-TWgLj8kmcdnekcpWySfpV97h3.jpg");
         String detail = currentItem.getmDetail().length() > 100 ? currentItem.getmDetail().substring(0,100)+"..." : currentItem.getmDetail();
         holder.txtHomeTrainerDetail.setText(detail);
         holder.txtHomeTrainerName.setText(currentItem.getmName());
@@ -159,36 +151,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolde
         return mUrunlerList.size();
     }
 
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
 
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
     //unlike course and  real-time ui changed
     private class UserUnLikeCourse implements AsyncResponse{
         private final int userId;
         private final int courseId;
-        private final HomeAdapter.PostsViewHolder holder;
-        public UserUnLikeCourse(int userId,int courseId,HomeAdapter.PostsViewHolder holder){
+        private final TrainerCourseAdapter.PostsViewHolder holder;
+        public UserUnLikeCourse(int userId, int courseId, TrainerCourseAdapter.PostsViewHolder holder){
             this.userId = userId;
             this.courseId = courseId;
             this.holder = holder;
@@ -203,14 +172,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolde
             if(mGetClassType(result) == ArrayList.class){
                 ArrayList<T> _temp = (ArrayList<T>) result;
                 boolean _result = (boolean) _temp.get(0);
-                PostsViewHolder v = (HomeAdapter.PostsViewHolder) _temp.get(1);
+                PostsViewHolder v = (TrainerCourseAdapter.PostsViewHolder) _temp.get(1);
                 System.out.println(_result);
                 if(_result){
                     v.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_null_24);
                     int getLike = course.getmLikeCount()-1;
                     v.txtLikesCount.setText(String.valueOf(getLike));
                     course.setmLikeCount(getLike);
-                    System.out.println("diss like -> "+course.getmLikeCount());
                 }else {
                     v.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_24);
                 }

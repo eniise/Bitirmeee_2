@@ -15,13 +15,22 @@ public final class User {
     private String Password;
     @SerializedName("roleId")
     private int RoleID;
-    public User(int userId,String mail,String name,String surName,String password,int roleID){
+    @SerializedName("profileImage")
+    private String UserProfileImageUrl;
+    @SerializedName("gender")
+    private boolean UserGender;
+    @SerializedName("likesCount")
+    private int UserLikesCount;
+    public User(int userId, String mail, String name, String surName, String password, int roleID, String userProfileImageUrl, boolean userGender,int userLikesCount){
         UserId = userId;
         Mail = mail;
         Name = name;
         SurName = surName;
         Password = password;
         RoleID = roleID;
+        UserProfileImageUrl = userProfileImageUrl;
+        UserGender = userGender;
+        UserLikesCount = userLikesCount;
     }
     public User(){
 
@@ -66,5 +75,29 @@ public final class User {
 
     public void setRoleID(int roleID) {
         RoleID = roleID;
+    }
+
+    public String getUserProfileImageUrl() {
+        return UserProfileImageUrl;
+    }
+
+    public void setUserProfileImageUrl(String userProfileImageUrl) {
+        UserProfileImageUrl = userProfileImageUrl;
+    }
+
+    public boolean isUserGender() {
+        return UserGender;
+    }
+
+    public void setUserGender(boolean userGender) {
+        UserGender = userGender;
+    }
+
+    public int getUserLikesCount() {
+        return UserLikesCount;
+    }
+
+    public void setUserLikesCount(int userLikesCount) {
+        UserLikesCount = userLikesCount;
     }
 }

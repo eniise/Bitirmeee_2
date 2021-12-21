@@ -8,4 +8,5 @@ public class TransactionTypes {
     public static final int doAddCourseLike = 5;
     public static final int isUserCourseLikeControl = 6;
     public static final int doUnlikeCourse = 7;
+    public static final int doGetMyLikeCourses = 8;
 }

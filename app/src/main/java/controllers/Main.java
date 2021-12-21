@@ -21,7 +21,9 @@ import androidx.fragment.app.Fragment;
 import com.enise.bitirme_2.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import fragments.ChatFragment;
 import fragments.FragmentHome;
+import fragments.ProfilFragment;
 
 public class Main extends AppCompatActivity {
     Toolbar mToolBar;
@@ -36,6 +38,7 @@ public class Main extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new FragmentHome()).commit();
         context = this;
+        SetupNavigationBar();
     }
 
     @SuppressLint("RestrictedApi")
@@ -50,7 +53,6 @@ public class Main extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Toast.makeText(context,"asdjasjdasd",Toast.LENGTH_LONG).show();
         switch (item.getItemId()){
             case R.id.DetailFiltering:
                 Toast.makeText(context,"Detaylı arama sayfası detail",Toast.LENGTH_LONG).show();
@@ -71,6 +73,7 @@ public class Main extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.alt_menu);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
     }
+    @SuppressLint("NonConstantResourceId")
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             item -> {
                 Fragment selectedFragment = null;
@@ -79,10 +82,11 @@ public class Main extends AppCompatActivity {
                         selectedFragment = new FragmentHome();
                         break;
                     case R.id.chat:
-                        //selectedFragment = new sepet();
+                        selectedFragment = new ChatFragment();
                         break;
                     case R.id.profil:
-                        //selectedFragment = new profil();
+                        selectedFragment = new ProfilFragment();
+                        System.out.println("Profile");
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

@@ -36,4 +36,10 @@ public class URLs {
                 ServerInfo.API_LEVEL +
                 "TrainerCourse/UnlikeCourse?userId="+userId+"&courseId="+courseId;
     }
+    public static String GetUserLikeCourses(int userId){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "User/MyLikeCourse?userId="+userId;
+    }
 }

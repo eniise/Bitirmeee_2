@@ -28,4 +28,16 @@
     <string name="i_m_student">I am student</string>
     <string name="i_m_trainer">I am trainer</string>
     <string name="okay">Okay</string>
+    <string name="selectRole">What is your role?</string>
+    <string name="pleaseSelectRole">Please select a any role.</string>
+    <string name="selectGender">What is your gender?</string>
+    <string name="pleaseSelectGender">Please select a any gender.</string>
+    <string name="mailNotNull">Mail address not null.</string>
+    <string name="pleaseEnterMail">Please enter a mail address</string>
+    <string name="passwordNotNull">Password incorrect</string>
+    <string name="pleaseEnterPassowrd">Password field not null, please enter a password.</string>
+    <string name="nameNotNull">Name field not null.</string>
+    <string name="pleaseEnterName">Please enter a name.</string>
+    <string name="surNameNotNull">Sur name not null.</string>
+    <string name="pleaseEnterSurName">Please enter a sur name.</string>
 </resources>
