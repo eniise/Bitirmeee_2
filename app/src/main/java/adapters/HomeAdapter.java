@@ -36,18 +36,19 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolde
     private static ArrayList<TrainerCourse> mUrunlerList;
     private  OnItemClickListener mListener;
     private View _v;
-    private int userId;
-    private int courseId;
-    private HomeAdapter.PostsViewHolder postsViewHolder;
+    private int _userId;
+    private int _courseId;
+    private HomeAdapter.PostsViewHolder _postsViewHolder;
+    private static int _courseLikeCount;
+    private static TrainerCourse course;
     @Override
     public <T> void processFinish(T result) {
-        //get process finished class type
-        //if user like course && finished class type == holder
+        //if user like course && finished class type == holder set ui favorite
         if(mGetClassType(result) == HomeAdapter.PostsViewHolder.class){
             HomeAdapter.PostsViewHolder holder = (HomeAdapter.PostsViewHolder) result;
             holder.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_24);
         }
-        //else if user not like course && finished class type == arraylist
+        //else if user not like course && finished class type == arraylist set ui favorite null
         else if(mGetClassType(result)  == ArrayList.class){
             ArrayList<T> _tmp = (ArrayList<T>) result;
             boolean _status = (boolean) _tmp.get(0);
@@ -57,15 +58,23 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolde
         }
         //else if user liked course and question show "unliked it?" && finished class type == string
         else if(mGetClassType(result) == String.class){
+            //if user like it course question show "unlike it?"
             if (String.valueOf(result).equals("false")) {
-                new MyAlertDialog(_v.getContext(),"Already Liked","Unlike it?",R.drawable.ic_baseline_info_24)
+                new MyAlertDialog(_v.getContext(),"Already Like it","Unlike it?",R.drawable.ic_baseline_info_24)
                         .ShowMessage()
                         .setNegativeButton("No",(dialog, which) -> {
 
                         })
                         .setPositiveButton("Yes", (dialog, which) -> {
-                            new UserUnLikeCourse(userId,courseId,postsViewHolder).Unlike();
+                            new UserUnLikeCourse(_userId,_courseId,_postsViewHolder).Unlike();
                         }).show();
+            }
+            //if user don't like course and like it course
+            else if(String.valueOf(result).equals("Like_added")){
+                int getLike = course.getmLikeCount()+1;
+                _postsViewHolder.txtLikesCount.setText(String.valueOf(getLike));
+                course.setmLikeCount(getLike);
+                System.out.println("like -> "+course.getmLikeCount());
             }
         }
 
@@ -73,36 +82,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolde
     private Object mGetClassType(Object object){
         return object.getClass();
     }
-    //unlike course and  real-time ui changed
-    private class UserUnLikeCourse implements AsyncResponse{
-        private final int userId;
-        private final int courseId;
-        private final HomeAdapter.PostsViewHolder holder;
-        public UserUnLikeCourse(int userId,int courseId,HomeAdapter.PostsViewHolder holder){
-            this.userId = userId;
-            this.courseId = courseId;
-            this.holder = holder;
-        }
-        public void Unlike(){
-            ServerPOST _unlikeCourse = new ServerPOST(holder,TransactionTypes.doUnlikeCourse);
-            _unlikeCourse.delegate = this;
-            _unlikeCourse.execute(URLs.UserUnlikeCourse(userId,courseId),"");
-        }
-        @Override
-        public <T> void processFinish(T result) {
-            if(mGetClassType(result) == ArrayList.class){
-                ArrayList<T> _temp = (ArrayList<T>) result;
-                boolean _result = (boolean) _temp.get(0);
-                PostsViewHolder v = (HomeAdapter.PostsViewHolder) _temp.get(1);
-                System.out.println(_result);
-                if(_result){
-                    v.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_null_24);
-                }else {
-                    v.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_24);
-                }
-            }
-        }
-    }
+
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
@@ -139,7 +119,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolde
     @Override
     public void onBindViewHolder(HomeAdapter.@NotNull PostsViewHolder holder, int position) {
         TrainerCourse currentItem = mUrunlerList.get(position);
-        postsViewHolder = holder;
+        _postsViewHolder = holder;
         //test image downloader task method from url
         //@DownloadImageTask class
         ServerGET isLikeCourseAsync = new ServerGET(TransactionTypes.isUserCourseLikeControl,holder);
@@ -157,21 +137,18 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolde
 
         });
         holder.btnHomeLike.setOnClickListener(v -> {
-            postsViewHolder = holder;
+            _postsViewHolder = holder;
             _v = v;
-            TrainerCourse course = mUrunlerList.get(holder.getAdapterPosition());
-            ServerPOST postLike = new ServerPOST(null, TransactionTypes.doAddCourseLike,"Beğeni gönderiliyor..");
+            if(course == null || course != mUrunlerList.get(holder.getAdapterPosition())) {
+                course = mUrunlerList.get(holder.getAdapterPosition());
+            }
+            ServerPOST postLike = new ServerPOST(null, TransactionTypes.doAddCourseLike,"Send likes..");
             postLike.delegate = this;
-            postLike.execute(URLs.SendUserCourseLike(
-                    StaticData.getUserData().getUserId()
-            ),new Gson().toJson(new UserLikes(
-                    0,
-                    StaticData.getUserData().getUserId(),
-                    course.getmId()
-                    )));
-            this.userId = StaticData.getUserData().getUserId();
-            this.courseId = course.getmId();
-            holder.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_24);
+            postLike.execute(URLs.SendUserCourseLike(StaticData.getUserData().getUserId()),new Gson()
+                    .toJson(new UserLikes( 0,StaticData.getUserData().getUserId(),course.getmId())));
+            this._userId = StaticData.getUserData().getUserId();
+            this._courseId = course.getmId();
+             holder.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_24);
         });
         holder.btnHomeShare.setOnClickListener(v -> {
             Toast.makeText(v.getContext(),"Buraya tıklanınca gönderi paylaşılacak",Toast.LENGTH_SHORT).show();
@@ -204,6 +181,40 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.PostsViewHolde
 
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
+        }
+    }
+    //unlike course and  real-time ui changed
+    private class UserUnLikeCourse implements AsyncResponse{
+        private final int userId;
+        private final int courseId;
+        private final HomeAdapter.PostsViewHolder holder;
+        public UserUnLikeCourse(int userId,int courseId,HomeAdapter.PostsViewHolder holder){
+            this.userId = userId;
+            this.courseId = courseId;
+            this.holder = holder;
+        }
+        public void Unlike(){
+            ServerPOST _unlikeCourse = new ServerPOST(holder,TransactionTypes.doUnlikeCourse);
+            _unlikeCourse.delegate = this;
+            _unlikeCourse.execute(URLs.UserUnlikeCourse(userId,courseId),"");
+        }
+        @Override
+        public <T> void processFinish(T result) {
+            if(mGetClassType(result) == ArrayList.class){
+                ArrayList<T> _temp = (ArrayList<T>) result;
+                boolean _result = (boolean) _temp.get(0);
+                PostsViewHolder v = (HomeAdapter.PostsViewHolder) _temp.get(1);
+                System.out.println(_result);
+                if(_result){
+                    v.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_null_24);
+                    int getLike = course.getmLikeCount()-1;
+                    v.txtLikesCount.setText(String.valueOf(getLike));
+                    course.setmLikeCount(getLike);
+                    System.out.println("diss like -> "+course.getmLikeCount());
+                }else {
+                    v.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_24);
+                }
+            }
         }
     }
 }
