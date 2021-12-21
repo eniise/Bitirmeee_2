@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import adapters.HomeAdapter;
 import models.TrainerCourse;
 import models.User;
 
@@ -26,15 +27,22 @@ public class ServerGET extends AsyncTask<String, String, String> {
     public ProgressDialog progressDialog;
     private final int transactionType;
     public AsyncResponse delegate = null;
+    private HomeAdapter.PostsViewHolder holder;
     public ServerGET(ProgressDialog progressDialog, int transactionType, String islem){
         this.progressDialog = progressDialog;
-        this.progressDialog.setMessage(islem+", lütfen bekleyiniz.");
+        this.progressDialog.setMessage(islem+", please wait..");
         this.transactionType = transactionType;
+    }
+    public ServerGET(int transactionType, HomeAdapter.PostsViewHolder holder){
+        this.transactionType = transactionType;
+        this.holder = holder;
     }
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        if(progressDialog != null) {
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
     }
 
     protected String doInBackground(String... params) {
@@ -72,8 +80,10 @@ public class ServerGET extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        if (progressDialog.isShowing()) {
-            progressDialog.dismiss();
+        if(progressDialog != null) {
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
         }
         if(result != null) {
             if (result.length() > 0) {
@@ -88,7 +98,18 @@ public class ServerGET extends AsyncTask<String, String, String> {
                         ArrayList<TrainerCourse> tempList = new ArrayList<>(Arrays.asList(courses));
                         delegate.processFinish(tempList);
                     case TransactionTypes.doGetLikesCount:
-
+                        //null
+                    break;
+                    case TransactionTypes.isUserCourseLikeControl:
+                        if(result.equals("true") || result.equals("true\n"))
+                            delegate.processFinish(holder);
+                        else
+                        {
+                            ArrayList<Object> _tmp = new ArrayList<Object>();
+                            _tmp.add(false);
+                            _tmp.add(holder);
+                            delegate.processFinish(_tmp);
+                        }
                     break;
                 }
             } else {

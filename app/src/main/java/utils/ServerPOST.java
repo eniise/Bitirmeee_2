@@ -1,42 +1,46 @@
 package utils;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-
-import com.google.gson.Gson;
+import android.view.View;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
-import models.User;
-import okhttp3.Headers;
-import okhttp3.MultipartBody;
+import adapters.HomeAdapter;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class ServerPOST extends AsyncTask<String, String, String> {
-    public ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
     private final int transactionType;
     public AsyncResponse delegate = null;
-    private final OkHttpClient client = new OkHttpClient();
+    @SuppressLint("StaticFieldLeak")
+    private HomeAdapter.PostsViewHolder postsViewHolder;
     public ServerPOST(ProgressDialog progressDialog, int transactionType, String islem) {
-        this.progressDialog = progressDialog;
-        this.progressDialog.setMessage(islem+", lütfen bekleyiniz.");
+        if(progressDialog != null) {
+            this.progressDialog = progressDialog;
+            this.progressDialog.setMessage(islem + ", lütfen bekleyiniz.");
+        }
         this.transactionType = transactionType;
+    }
+    public ServerPOST(HomeAdapter.PostsViewHolder v, int transactionType){
+        this.transactionType = transactionType;
+        this.postsViewHolder = v;
     }
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog.setMessage("Kayıt tamamlanıyor..");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        if(progressDialog != null) {
+            progressDialog.setMessage("Kayıt tamamlanıyor..");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
     }
     @Override
     protected String doInBackground(String... strings) {
@@ -58,7 +62,7 @@ public class ServerPOST extends AsyncTask<String, String, String> {
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
                 }
-                System.out.println(response.toString());
+                //System.out.println(response.toString());
                 return response.toString();
             }
         } catch (IOException e) {
@@ -68,8 +72,10 @@ public class ServerPOST extends AsyncTask<String, String, String> {
     }
     @Override
     protected void onPostExecute(String result) {
-        if (progressDialog.isShowing()) {
-            progressDialog.dismiss();
+        if(progressDialog != null){
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
         }
         if(result != null) {
             if (result.equals("true")) {
@@ -77,6 +83,15 @@ public class ServerPOST extends AsyncTask<String, String, String> {
                     case TransactionTypes.doRegister:
                         delegate.processFinish("true");
                         break;
+                    case TransactionTypes.doAddCourseLike:
+                         delegate.processFinish("Like_added");
+                    break;
+                    case TransactionTypes.doUnlikeCourse:
+                        ArrayList<Object> _temp = new ArrayList<>();
+                        _temp.add(true);
+                        _temp.add(postsViewHolder);
+                        delegate.processFinish(_temp);
+                     break;
                 }
             }
             else {
