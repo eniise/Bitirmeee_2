@@ -32,6 +32,9 @@ public class ServerPOST extends AsyncTask<String, String, String> {
         this.transactionType = transactionType;
         this.postsViewHolder = v;
     }
+    public ServerPOST(int transactionType){
+        this.transactionType = transactionType;
+    }
     protected void onPreExecute() {
         super.onPreExecute();
         if(progressDialog != null) {
@@ -79,25 +82,48 @@ public class ServerPOST extends AsyncTask<String, String, String> {
             if (result.equals("true")) {
                 switch (transactionType) {
                     case TransactionTypes.doRegister:
-                        delegate.processFinish("true");
+                        try {
+                            delegate.processFinish("true");
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         break;
                     case TransactionTypes.doAddCourseLike:
-                         delegate.processFinish("Like_added");
-                    break;
+                        try {
+                            delegate.processFinish("Like_added");
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        break;
                     case TransactionTypes.doUnlikeCourse:
                         ArrayList<Object> _temp = new ArrayList<>();
                         _temp.add(true);
                         _temp.add(postsViewHolder);
-                        delegate.processFinish(_temp);
-                     break;
+                        try {
+                            delegate.processFinish(_temp);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                        case TransactionTypes.doSendMessage:
+                            System.out.println("your message has been send.");
+                            break;
                 }
             }
             else {
-                delegate.processFinish("false");
+                try {
+                    delegate.processFinish("false");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
         else {
-            delegate.processFinish("false");
+            try {
+                delegate.processFinish("false");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

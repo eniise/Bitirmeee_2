@@ -5,26 +5,26 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="4dp">
-<TextView
-    android:id="@+id/txtChatDetailSenderMessage"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:background="@drawable/background_send_message"
-    android:padding="12dp"
-    android:textColor="@color/white"
-    android:textSize="13sp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintWidth_percent="0.8"
-    />
+    <Button
+        android:id="@+id/btnSenderCourseMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_send_message"
+        android:padding="12dp"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        />
     <TextView
-        android:id="@+id/txtSenderDateTime"
+        android:id="@+id/txtSenderCourseDateTime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:textColor="@color/dateTime"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtChatDetailSenderMessage"
+        app:layout_constraintTop_toBottomOf="@id/btnSenderCourseMessage"
         tools:ignore="SmallSp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

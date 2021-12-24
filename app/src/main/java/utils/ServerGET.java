@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import adapters.TrainerCourseAdapter;
+import models.ChatContent;
+import models.ChatDetail;
+import models.CurrentChatLastMessageInfo;
 import models.TrainerCourse;
 import models.User;
 
@@ -31,6 +34,9 @@ public class ServerGET extends AsyncTask<String, String, String> {
     public ServerGET(int transactionType, TrainerCourseAdapter.PostsViewHolder holder){
         this.transactionType = transactionType;
         this.holder = holder;
+    }
+    public ServerGET(int transactionType){
+        this.transactionType = transactionType;
     }
     protected void onPreExecute() {
         super.onPreExecute();
@@ -94,37 +100,91 @@ public class ServerGET extends AsyncTask<String, String, String> {
                                 , u.getUserProfileImageUrl()
                                 , u.isUserGender()
                                 ,u.getUserLikesCount()));
-                        delegate.processFinish("true");
+                        try {
+                            delegate.processFinish("true");
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         break;
                     case TransactionTypes.doGetCourses:
                         TrainerCourse[] courses = new Gson().fromJson(result,TrainerCourse[].class);
                         ArrayList<TrainerCourse> tempList = new ArrayList<>(Arrays.asList(courses));
-                        delegate.processFinish(tempList);
+                        try {
+                            delegate.processFinish(tempList);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     case TransactionTypes.doGetLikesCount:
                         //null
                     break;
                     case TransactionTypes.isUserCourseLikeControl:
-                        if(result.equals("true") || result.equals("true\n"))
-                            delegate.processFinish(holder);
+                        if(result.equals("true") || result.equals("true\n")) {
+                            try {
+                                delegate.processFinish(holder);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
                         else
                         {
                             ArrayList<Object> _tmp = new ArrayList<Object>();
                             _tmp.add(false);
                             _tmp.add(holder);
-                            delegate.processFinish(_tmp);
+                            try {
+                                delegate.processFinish(_tmp);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
                     break;
                     case TransactionTypes.doGetMyLikeCourses:
                         TrainerCourse[] myLike = new Gson().fromJson(result,TrainerCourse[].class);
                         ArrayList<TrainerCourse> tempMyLike = new ArrayList<>(Arrays.asList(myLike));
-                        delegate.processFinish(tempMyLike);
-                    break;
+                        try {
+                            delegate.processFinish(tempMyLike);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case TransactionTypes.doGetMyChatContent:
+                        ChatContent[] myChatContent = new Gson().fromJson(result,ChatContent[].class);
+                        ArrayList<ChatContent> _tempMyChatContent = new ArrayList<>(Arrays.asList(myChatContent));
+                        try {
+                            delegate.processFinish(_tempMyChatContent);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case TransactionTypes.doGetMyCurrentLastMessage:
+                        CurrentChatLastMessageInfo currentChatLastMessageInfos = new Gson().fromJson(result,CurrentChatLastMessageInfo.class);
+                        try {
+                            delegate.processFinish(currentChatLastMessageInfos);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                        case TransactionTypes.doGetChatDetail:
+                            ChatDetail[] chatDetails = new Gson().fromJson(result,ChatDetail[].class);
+                            try {
+                                delegate.processFinish(new ArrayList<>(Arrays.asList(chatDetails)));
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            break;
                 }
             } else {
-                delegate.processFinish("false");
+                try {
+                    delegate.processFinish("false");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         } else {
-            delegate.processFinish("false");
+            try {
+                delegate.processFinish("false");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

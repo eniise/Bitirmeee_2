@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import adapters.TrainerCourseAdapter;
 import models.TrainerCourse;
 import utils.AsyncResponse;
-import utils.ImageDownloaderTask;
+import adapters.util.ImageDownloaderTask;
 import utils.ServerGET;
 import utils.StaticData;
 import utils.TransactionTypes;

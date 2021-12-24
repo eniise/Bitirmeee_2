@@ -45,39 +45,39 @@
 
     <TextView
         android:id="@+id/txtProfileNameSurname"
-        android:layout_width="246dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="NULL"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toEndOf="@+id/imgProfile"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.046" />
+        app:layout_constraintVertical_bias="0.022" />
 
     <TextView
         android:id="@+id/txtYoruLikeAs"
-        android:layout_width="163dp"
-        android:layout_height="27dp"
-        android:text="You like as.."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your like count"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintHorizontal_bias="0.548"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgProfile"
-        app:layout_constraintVertical_bias="0.028" />
+        app:layout_constraintVertical_bias="0.026" />
 
     <ImageView
         android:id="@+id/imgProfileFavorite"
-        android:layout_width="59dp"
-        android:layout_height="51dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_favorite_24"
         app:layout_constraintBottom_toTopOf="@+id/txtYoruLikeAs"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/txtYoruLikeAs"
-        app:layout_constraintTop_toBottomOf="@+id/txtProfileNameSurname"
-        app:layout_constraintVertical_bias="0.609" />
+        app:layout_constraintTop_toBottomOf="@+id/imgProfile"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recylerUserProfile"
@@ -93,13 +93,13 @@
 
     <TextView
         android:id="@+id/txtProfileLikeCount"
-        android:layout_width="55dp"
-        android:layout_height="28dp"
+        android:layout_width="27dp"
+        android:layout_height="16dp"
         android:text="NULL"
-        app:layout_constraintBottom_toTopOf="@+id/recylerUserProfile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.132"
-        app:layout_constraintStart_toEndOf="@+id/txtYoruLikeAs"
-        app:layout_constraintTop_toBottomOf="@+id/imgProfileFavorite"
-        app:layout_constraintVertical_bias="0.166" />
+        app:layout_constraintBottom_toBottomOf="@+id/imgProfileFavorite"
+        app:layout_constraintEnd_toEndOf="@+id/imgProfileFavorite"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toEndOf="@+id/imgProfileFavorite"
+        app:layout_constraintTop_toTopOf="@+id/imgProfileFavorite"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

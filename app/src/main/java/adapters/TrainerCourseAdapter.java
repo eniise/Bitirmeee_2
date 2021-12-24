@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import models.TrainerCourse;
 import models.UserLikes;
 import utils.AsyncResponse;
-import utils.ImageDownloaderTask;
+import adapters.util.ImageDownloaderTask;
 import utils.MyAlertDialog;
 import utils.ServerGET;
 import utils.ServerPOST;

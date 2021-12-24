@@ -42,4 +42,28 @@ public class URLs {
                 ServerInfo.API_LEVEL +
                 "User/MyLikeCourse?userId="+userId;
     }
+    public static String GetChatContent(int userId){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "User/GetMyChatContent?userId="+userId;
+    }
+    public static String GetCurrentLastMessage(int userId,int receiverId){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "User/GetMyCurrentLastMessage?userId="+userId+"&receiverId="+receiverId;
+    }
+    public static String GetChatDetail(int userId,int receiverId){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "User/GetChatDetail?userId="+userId+"&receiverId="+receiverId;
+    }
+    public static String SendMessage(){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "User/SendMyMessage";
+    }
 }
