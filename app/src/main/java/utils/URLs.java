@@ -66,4 +66,10 @@ public class URLs {
                 ServerInfo.API_LEVEL +
                 "User/SendMyMessage";
     }
+    public static String DeleteMyMessage(int userId,int receiverId){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "User/DeleteMyMessage?userId="+userId+"&receiverId="+receiverId;
+    }
 }

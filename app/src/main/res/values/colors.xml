@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="ask">#FF0000</color>
     <color name="dateTime">#6A6A6A</color>
+    <color name="courseItemBackground">#FFFEFE</color>
+    <color name="home_navigation">#E91E63</color>
 </resources>

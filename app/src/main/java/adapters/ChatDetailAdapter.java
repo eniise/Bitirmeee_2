@@ -2,12 +2,15 @@ package adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,10 +19,12 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import adapters.util.ImageDownloaderTask;
 import models.ChatDetail;
+import utils.TransactionTypes;
 
 public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private final ArrayList<ChatDetail> mChatDetail;
@@ -41,17 +46,33 @@ public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHo
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         if(viewType == VIEW_TYPE_SENT){
             return new SentMessageViewHolder(LayoutInflater.from(context).inflate(R.layout.chat_detail_sender_items, parent, false));
-        }else {
+        }else if(viewType == VIEW_TYPE_RECEIVER) {
             return new ReceiverMessageViewHolder(LayoutInflater.from(context).inflate(R.layout.chat_detail_receiver_items, parent, false));
+        }else if(viewType == TransactionTypes.MESSAGE_TYPE_SENDER_WITH_COURSE){
+            return new SenderCourseMessageViewHolder(LayoutInflater.from(context).inflate(R.layout.chat_detail_sender_course_item,parent,false));
+        }else if(viewType == TransactionTypes.MESSAGE_TYPE_RECEIVER_WITH_COURSE){
+            return new ReceiverCourseMessageViewHolder(LayoutInflater.from(context).inflate(R.layout.chat_detail_sender_course_item,parent,false));
+        }else {
+            return null;
         }
+
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
         if(getItemViewType(position) == VIEW_TYPE_SENT){
-            ((SentMessageViewHolder) holder).SetData(mChatDetail.get(position));
+            if(mChatDetail.get(position).getMessageType() == TransactionTypes.MESSAGE_TYPE_STRING) {
+                ((SentMessageViewHolder) holder).SetData(mChatDetail.get(position));
+            }else {
+                ((SenderCourseMessageViewHolder) holder).SetData(mChatDetail.get(position));
+            }
         }else {
-            ((ReceiverMessageViewHolder) holder).SetData(mChatDetail.get(position));
+            if(mChatDetail.get(position).getMessageType() == TransactionTypes.MESSAGE_TYPE_STRING) {
+                ((ReceiverMessageViewHolder) holder).SetData(mChatDetail.get(position));
+            }else{
+                ((ReceiverCourseMessageViewHolder) holder).SetData(mChatDetail.get(position));
+            }
         }
     }
 
@@ -63,9 +84,20 @@ public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public int getItemViewType(int position) {
         if(mChatDetail.get(position).getMessageFromId() == mSenderId){
-            return VIEW_TYPE_SENT;
+            if(mChatDetail.get(position).getMessageType() == TransactionTypes.MESSAGE_TYPE_STRING)
+                return VIEW_TYPE_SENT;
+            else if(mChatDetail.get(position).getMessageType() == TransactionTypes.MESSAGE_TYPE_COURSE)
+                return TransactionTypes.MESSAGE_TYPE_SENDER_WITH_COURSE;
+            else
+                return VIEW_TYPE_SENT;
         }else{
-            return  VIEW_TYPE_RECEIVER;
+            if(mChatDetail.get(position).getMessageType() == TransactionTypes.MESSAGE_TYPE_STRING)
+                return VIEW_TYPE_RECEIVER;
+            else if(mChatDetail.get(position).getMessageType() == TransactionTypes.MESSAGE_TYPE_COURSE)
+                return TransactionTypes.MESSAGE_TYPE_RECEIVER_WITH_COURSE;
+            else
+                return  VIEW_TYPE_RECEIVER;
+
         }
     }
 
@@ -79,6 +111,7 @@ public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHo
             this.txtChatSender = itemView.findViewById(R.id.txtChatDetailSenderMessage);
             this.txtSenderDateTime = itemView.findViewById(R.id.txtSenderDateTime);
         }
+        @RequiresApi(api = Build.VERSION_CODES.O)
         public void SetData(ChatDetail chat){
             txtChatSender.setText(chat.getMessage());
             txtSenderDateTime.setText(chat.getMessageDate());
@@ -96,10 +129,52 @@ public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHo
             txtChatReceiverMessage = itemView.findViewById(R.id.textReceiverMessage);
             txtChatReceiverDateTime = itemView.findViewById(R.id.receiverDateTime);
         }
+        @RequiresApi(api = Build.VERSION_CODES.O)
         public void SetData(ChatDetail chat){
             txtChatReceiverMessage.setText(chat.getMessage());
             txtChatReceiverDateTime.setText(chat.getMessageDate());
             imageReceiver.setImageBitmap(receiverProfileImage);
+        }
+    }
+    static class ReceiverCourseMessageViewHolder extends RecyclerView.ViewHolder {
+        private final View itemView;
+        private RoundedImageView roundedImageView;
+        private Button btnReceiverCourseSend;
+        private TextView txtReceiverSendDate;
+        ReceiverCourseMessageViewHolder(final View itemView){
+            super(itemView);
+            this.itemView = itemView;
+            roundedImageView = itemView.findViewById(R.id.imageChatDetailCourseProfile);
+            btnReceiverCourseSend = itemView.findViewById(R.id.btntReceiverCourseMessage);
+            txtReceiverSendDate = itemView.findViewById(R.id.receiverCourseDateTime);
+        }
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        public void SetData(ChatDetail chat){
+            roundedImageView.setImageBitmap(receiverProfileImage);
+            btnReceiverCourseSend.setText(chat.getMessage());
+            txtReceiverSendDate.setText(chat.getMessageDate());
+        }
+    }
+    static class SenderCourseMessageViewHolder extends RecyclerView.ViewHolder {
+        private final View itemView;
+        private RoundedImageView roundedImageView;
+        private Button btnSenderCourseSend;
+        private TextView txtSenderSendDate;
+        SenderCourseMessageViewHolder(final View itemView){
+            super(itemView);
+            this.itemView = itemView;
+            roundedImageView = itemView.findViewById(R.id.imageChatDetailCourseProfile);
+            btnSenderCourseSend = itemView.findViewById(R.id.btntReceiverCourseMessage);
+            txtSenderSendDate = itemView.findViewById(R.id.receiverCourseDateTime);
+        }
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        public void SetData(ChatDetail chat){
+            roundedImageView.setImageBitmap(receiverProfileImage);
+            btnSenderCourseSend.setText(chat.getMessage());
+            txtSenderSendDate.setText(chat.getMessageDate());
+            btnSenderCourseSend.setOnClickListener(v-> {
+                //do click course
+            });
         }
     }
 }

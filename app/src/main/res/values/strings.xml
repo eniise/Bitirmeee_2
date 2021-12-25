@@ -40,4 +40,5 @@
     <string name="pleaseEnterName">Please enter a name.</string>
     <string name="surNameNotNull">Sur name not null.</string>
     <string name="pleaseEnterSurName">Please enter a sur name.</string>
+    <string name="app_text">e-Tech Education</string>
 </resources>

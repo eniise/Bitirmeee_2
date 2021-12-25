@@ -24,6 +24,8 @@
         <activity android:name="controllers.ChatPage"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.Bitirme_2_Chat"/>
+        <activity android:name="controllers.MessageInfo"
+            android:theme="@style/Theme.Bitirme_2"/>
         <activity
             android:name="controllers.Login"
             android:exported="true"

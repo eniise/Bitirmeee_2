@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,11 +34,13 @@ public class ChatFragment extends Fragment implements AsyncResponse {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private View view;
+    ProgressBar chatContent;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.chat_content,container,false);
         view = rootView;
+        chatContent = rootView.findViewById(R.id.chatContent);
         ServerGET getMyContent = new ServerGET( new ProgressDialog(rootView.getContext()), TransactionTypes.doGetMyChatContent," loading your chats");
         getMyContent.delegate = this;
         getMyContent.execute(URLs.GetChatContent(StaticData.getUserData().getUserId()));
@@ -52,5 +55,7 @@ public class ChatFragment extends Fragment implements AsyncResponse {
         mAdapter = new ChatContentAdapter(_lst);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+        chatContent.setVisibility(View.GONE);
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
 }

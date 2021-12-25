@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 import com.enise.bitirme_2.R;
 import com.google.gson.Gson;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
             //if user don't like course and like it course
             else if(String.valueOf(result).equals("Like_added")){
                 int getLike = course.getmLikeCount()+1;
-                _postsViewHolder.txtLikesCount.setText(String.valueOf(getLike));
+                _postsViewHolder.txtLikesCount.setText(getLike+" user like this course");
                 course.setmLikeCount(getLike);
             }
         }
@@ -83,12 +84,12 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
         mListener = listener;
     }
     public static class PostsViewHolder extends RecyclerView.ViewHolder {
-        public ImageView mHomeTrainerImage;
+        public RoundedImageView mHomeTrainerImage;
         public TextView txtHomeTrainerName;
         public TextView txtHomeTrainerDetail;
-        public ImageButton btnHomeShare;
-        public ImageButton btnHomeLike;
-        public ImageButton btnHomeStartChat;
+        public RoundedImageView btnHomeShare;
+        public RoundedImageView btnHomeLike;
+        public RoundedImageView btnHomeStartChat;
         public TextView txtLikesCount;
         public PostsViewHolder(View itemView) {
             super(itemView);
@@ -124,7 +125,7 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
         String detail = currentItem.getmDetail().length() > 100 ? currentItem.getmDetail().substring(0,100)+"..." : currentItem.getmDetail();
         holder.txtHomeTrainerDetail.setText(detail);
         holder.txtHomeTrainerName.setText(currentItem.getmName());
-        holder.txtLikesCount.setText(String.valueOf(currentItem.getmLikeCount()));
+        holder.txtLikesCount.setText(currentItem.getmLikeCount()+" user like this course");
         holder.btnHomeStartChat.setOnClickListener(v -> {
 
         });
@@ -177,7 +178,7 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
                 if(_result){
                     v.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_null_24);
                     int getLike = course.getmLikeCount()-1;
-                    v.txtLikesCount.setText(String.valueOf(getLike));
+                    v.txtLikesCount.setText(getLike+" user like this course");
                     course.setmLikeCount(getLike);
                 }else {
                     v.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_24);

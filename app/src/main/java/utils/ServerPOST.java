@@ -52,9 +52,11 @@ public class ServerPOST extends AsyncTask<String, String, String> {
             con.setRequestProperty("Content-Type", "application/json; utf-8");
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
-            try(OutputStream os = con.getOutputStream()) {
-                byte[] input = strings[1].getBytes(StandardCharsets.UTF_8);
-                os.write(input, 0, input.length);
+            if(transactionType != TransactionTypes.doUserDeleteMessage) {
+                try (OutputStream os = con.getOutputStream()) {
+                    byte[] input = strings[1].getBytes(StandardCharsets.UTF_8);
+                    os.write(input, 0, input.length);
+                }
             }
             try(BufferedReader br = new BufferedReader(
                     new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8))) {
@@ -105,9 +107,21 @@ public class ServerPOST extends AsyncTask<String, String, String> {
                             e.printStackTrace();
                         }
                         break;
-                        case TransactionTypes.doSendMessage:
+                    case TransactionTypes.doSendMessage:
+                        try {
+                            delegate.processFinish(true);
                             System.out.println("your message has been send.");
-                            break;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    break;
+                    case TransactionTypes.doUserDeleteMessage:
+                        try {
+                            delegate.processFinish(true);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        break;
                 }
             }
             else {

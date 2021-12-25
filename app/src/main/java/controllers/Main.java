@@ -9,6 +9,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -24,10 +28,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import fragments.ChatFragment;
 import fragments.FragmentHome;
 import fragments.ProfilFragment;
+import utils.TransactionTypes;
 
 public class Main extends AppCompatActivity {
     Toolbar mToolBar;
     Context context;
+    private FrameLayout mFrameLayout;
+    private RelativeLayout.LayoutParams mParams;
+    private BottomNavigationView bottomNav;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +43,8 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.home_page);
         mToolBar = findViewById(R.id.toolbar);
         SetApplicationToolbar(mToolBar);
+        mFrameLayout = findViewById(R.id.fragment_container);
+        mParams = (RelativeLayout.LayoutParams) findViewById(R.id.fragment_container).getLayoutParams();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new FragmentHome()).commit();
         context = this;
@@ -55,7 +65,7 @@ public class Main extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.DetailFiltering:
-                Toast.makeText(context,"Detaylı arama sayfası detail",Toast.LENGTH_LONG).show();
+                Toast.makeText(context,"Detaylı arama sayfası ",Toast.LENGTH_LONG).show();
                 break;
             case R.id.MapFiltering:
                 Intent intent = new Intent(context,Maps.class);
@@ -70,27 +80,54 @@ public class Main extends AppCompatActivity {
         getActionBar().setTitle("");
     }
     private void SetupNavigationBar(){
-        BottomNavigationView bottomNav = findViewById(R.id.alt_menu);
+        bottomNav = findViewById(R.id.alt_menu);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
     }
     @SuppressLint("NonConstantResourceId")
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+    private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
             item -> {
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.home:
                         selectedFragment = new FragmentHome();
+                        mToolBar.setVisibility(View.VISIBLE);
+                        mFrameLayout.setLayoutParams(mParams);
+                        item.setChecked(true);
                         break;
                     case R.id.chat:
                         selectedFragment = new ChatFragment();
+                        mToolBar.setVisibility(View.GONE);
+                        RelativeLayout.LayoutParams _tmp = new RelativeLayout.LayoutParams(mParams);
+                        _tmp.topMargin = 0;
+                        mFrameLayout.setLayoutParams(_tmp);
+                        item.setChecked(true);
                         break;
                     case R.id.profil:
                         selectedFragment = new ProfilFragment();
-                        System.out.println("Profile");
+                        mToolBar.setVisibility(View.GONE);
+                        RelativeLayout.LayoutParams _tmp2 = new RelativeLayout.LayoutParams(mParams);
+                        _tmp2.topMargin = 0;
+                        mFrameLayout.setLayoutParams(_tmp2);
+                        item.setChecked(true);
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         selectedFragment).commit();
                 return true;
             };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle != null){
+            int mTransactionType = bundle.getInt(TransactionTypes.USER_COME_BACK);
+            switch (mTransactionType){
+                case TransactionTypes.USER_DELETE_MESSAGE:
+                    navListener.onNavigationItemSelected(bottomNav.getMenu().findItem(R.id.chat));
+                    break;
+            }
+        }
+    }
 }

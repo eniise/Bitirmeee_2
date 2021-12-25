@@ -19,7 +19,7 @@ public class ChatDetail {
     private String Message;
     @SerializedName("messageFromId")
     private int MessageFromId;
-    @SerializedName("MessageDate")
+    @SerializedName("messageDate")
     private String MessageDate;
     public ChatDetail(int chatId, String receiverImageUrl, String senderImageUrl, String receiverName, String senderName, int messageType, String message, int messageFromId, String messageDate) {
         ChatId = chatId;
@@ -32,10 +32,11 @@ public class ChatDetail {
         MessageFromId = messageFromId;
         MessageDate = messageDate;
     }
-    public ChatDetail(String message,String messageDate,int senderId){
+    public ChatDetail(String message,String messageDate,int senderId,int messageType){
         this.Message = message;
         this.MessageDate = messageDate;
         this.MessageFromId = senderId;
+        this.MessageType = messageType;
     }
     public int getChatId() {
         return ChatId;

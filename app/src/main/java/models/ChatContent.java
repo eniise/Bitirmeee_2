@@ -15,13 +15,19 @@ public class ChatContent {
     private int ReceiverId;
     @SerializedName("lastMessageId")
     private int LastMessageId;
-    public ChatContent(int chatContentId, String userProfileImageUrl, String userName, String lastMessage,int receiverId,int lastMessageId) {
+    @SerializedName("lastMessageTime")
+    private String LastMessageTime;
+    @SerializedName("startChatDate")
+    private String StartChatDate;
+    public ChatContent(int chatContentId, String userProfileImageUrl, String userName, String lastMessage, int receiverId, int lastMessageId, String lastMessageTime, String startChatDate) {
         ChatContentId = chatContentId;
         UserProfileImageUrl = userProfileImageUrl;
         UserName = userName;
         LastMessage = lastMessage;
         ReceiverId = receiverId;
         LastMessageId = lastMessageId;
+        LastMessageTime = lastMessageTime;
+        StartChatDate = startChatDate;
     }
 
 
@@ -71,5 +77,21 @@ public class ChatContent {
 
     public void setLastMessageId(int lastMessageId) {
         LastMessageId = lastMessageId;
+    }
+
+    public String getLastMessageTime() {
+        return LastMessageTime;
+    }
+
+    public void setLastMessageTime(String lastMessageTime) {
+        LastMessageTime = lastMessageTime;
+    }
+
+    public String getStartChatDate() {
+        return StartChatDate;
+    }
+
+    public void setStartChatDate(String startChatDate) {
+        StartChatDate = startChatDate;
     }
 }

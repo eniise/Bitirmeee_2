@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:id="@+id/topToolbar"
     android:theme="@style/Theme.Bitirme_2"
     app:title=" "
-    android:background="@color/white"
+    android:background="@drawable/course_content_background"
     >
-
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="5dp"
+    android:foregroundGravity="center"
+    >
+    <TextView
+        android:id="@+id/applicationName"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintEnd_toEndOf="@id/topToolbar"
+        android:text="@string/app_text"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-black"
+        android:textSize="15sp"
+        tools:ignore="NotSibling" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 </Toolbar>

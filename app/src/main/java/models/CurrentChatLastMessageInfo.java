@@ -10,10 +10,10 @@ public class CurrentChatLastMessageInfo {
     @SerializedName("messageFromId")
     private int MessageFromId;
     @SerializedName("type")
-    private String Transaction;
+    private int Transaction;
     @SerializedName("messageTime")
     private String MessageTime;
-    public CurrentChatLastMessageInfo(String lastMessage, int lastMessageId, int messageFromId, String transaction, String messageTime) {
+    public CurrentChatLastMessageInfo(String lastMessage, int lastMessageId, int messageFromId, int transaction, String messageTime) {
         LastMessage = lastMessage;
         LastMessageId = lastMessageId;
         MessageFromId = messageFromId;
@@ -36,11 +36,11 @@ public class CurrentChatLastMessageInfo {
         LastMessageId = lastMessageId;
     }
 
-    public String getTransaction() {
+    public int getTransaction() {
         return Transaction;
     }
 
-    public void setTransaction(String transaction) {
+    public void setTransaction(int transaction) {
         Transaction = transaction;
     }
 

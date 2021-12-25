@@ -20,12 +20,15 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="50dp"
+        />
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/alt_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         ads:menu="@menu/alt_menu"
-        android:background="@color/white"
+        ads:itemIconTint="@color/white"
+        ads:itemTextColor="@color/black"
+        android:background="@drawable/home_page_background"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

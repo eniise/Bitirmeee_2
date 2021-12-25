@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enise.bitirme_2.R;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,21 +33,24 @@ import utils.TransactionTypes;
 import utils.URLs;
 
 public class ProfilFragment extends Fragment implements AsyncResponse,View.OnClickListener {
-    private Button btnProfileCourseUpload;
-    private Button btnProfileCourseEdit;
-    private ImageView mUserProfileImage;
+    private RoundedImageView btnProfileCourseUpload;
+    private RoundedImageView btnProfileCourseEdit;
+    private RoundedImageView mUserProfileImage;
     private TextView mUserProfileName;
     private TextView mUserProfileLikeCount;
     private RecyclerView mUserProfileRecylerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private View view;
+    private ProgressBar profileProgressBar;
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View  rootView = inflater.inflate(R.layout.user_profile_page,container,false);
         view = rootView;
+        profileProgressBar = rootView.findViewById(R.id.profileProgressBar);
+        profileProgressBar.setVisibility(View.VISIBLE);
         //setup user profile layout
         SetupProfileButtons(rootView,StaticData.getUserData().getRoleID());
         //do get user data's from server json data here
@@ -53,11 +58,8 @@ public class ProfilFragment extends Fragment implements AsyncResponse,View.OnCli
         new ImageDownloaderTask(mUserProfileImage)
                 .execute(StaticData.getUserData().getUserProfileImageUrl());
         mUserProfileName.setText(StaticData.getUserData().getName());
-        mUserProfileLikeCount.setText(String.valueOf(StaticData.getUserData().getUserLikesCount()));
-        ServerGET getMyLikes = new ServerGET(new ProgressDialog(
-                rootView.getContext()),
-                TransactionTypes.doGetMyLikeCourses,
-                " loading your likes courses");
+        mUserProfileLikeCount.setText("Your like score : "+StaticData.getUserData().getUserLikesCount());
+        ServerGET getMyLikes = new ServerGET(TransactionTypes.doGetMyLikeCourses);
         getMyLikes.delegate = this;
         getMyLikes.execute(URLs.GetUserLikeCourses(StaticData.getUserData().getUserId()));
         return rootView;
@@ -95,5 +97,7 @@ public class ProfilFragment extends Fragment implements AsyncResponse,View.OnCli
         mAdapter = new TrainerCourseAdapter(_lst,"Profile");
         mUserProfileRecylerView.setLayoutManager(mLayoutManager);
         mUserProfileRecylerView.setAdapter(mAdapter);
+        mUserProfileRecylerView.setVisibility(View.VISIBLE);
+        profileProgressBar.setVisibility(View.GONE);
     }
 }

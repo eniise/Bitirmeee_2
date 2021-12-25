@@ -48,21 +48,27 @@ import utils.StaticData;
 import utils.TransactionTypes;
 import utils.URLs;
 
-public class ChatPage extends AppCompatActivity implements AsyncResponse {
+public class ChatPage extends AppCompatActivity implements AsyncResponse, View.OnClickListener {
     private ServerGET getLastMessage;
     private String lastMessage;
     private int receiverId;
     private int lastMessageId;
+    private String receiverUserName;
+    private String mStartChatDate;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     public Bitmap receiverUserImageBmp;
     private boolean mPageFirstOpen;
     private ProgressBar mProgressBar;
     private TextView mReceiverName;
-    RecyclerView.LayoutManager mLayoutManager;
-    ArrayList<ChatDetail> chatDetails;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<ChatDetail> chatDetails;
     private AppCompatImageView btnMessageSend;
     private TextView inputMessage;
+    private boolean isActivityActive = false;
+    private AppCompatImageView imgBack;
+    private  String receiverUserImage;
+    private AppCompatImageView imgChatInfo;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -76,7 +82,51 @@ public class ChatPage extends AppCompatActivity implements AsyncResponse {
             getLastMessage.execute(URLs.GetChatDetail(StaticData.getUserData().getUserId(), receiverId));
             mPageFirstOpen = false;
         }
-        btnMessageSend.setOnClickListener(v->{
+        isActivityActive = true;
+    }
+    @Override
+    public <T> void processFinish(T result) {
+        Object result_type = result.getClass();
+        if(result_type == CurrentChatLastMessageInfo.class && !mPageFirstOpen && isActivityActive) {
+            CurrentChatLastMessageInfo _lst = (CurrentChatLastMessageInfo) result;
+            System.out.println("message from id : "+_lst.getMessageFromId()+" user id = "+StaticData.getUserData().getUserId()+" last message id = "+_lst.getLastMessageId()+" last message current id = "+lastMessageId);
+            if ((_lst.getMessageFromId() != StaticData.getUserData().getUserId()) && (_lst.getLastMessageId() != lastMessageId)) {
+                //new message detected on listener
+                ChatDetail detailTemp = new ChatDetail(_lst.getLastMessage(),_lst.getMessageTime(),receiverId,_lst.getTransaction());
+                chatDetails.add(detailTemp);
+                mAdapter.notifyDataSetChanged();
+                this.lastMessageId = _lst.getLastMessageId();
+                //return new listener..
+                getLastMessage = new ServerGET(TransactionTypes.doGetMyCurrentLastMessage);
+                getLastMessage.delegate = this;
+                getLastMessage.execute(URLs.GetCurrentLastMessage(StaticData.getUserData().getUserId(),receiverId));
+            }else {
+                //will not a new message??? yeah, create async task..
+                getLastMessage = new ServerGET(TransactionTypes.doGetMyCurrentLastMessage);
+                getLastMessage.delegate = this;
+                getLastMessage.execute(URLs.GetCurrentLastMessage(StaticData.getUserData().getUserId(),receiverId));
+            }
+        }else if(result_type == ArrayList.class && isActivityActive) {
+            //if page first opened? init items and run listener.. infinite...
+            chatDetails = (ArrayList<ChatDetail>) result;
+            mRecyclerView = findViewById(R.id.chatDetailContent);
+            mRecyclerView.setHasFixedSize(true);
+            mLayoutManager = new LinearLayoutManager(this);
+            mAdapter = new ChatDetailAdapter(chatDetails,receiverUserImageBmp,StaticData.getUserData().getUserId(),this);
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mProgressBar.setVisibility(View.GONE);
+            getLastMessage = new ServerGET(TransactionTypes.doGetMyCurrentLastMessage);
+            getLastMessage.delegate = this;
+            getLastMessage.execute(URLs.GetCurrentLastMessage(StaticData.getUserData().getUserId(),receiverId));
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.messageSend){
             if(inputMessage.getText().toString().length() != 0) {
                 String message = inputMessage.getText().toString();
                 inputMessage.setText("");
@@ -96,52 +146,25 @@ public class ChatPage extends AppCompatActivity implements AsyncResponse {
                         message
                         ,getDateTime()
                         ,StaticData.getUserData().getUserId()
+                        ,1
                 );
                 chatDetails.add(_tmpDetail);
             }else {
                 Toast.makeText(v.getContext(),"Please type a message.",Toast.LENGTH_SHORT).show();
             }
-        });
-    }
-
-    @Override
-    public <T> void processFinish(T result) {
-        Object result_type = result.getClass();
-        if(result_type == CurrentChatLastMessageInfo.class && !mPageFirstOpen) {
-            CurrentChatLastMessageInfo _lst = (CurrentChatLastMessageInfo) result;
-            System.out.println("message from id : "+_lst.getMessageFromId()+" user id = "+StaticData.getUserData().getUserId()+" last message id = "+_lst.getLastMessageId()+" last message current id = "+lastMessageId);
-            if ((_lst.getMessageFromId() != StaticData.getUserData().getUserId()) && (_lst.getLastMessageId() != lastMessageId)) {
-                //new message detected on listener
-                ChatDetail detailTemp = new ChatDetail(_lst.getLastMessage(),_lst.getMessageTime(),receiverId);
-                chatDetails.add(detailTemp);
-                mAdapter.notifyDataSetChanged();
-                this.lastMessageId = _lst.getLastMessageId();
-                //return new listener..
-                getLastMessage = new ServerGET(TransactionTypes.doGetMyCurrentLastMessage);
-                getLastMessage.delegate = this;
-                getLastMessage.execute(URLs.GetCurrentLastMessage(StaticData.getUserData().getUserId(),receiverId));
-            }else {
-                //will not a new message??? yeah, create async task..
-                getLastMessage = new ServerGET(TransactionTypes.doGetMyCurrentLastMessage);
-                getLastMessage.delegate = this;
-                getLastMessage.execute(URLs.GetCurrentLastMessage(StaticData.getUserData().getUserId(),receiverId));
-            }
-        }else if(result_type == ArrayList.class) {
-            //if page first opened? init items and run listener.. infinite...
-            chatDetails = (ArrayList<ChatDetail>) result;
-            mRecyclerView = findViewById(R.id.chatDetailContent);
-            mRecyclerView.setHasFixedSize(true);
-            mLayoutManager = new LinearLayoutManager(this);
-            mAdapter = new ChatDetailAdapter(chatDetails,receiverUserImageBmp,StaticData.getUserData().getUserId(),this);
-            mRecyclerView.setLayoutManager(mLayoutManager);
-            mRecyclerView.setAdapter(mAdapter);
-            mRecyclerView.setVisibility(View.VISIBLE);
-            mProgressBar.setVisibility(View.GONE);
-            getLastMessage = new ServerGET(TransactionTypes.doGetMyCurrentLastMessage);
-            getLastMessage.delegate = this;
-            getLastMessage.execute(URLs.GetCurrentLastMessage(StaticData.getUserData().getUserId(),receiverId));
+         }
+        if(v.getId() == R.id.imageBack){
+            onBackPressed();
+        }
+        if(v.getId() == R.id.imageInfo && isActivityActive){
+            startActivity(new Intent(this,MessageInfo.class)
+                                    .putExtra("userProfil",receiverUserImage)
+                                    .putExtra("userName",receiverUserName)
+                                    .putExtra("receiverUserId",receiverId)
+                                    .putExtra("startChatDate",mStartChatDate));
         }
     }
+
     @SuppressLint("StaticFieldLeak")
     class BitmapTask extends AsyncTask<String, Bitmap, Bitmap> {
         @Override
@@ -169,13 +192,20 @@ public class ChatPage extends AppCompatActivity implements AsyncResponse {
         receiverId = bundle.getInt("receiverId");
         lastMessage = bundle.getString("lastMessage");
         lastMessageId = bundle.getInt("lastMessageId");
-        String receiverUserImage = bundle.getString("receiverImage");
+        receiverUserName = bundle.getString("receiverName");
+        mStartChatDate = bundle.getString("startChatDate");
+        receiverUserImage = bundle.getString("receiverImage");
         new BitmapTask().execute(receiverUserImage);
         mProgressBar = findViewById(R.id.progressBar);
         mReceiverName = findViewById(R.id.txtReceiverName);
-        mReceiverName.setText(bundle.getString("receiverName"));
+        mReceiverName.setText(receiverUserName);
         btnMessageSend = findViewById(R.id.messageSend);
+        btnMessageSend.setOnClickListener(this);
         inputMessage = findViewById(R.id.inputMessage);
+        imgBack = findViewById(R.id.imageBack);
+        imgBack.setOnClickListener(this);
+        imgChatInfo = findViewById(R.id.imageInfo);
+        imgChatInfo.setOnClickListener(this);
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private String getDateTime(){
@@ -183,5 +213,16 @@ public class ChatPage extends AppCompatActivity implements AsyncResponse {
         LocalDateTime localDate = Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.of("UTC")).toLocalDateTime();
         DateTimeFormatter _formater = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return _formater.format(localDate);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isActivityActive = true;
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isActivityActive = false;
     }
 }
