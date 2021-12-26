@@ -32,4 +32,13 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="popupWindow">
+        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+    </style>
+    <style name="SwitchStyle" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/teal_200</item>
+        <item name="colorSwitchThumbNormal">@color/dateTime</item>
+        <item name="android:colorForeground">@color/dateTime</item>
+    </style>
 </resources>

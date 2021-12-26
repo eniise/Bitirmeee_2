@@ -85,16 +85,25 @@ public class MessageInfo extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public <T> void processFinish(T result) {
-        if((boolean)result) {
-            new MyAlertDialog(this, "Done.", "Your messages has been deleted.", R.drawable.ic_message_info)
-                    .ShowMessage()
-                    .setPositiveButton(R.string.okay, ((dialog, which) -> {
-                        startActivity(new Intent(this, Main.class)
-                                .putExtra(TransactionTypes.USER_COME_BACK,
-                                          TransactionTypes.USER_DELETE_MESSAGE));
-                        finish();
-                    }))
-                    .show();
+        if(result.getClass() == Boolean.class) {
+            if ((boolean) result) {
+                new MyAlertDialog(this, "Done.", "Your messages has been deleted.", R.drawable.ic_message_info)
+                        .ShowMessage()
+                        .setPositiveButton(R.string.okay, ((dialog, which) -> {
+                            startActivity(new Intent(this, Main.class)
+                                    .putExtra(TransactionTypes.USER_COME_BACK,
+                                            TransactionTypes.USER_DELETE_MESSAGE));
+                            finish();
+                        }))
+                        .show();
+            } else {
+                new MyAlertDialog(this, "Error.", "Please try again.", R.drawable.ic_message_info)
+                        .ShowMessage()
+                        .setPositiveButton(R.string.okay, ((dialog, which) -> {
+                            //try again..
+                        }))
+                        .show();
+            }
         }else {
             new MyAlertDialog(this, "Error.", "Please try again.", R.drawable.ic_message_info)
                     .ShowMessage()

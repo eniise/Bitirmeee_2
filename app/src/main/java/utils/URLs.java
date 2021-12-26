@@ -72,4 +72,16 @@ public class URLs {
                 ServerInfo.API_LEVEL +
                 "User/DeleteMyMessage?userId="+userId+"&receiverId="+receiverId;
     }
+    public static String SearchUser(String userName,int userId){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "User/SearchUser?userName="+userName+"&userId="+userId;
+    }
+    public static String SendMessageWithCourse(){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "User/SendMyMessage";
+    }
 }

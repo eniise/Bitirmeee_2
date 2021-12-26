@@ -84,60 +84,34 @@ public class ServerPOST extends AsyncTask<String, String, String> {
             if (result.equals("true")) {
                 switch (transactionType) {
                     case TransactionTypes.doRegister:
-                        try {
-                            delegate.processFinish("true");
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        delegate.processFinish("true");
                         break;
                     case TransactionTypes.doAddCourseLike:
-                        try {
-                            delegate.processFinish("Like_added");
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        delegate.processFinish("Like_added");
                         break;
                     case TransactionTypes.doUnlikeCourse:
                         ArrayList<Object> _temp = new ArrayList<>();
                         _temp.add(true);
                         _temp.add(postsViewHolder);
-                        try {
-                            delegate.processFinish(_temp);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        delegate.processFinish(_temp);
                         break;
                     case TransactionTypes.doSendMessage:
-                        try {
-                            delegate.processFinish(true);
-                            System.out.println("your message has been send.");
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        System.out.println("your message has been send.");
                     break;
                     case TransactionTypes.doUserDeleteMessage:
-                        try {
-                            delegate.processFinish(true);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        delegate.processFinish(true);
+                        break;
+                    case TransactionTypes.doUserSendMessageWithCourse:
+                         delegate.processFinish(true);
                         break;
                 }
             }
             else {
-                try {
-                    delegate.processFinish("false");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                delegate.processFinish("false");
             }
         }
         else {
-            try {
-                delegate.processFinish("false");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            delegate.processFinish("false");
         }
     }
 }

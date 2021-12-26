@@ -1,5 +1,5 @@
 package utils;
 
 public interface AsyncResponse {
-    <T> void processFinish(T result) throws InterruptedException;
+    <T> void processFinish(T result);
 }

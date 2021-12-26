@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="4dp">
     <Button
-        android:id="@+id/btnSenderCourseMessage"
+        android:id="@+id/txtChatDetailCourseSenderMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/background_send_message"
@@ -25,6 +25,6 @@
         android:textColor="@color/dateTime"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnSenderCourseMessage"
+        app:layout_constraintTop_toBottomOf="@id/txtChatDetailCourseSenderMessage"
         tools:ignore="SmallSp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

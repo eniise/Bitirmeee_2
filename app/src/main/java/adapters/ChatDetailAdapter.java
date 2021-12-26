@@ -51,7 +51,7 @@ public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHo
         }else if(viewType == TransactionTypes.MESSAGE_TYPE_SENDER_WITH_COURSE){
             return new SenderCourseMessageViewHolder(LayoutInflater.from(context).inflate(R.layout.chat_detail_sender_course_item,parent,false));
         }else if(viewType == TransactionTypes.MESSAGE_TYPE_RECEIVER_WITH_COURSE){
-            return new ReceiverCourseMessageViewHolder(LayoutInflater.from(context).inflate(R.layout.chat_detail_sender_course_item,parent,false));
+            return new ReceiverCourseMessageViewHolder(LayoutInflater.from(context).inflate(R.layout.chat_detail_receiver_course_item,parent,false));
         }else {
             return null;
         }
@@ -61,13 +61,14 @@ public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHo
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
-        if(getItemViewType(position) == VIEW_TYPE_SENT){
+        if(getItemViewType(position) == VIEW_TYPE_SENT || getItemViewType(position) == TransactionTypes.MESSAGE_TYPE_SENDER_WITH_COURSE){
             if(mChatDetail.get(position).getMessageType() == TransactionTypes.MESSAGE_TYPE_STRING) {
                 ((SentMessageViewHolder) holder).SetData(mChatDetail.get(position));
             }else {
                 ((SenderCourseMessageViewHolder) holder).SetData(mChatDetail.get(position));
             }
-        }else {
+        }
+        if(getItemViewType(position) == VIEW_TYPE_RECEIVER || getItemViewType(position) == TransactionTypes.MESSAGE_TYPE_RECEIVER_WITH_COURSE){
             if(mChatDetail.get(position).getMessageType() == TransactionTypes.MESSAGE_TYPE_STRING) {
                 ((ReceiverMessageViewHolder) holder).SetData(mChatDetail.get(position));
             }else{
@@ -157,19 +158,16 @@ public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHo
     }
     static class SenderCourseMessageViewHolder extends RecyclerView.ViewHolder {
         private final View itemView;
-        private RoundedImageView roundedImageView;
         private Button btnSenderCourseSend;
         private TextView txtSenderSendDate;
         SenderCourseMessageViewHolder(final View itemView){
             super(itemView);
             this.itemView = itemView;
-            roundedImageView = itemView.findViewById(R.id.imageChatDetailCourseProfile);
-            btnSenderCourseSend = itemView.findViewById(R.id.btntReceiverCourseMessage);
-            txtSenderSendDate = itemView.findViewById(R.id.receiverCourseDateTime);
+            btnSenderCourseSend = itemView.findViewById(R.id.txtChatDetailCourseSenderMessage);
+            txtSenderSendDate = itemView.findViewById(R.id.txtSenderCourseDateTime);
         }
         @RequiresApi(api = Build.VERSION_CODES.O)
         public void SetData(ChatDetail chat){
-            roundedImageView.setImageBitmap(receiverProfileImage);
             btnSenderCourseSend.setText(chat.getMessage());
             txtSenderSendDate.setText(chat.getMessageDate());
             btnSenderCourseSend.setOnClickListener(v-> {

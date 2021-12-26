@@ -41,4 +41,9 @@
     <string name="surNameNotNull">Sur name not null.</string>
     <string name="pleaseEnterSurName">Please enter a sur name.</string>
     <string name="app_text">e-Tech Education</string>
+    <string name="hello_i_want_to_talk_to_you_about_your_course">Hello, I want to talk to you about your course.</string>
+    <string name="online_hastag">#online</string>
+    <string name="otherplace_hastag">#otherplace</string>
+    <string name="trainerhome_hastag">#trainerhome</string>
+    <string name="studenthome">#studenthome</string>
 </resources>

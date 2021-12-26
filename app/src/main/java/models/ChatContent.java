@@ -19,7 +19,9 @@ public class ChatContent {
     private String LastMessageTime;
     @SerializedName("startChatDate")
     private String StartChatDate;
-    public ChatContent(int chatContentId, String userProfileImageUrl, String userName, String lastMessage, int receiverId, int lastMessageId, String lastMessageTime, String startChatDate) {
+    @SerializedName("isUserSearch")
+    private int isUserSearch;
+    public ChatContent(int chatContentId, String userProfileImageUrl, String userName, String lastMessage, int receiverId, int lastMessageId, String lastMessageTime, String startChatDate, int isUserSearch) {
         ChatContentId = chatContentId;
         UserProfileImageUrl = userProfileImageUrl;
         UserName = userName;
@@ -28,6 +30,7 @@ public class ChatContent {
         LastMessageId = lastMessageId;
         LastMessageTime = lastMessageTime;
         StartChatDate = startChatDate;
+        this.isUserSearch = isUserSearch;
     }
 
 
@@ -93,5 +96,13 @@ public class ChatContent {
 
     public void setStartChatDate(String startChatDate) {
         StartChatDate = startChatDate;
+    }
+
+    public int isUserSearch() {
+        return isUserSearch;
+    }
+
+    public void setUserSearch(int userSearch) {
+        isUserSearch = userSearch;
     }
 }

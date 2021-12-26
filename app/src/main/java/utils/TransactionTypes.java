@@ -6,6 +6,8 @@ public class TransactionTypes {
     public static final int MESSAGE_TYPE_SENDER_WITH_COURSE = 3;
     public static final int MESSAGE_TYPE_RECEIVER_WITH_COURSE = 4;
     public static final int USER_DELETE_MESSAGE = 5;
+    public static final int USER_CHAT_CONTENT_ALREADY_EXIST = 1;
+    public static final int USER_CHAT_CONTENT_TYPE_SEARCH = 2;
     public static final String USER_COME_BACK = "userComeBackMain";
     public static final int doLogin = 1;
     public static final int doRegister = 2;
@@ -20,4 +22,6 @@ public class TransactionTypes {
     public static final int doGetChatDetail = 11;
     public static final int doSendMessage = 12;
     public static final int doUserDeleteMessage = 13;
+    public static final int doUserSearch=14;
+    public static final int doUserSendMessageWithCourse=15;
 }

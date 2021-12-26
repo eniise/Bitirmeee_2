@@ -100,91 +100,63 @@ public class ServerGET extends AsyncTask<String, String, String> {
                                 , u.getUserProfileImageUrl()
                                 , u.isUserGender()
                                 ,u.getUserLikesCount()));
-                        try {
                             delegate.processFinish("true");
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
                         break;
                     case TransactionTypes.doGetCourses:
                         TrainerCourse[] courses = new Gson().fromJson(result,TrainerCourse[].class);
                         ArrayList<TrainerCourse> tempList = new ArrayList<>(Arrays.asList(courses));
-                        try {
-                            delegate.processFinish(tempList);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        delegate.processFinish(tempList);
                     case TransactionTypes.doGetLikesCount:
                         //null
                     break;
                     case TransactionTypes.isUserCourseLikeControl:
                         if(result.equals("true") || result.equals("true\n")) {
-                            try {
-                                delegate.processFinish(holder);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                            delegate.processFinish(holder);
                         }
                         else
                         {
                             ArrayList<Object> _tmp = new ArrayList<Object>();
                             _tmp.add(false);
                             _tmp.add(holder);
-                            try {
                                 delegate.processFinish(_tmp);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+
                         }
                     break;
                     case TransactionTypes.doGetMyLikeCourses:
                         TrainerCourse[] myLike = new Gson().fromJson(result,TrainerCourse[].class);
                         ArrayList<TrainerCourse> tempMyLike = new ArrayList<>(Arrays.asList(myLike));
-                        try {
-                            delegate.processFinish(tempMyLike);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        delegate.processFinish(tempMyLike);
                         break;
                     case TransactionTypes.doGetMyChatContent:
-                        ChatContent[] myChatContent = new Gson().fromJson(result,ChatContent[].class);
-                        ArrayList<ChatContent> _tempMyChatContent = new ArrayList<>(Arrays.asList(myChatContent));
-                        try {
-                            delegate.processFinish(_tempMyChatContent);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        ChatContent[] chatContentsExist = new Gson().fromJson(result,ChatContent[].class);
+                        ArrayList<ChatContent> _tempExist = new ArrayList<>(Arrays.asList(chatContentsExist));
+                        ArrayList<Object> _returnExist = new ArrayList<>();
+                        _returnExist.add(TransactionTypes.USER_CHAT_CONTENT_ALREADY_EXIST);
+                        _returnExist.add(_tempExist);
+                        delegate.processFinish(_returnExist);
                         break;
                     case TransactionTypes.doGetMyCurrentLastMessage:
                         CurrentChatLastMessageInfo currentChatLastMessageInfos = new Gson().fromJson(result,CurrentChatLastMessageInfo.class);
-                        try {
                             delegate.processFinish(currentChatLastMessageInfos);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
                         break;
-                        case TransactionTypes.doGetChatDetail:
-                            ChatDetail[] chatDetails = new Gson().fromJson(result,ChatDetail[].class);
-                            try {
-                                delegate.processFinish(new ArrayList<>(Arrays.asList(chatDetails)));
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            break;
+                    case TransactionTypes.doGetChatDetail:
+                         ChatDetail[] chatDetails = new Gson().fromJson(result,ChatDetail[].class);
+                         delegate.processFinish(new ArrayList<>(Arrays.asList(chatDetails)));
+                    break;
+                    case TransactionTypes.doUserSearch:
+                        ChatContent[] chatContentsSearch = new Gson().fromJson(result,ChatContent[].class);
+                        ArrayList<ChatContent> _tempSearch = new ArrayList<>(Arrays.asList(chatContentsSearch));
+                        ArrayList<Object> _returnSearch = new ArrayList<>();
+                        _returnSearch.add(TransactionTypes.USER_CHAT_CONTENT_TYPE_SEARCH);
+                        _returnSearch.add(_tempSearch);
+                        delegate.processFinish(_returnSearch);
+                    break;
                 }
             } else {
-                try {
-                    delegate.processFinish("false");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                delegate.processFinish("false");
             }
         } else {
-            try {
-                delegate.processFinish("false");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            delegate.processFinish("false");
         }
     }
 }
