@@ -17,7 +17,9 @@ public class Chat {
     private String MessageDate;
     @SerializedName("messageFromId")
     private int messageFromId;
-    public Chat(int id, int receiverId, int senderId, int type, String message, String messageDate, int messageFromId) {
+    @SerializedName("courseId")
+    private int courseId;
+    public Chat(int id, int receiverId, int senderId, int type, String message, String messageDate, int messageFromId, int courseId) {
         this.id = id;
         ReceiverId = receiverId;
         SenderId = senderId;
@@ -25,6 +27,7 @@ public class Chat {
         Message = message;
         MessageDate = messageDate;
         this.messageFromId = messageFromId;
+        this.courseId = courseId;
     }
 
 
@@ -82,5 +85,13 @@ public class Chat {
 
     public void setMessageFromId(int messageFromId) {
         this.messageFromId = messageFromId;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 }

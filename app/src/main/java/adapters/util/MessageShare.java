@@ -1,30 +1,28 @@
-package fragments;
+package adapters.util;
 
-import android.app.ProgressDialog;
-import android.os.Bundle;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.fragment.app.Fragment;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enise.bitirme_2.R;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 
 import adapters.ChatContentAdapter;
-import adapters.TrainerCourseAdapter;
 import models.ChatContent;
 import models.TrainerCourse;
 import utils.AsyncResponse;
@@ -33,28 +31,14 @@ import utils.StaticData;
 import utils.TransactionTypes;
 import utils.URLs;
 
-public class ChatFragment extends Fragment implements AsyncResponse, TextWatcher {
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private View view;
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
+public class MessageShare extends PopupWindow implements AsyncResponse, TextWatcher {
     private EditText txtSearchUser;
-    ProgressBar chatContent;
-    private View searchingView;
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.chat_content,container,false);
-        view = rootView;
-        chatContent = rootView.findViewById(R.id.chatContent);
-        txtSearchUser = rootView.findViewById(R.id.txtSearchUser);
-        txtSearchUser.addTextChangedListener(this);
-        searchingView = rootView.findViewById(R.id.searchingView);
-        ServerGET getMyContent = new ServerGET(TransactionTypes.doGetMyChatContent);
-        getMyContent.delegate = this;
-        getMyContent.execute(URLs.GetChatContent(StaticData.getUserData().getUserId()));
-        return rootView;
+    public MessageShare(View mView, Context mContext, TrainerCourse mCourse, int userSee, String layout) {
+        super(mView, mContext, mCourse, userSee, layout);
     }
+
     @Override
     public <T> void processFinish(T result) {
         ArrayList<Object> _tmp = (ArrayList<Object>) result;
@@ -71,12 +55,45 @@ public class ChatFragment extends Fragment implements AsyncResponse, TextWatcher
         mRecyclerView = view.findViewById(R.id.chatContentRecyler);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(view.getContext());
-        mAdapter = new ChatContentAdapter(_lst,TransactionTypes.LAYOUT_MESSAGE_NORMAL);
+        mAdapter = new ChatContentAdapter(_lst,TransactionTypes.LAYOUT_MESSAGE_SHARE,mCourse,this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         chatContent.setVisibility(View.GONE);
         mRecyclerView.setVisibility(View.VISIBLE);
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onButtonShowPopupWindowClick() {
+        LayoutInflater inflater = (LayoutInflater)
+                mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.chat_content, null);
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        final android.widget.PopupWindow popupWindow = new android.widget.PopupWindow(popupView, width, height, focusable);
+        popupWindow.setAnimationStyle(R.style.popupWindow);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        popupWindow.setFocusable(true);
+        popupWindow.update();
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAtLocation(mView, Gravity.CENTER, 0, 0);
+        mPopupWindow = popupWindow;
+        init(popupView);
+    }
+
+    @Override
+    public void init(View popupView) {
+        view = popupView;
+        chatContent = popupView.findViewById(R.id.chatContent);
+        txtSearchUser = popupView.findViewById(R.id.txtSearchUser);
+        txtSearchUser.addTextChangedListener(this);
+        searchingView = popupView.findViewById(R.id.searchingView);
+        ServerGET getMyContent = new ServerGET(TransactionTypes.doGetMyChatContent);
+        getMyContent.delegate = this;
+        getMyContent.execute(URLs.GetChatContent(StaticData.getUserData().getUserId()));
+    }
+
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -84,7 +101,6 @@ public class ChatFragment extends Fragment implements AsyncResponse, TextWatcher
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
         if(s.length()>0) {
             searchingView.setVisibility(View.VISIBLE);
             chatContent.setVisibility(View.VISIBLE);
@@ -102,5 +118,6 @@ public class ChatFragment extends Fragment implements AsyncResponse, TextWatcher
 
     @Override
     public void afterTextChanged(Editable s) {
+
     }
 }

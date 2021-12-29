@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,15 +25,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Locale;
 
 import adapters.ChatDetailAdapter;
 import adapters.message.SendMessage;
@@ -43,7 +38,6 @@ import models.ChatDetail;
 import models.CurrentChatLastMessageInfo;
 import utils.AsyncResponse;
 import utils.ServerGET;
-import utils.ServerPOST;
 import utils.StaticData;
 import utils.TransactionTypes;
 import utils.URLs;
@@ -89,7 +83,6 @@ public class ChatPage extends AppCompatActivity implements AsyncResponse, View.O
         Object result_type = result.getClass();
         if(result_type == CurrentChatLastMessageInfo.class && !mPageFirstOpen && isActivityActive) {
             CurrentChatLastMessageInfo _lst = (CurrentChatLastMessageInfo) result;
-            System.out.println("message from id : "+_lst.getMessageFromId()+" user id = "+StaticData.getUserData().getUserId()+" last message id = "+_lst.getLastMessageId()+" last message current id = "+lastMessageId);
             if ((_lst.getMessageFromId() != StaticData.getUserData().getUserId()) && (_lst.getLastMessageId() != lastMessageId)) {
                 //new message detected on listener
                 ChatDetail detailTemp = new ChatDetail(_lst.getLastMessage(),_lst.getMessageTime(),receiverId,_lst.getTransaction());
@@ -137,7 +130,7 @@ public class ChatPage extends AppCompatActivity implements AsyncResponse, View.O
                         1,
                         message,
                         getDateTime(),
-                        StaticData.getUserData().getUserId());
+                        StaticData.getUserData().getUserId(), 0);
                 new SendMessage(receiverId,
                         StaticData.getUserData().getUserId(),
                         chatData,
@@ -149,6 +142,7 @@ public class ChatPage extends AppCompatActivity implements AsyncResponse, View.O
                         ,1
                 );
                 chatDetails.add(_tmpDetail);
+                mAdapter.notifyDataSetChanged();
             }else {
                 Toast.makeText(v.getContext(),"Please type a message.",Toast.LENGTH_SHORT).show();
             }

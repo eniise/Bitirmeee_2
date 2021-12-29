@@ -3,6 +3,7 @@ package adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.enise.bitirme_2.R;
@@ -24,6 +26,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
+import adapters.util.MessageShare;
 import adapters.util.PopupWindow;
 import models.TrainerCourse;
 import models.UserLikes;
@@ -121,6 +124,7 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.trainer_course_items, parent, false);
         return new PostsViewHolder(v);
     }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(TrainerCourseAdapter.@NotNull PostsViewHolder holder, int position) {
         TrainerCourse currentItem = mUrunlerList.get(position);
@@ -131,13 +135,12 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
                 StaticData.getUserData().getUserId(),
                 currentItem.getmId()
         ));
-        new ImageDownloaderTask(holder.mHomeTrainerImage).execute("https://img.favpng.com/14/3/22/stock-photography-computer-icons-user-png-favpng-TWgLj8kmcdnekcpWySfpV97h3.jpg");
         String detail = currentItem.getmDetail().length() > 100 ? currentItem.getmDetail().substring(0,100)+"..." : currentItem.getmDetail();
         holder.txtHomeTrainerDetail.setText(detail);
         holder.txtHomeTrainerName.setText(currentItem.getmName());
         holder.txtLikesCount.setText(currentItem.getmLikeCount()+" user like this course");
         holder.btnHomeStartChat.setOnClickListener(v -> {
-            new PopupWindow(holder.itemView,holder.itemView.getContext(),currentItem).onButtonShowPopupWindowClick();
+            new PopupWindow(holder.itemView,holder.itemView.getContext(),currentItem,TransactionTypes.USER_SEE_MAIN,TransactionTypes.LAYOUT_MESSAGE_SEND).onButtonShowPopupWindowClick();
         });
         holder.btnHomeLike.setOnClickListener(v -> {
             _postsViewHolder = holder;
@@ -154,8 +157,9 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
              holder.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_24);
         });
         holder.btnHomeShare.setOnClickListener(v -> {
-            Toast.makeText(v.getContext(),"Buraya tıklanınca gönderi paylaşılacak",Toast.LENGTH_SHORT).show();
+            new MessageShare(v,v.getContext(),currentItem,1,TransactionTypes.LAYOUT_MESSAGE_SHARE).onButtonShowPopupWindowClick();
         });
+        new ImageDownloaderTask(holder.mHomeTrainerImage).execute(currentItem.getmTrainerImage());
     }
     @Override
     public int getItemCount() {

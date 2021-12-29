@@ -1,60 +1,76 @@
 package adapters;
 
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enise.bitirme_2.R;
+import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import adapters.util.ImageDownloaderTask;
+import adapters.util.MessageShare;
 import controllers.ChatPage;
+import models.Chat;
 import models.ChatContent;
+import models.TrainerCourse;
 import utils.AsyncResponse;
+import utils.ServerPOST;
+import utils.StaticData;
 import utils.TransactionTypes;
+import utils.URLs;
 
 public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.ChatsViewHolder> implements AsyncResponse {
     private static ArrayList<ChatContent> mChatContents;
-    private TrainerCourseAdapter.OnItemClickListener mListener;
+    private static OnItemClickListener mListener;
+    private final String userChatType;
+    private static MessageShare mMessageShare;
+    private TrainerCourse trainerCourse;
     @Override
     public <T> void processFinish(T result) {
+        Toast.makeText(mMessageShare.mView.getContext(),"Your share has been send.",Toast.LENGTH_LONG).show();
+        mMessageShare.mPopupWindow.dismiss();
     }
-    private Object mGetClassType(Object object){
-        return object.getClass();
-    }
-
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
-    public void setOnItemClickListener(TrainerCourseAdapter.OnItemClickListener listener) {
+    public void setOnItemClickListener(ChatContentAdapter.OnItemClickListener listener) {
         mListener = listener;
     }
-    public static class ChatsViewHolder extends RecyclerView.ViewHolder {
+    public static class ChatsViewHolder extends RecyclerView.ViewHolder implements AsyncResponse{
         public AppCompatImageView mChatContentReceiverImage;
         public TextView mChatContentReceiverName;
         public TextView mChatContentReceiverLastMessage;
         public AppCompatImageView mChatContentSendMessage;
         public TextView txtMessageDate;
-        private ArrayList<ChatContent> mChatContent;
-        public ChatsViewHolder(View itemView) {
+        private String mUserChatType;
+        public ChatsViewHolder(View itemView,OnItemClickListener listener,String userChatType) {
             super(itemView);
             mChatContentReceiverImage = itemView.findViewById(R.id.receiverChatContentImage);
             mChatContentReceiverName = itemView.findViewById(R.id.txtChatContentReceiverName);
             mChatContentReceiverLastMessage = itemView.findViewById(R.id.txtChatContentReceiverLastMessage);
             mChatContentSendMessage = itemView.findViewById(R.id.btnChatContentSendMessage);
             txtMessageDate = itemView.findViewById(R.id.txtMessageDate);
+            this.mUserChatType = userChatType;
         }
-        public ChatsViewHolder(View itemView,int viewType){
+        public ChatsViewHolder(View itemView,OnItemClickListener listener,int viewType,String userChatType){
             super(itemView);
             if(viewType == TransactionTypes.USER_CHAT_CONTENT_TYPE_SEARCH) {
                 mChatContentReceiverImage = itemView.findViewById(R.id.receiverChatContentImage);
@@ -62,38 +78,66 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
                 mChatContentReceiverLastMessage = itemView.findViewById(R.id.txtChatContentReceiverLastMessage);
                 mChatContentSendMessage = itemView.findViewById(R.id.btnChatContentSendMessage);
                 txtMessageDate = itemView.findViewById(R.id.txtMessageDate);
+                this.mUserChatType =userChatType;
             }
         }
-        public void SetData(ChatContent contents){
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        public void SetData(ChatContent contents, TrainerCourse trainerCourse){
             new ImageDownloaderTask(mChatContentReceiverImage).execute(contents.getUserProfileImageUrl());
             mChatContentReceiverName.setText(String.valueOf(contents.getUserName()));
             mChatContentReceiverLastMessage.setText(String.valueOf(contents.getLastMessage()));
             String _time = DetectSendTime(contents.getLastMessageTime());
             txtMessageDate.setText(_time);
             mChatContentSendMessage.setOnClickListener(v -> {
-                v.getContext().startActivity(new Intent(v.getContext(), ChatPage.class)
-                        .putExtra("receiverId", contents.getReceiverId())
-                        .putExtra("lastMessage", contents.getLastMessage())
-                        .putExtra("lastMessageId", contents.getLastMessageId())
-                        .putExtra("receiverImage", contents.getUserProfileImageUrl())
-                        .putExtra("receiverName", contents.getUserName())
-                        .putExtra("startChatDate", contents.getStartChatDate()));
+                if(mUserChatType.equals(TransactionTypes.LAYOUT_MESSAGE_NORMAL)) {
+                    v.getContext().startActivity(new Intent(v.getContext(), ChatPage.class)
+                    .putExtra("receiverId", contents.getReceiverId())
+                    .putExtra("lastMessage", contents.getLastMessage())
+                    .putExtra("lastMessageId", contents.getLastMessageId())
+                    .putExtra("receiverImage", contents.getUserProfileImageUrl())
+                    .putExtra("receiverName", contents.getUserName())
+                    .putExtra("startChatDate", contents.getStartChatDate()));
+                }else {
+                    ServerPOST sendMessage = new ServerPOST(TransactionTypes.doUserSendMessageWithCourse);
+                    sendMessage.delegate = this;
+                    Chat _chat = new Chat(0,
+                            contents.getReceiverId(),
+                            StaticData.getUserData().getUserId(),
+                            2,"I am sharing the "+trainerCourse.getmName()+" course with you. Click and browse",
+                            getDateTime(),
+                            StaticData.getUserData().getUserId(), trainerCourse.getmId());
+                    sendMessage.execute(URLs.SendMessageWithCourse(),new Gson().toJson(_chat));
+                }
             });
         }
-    }
-    public ChatContentAdapter(ArrayList<ChatContent> exampleList) {
-        mChatContents = exampleList;
-    }
-    @Override
-    public ChatContentAdapter.@NotNull ChatsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType == TransactionTypes.USER_CHAT_CONTENT_TYPE_SEARCH){
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_items, parent, false);
-            return new ChatsViewHolder(v,viewType);
-        }else {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_items, parent, false);
-            return new ChatsViewHolder(v);
+
+        @Override
+        public <T> void processFinish(T result) {
+
+            Toast.makeText(mMessageShare.mView.getContext(),"Your share has been send.",Toast.LENGTH_LONG).show();
+            mMessageShare.mPopupWindow.dismiss();
         }
     }
+    public ChatContentAdapter(ArrayList<ChatContent> exampleList,String userChatType) {
+        mChatContents = exampleList;
+        this.userChatType = userChatType;
+    }
+    public ChatContentAdapter(ArrayList<ChatContent> exampleList, String userChatType, TrainerCourse trainerCourse, MessageShare share) {
+        mChatContents = exampleList;
+        this.userChatType = userChatType;
+        this.trainerCourse = trainerCourse;
+        this.mMessageShare = share;
+    }
+    @Override
+    public ChatContentAdapter.@NotNull ChatsViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_items, parent, false);
+        if(viewType == TransactionTypes.USER_CHAT_CONTENT_TYPE_SEARCH){
+            return new ChatsViewHolder(v,mListener,viewType,userChatType);
+        }else {
+            return new ChatsViewHolder(v,mListener,userChatType);
+        }
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(ChatContentAdapter.@NotNull ChatsViewHolder holder, int position) {
         ChatContent mCurrentItem = mChatContents.get(position);
@@ -104,16 +148,28 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
             String _time = DetectSendTime(mCurrentItem.getLastMessageTime());
             holder.txtMessageDate.setText(_time);
             holder.mChatContentSendMessage.setOnClickListener(v -> {
-                v.getContext().startActivity(new Intent(v.getContext(), ChatPage.class)
-                        .putExtra("receiverId", mCurrentItem.getReceiverId())
-                        .putExtra("lastMessage", mCurrentItem.getLastMessage())
-                        .putExtra("lastMessageId", mCurrentItem.getLastMessageId())
-                        .putExtra("receiverImage", mCurrentItem.getUserProfileImageUrl())
-                        .putExtra("receiverName", mCurrentItem.getUserName())
-                        .putExtra("startChatDate", mCurrentItem.getStartChatDate()));
+                if(userChatType.equals(TransactionTypes.LAYOUT_MESSAGE_NORMAL)) {
+                    v.getContext().startActivity(new Intent(v.getContext(), ChatPage.class)
+                            .putExtra("receiverId", mCurrentItem.getReceiverId())
+                            .putExtra("lastMessage", mCurrentItem.getLastMessage())
+                            .putExtra("lastMessageId", mCurrentItem.getLastMessageId())
+                            .putExtra("receiverImage", mCurrentItem.getUserProfileImageUrl())
+                            .putExtra("receiverName", mCurrentItem.getUserName())
+                            .putExtra("startChatDate", mCurrentItem.getStartChatDate()));
+                }else {
+                    ServerPOST sendMessage = new ServerPOST(TransactionTypes.doUserSendMessageWithCourse);
+                    sendMessage.delegate = this;
+                    Chat _chat = new Chat(0,
+                            mCurrentItem.getReceiverId(),
+                            StaticData.getUserData().getUserId(),
+                            2,"I am sharing the "+trainerCourse.getmName()+" course with you. Click and browse",
+                            getDateTime(),
+                            StaticData.getUserData().getUserId(), trainerCourse.getmId());
+                    sendMessage.execute(URLs.SendMessageWithCourse(),new Gson().toJson(_chat));
+                }
             });
         }else {
-            ((ChatContentAdapter.ChatsViewHolder) holder).SetData(mChatContents.get(position));
+            holder.SetData(mChatContents.get(position),trainerCourse);
         }
     }
     @Override
@@ -123,7 +179,6 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
 
     @Override
     public int getItemViewType(int position) {
-        System.out.println(mChatContents.get(position).isUserSearch());
         if(mChatContents.get(position).isUserSearch() == 1) {
             return TransactionTypes.USER_CHAT_CONTENT_TYPE_SEARCH;
         }
@@ -135,5 +190,13 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
         String _temp = lastMessageTime.substring(lastMessageTime.indexOf("T")+1,lastMessageTime.length()-1);
         String[] _arr = _temp.split(":");
         return _arr[0]+":"+_arr[1]+"";
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private static String getDateTime(){
+        java.util.Date date = new java.util.Date();
+        LocalDateTime localDate = Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.of("UTC")).toLocalDateTime();
+        DateTimeFormatter _formater = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return _formater.format(localDate);
     }
 }

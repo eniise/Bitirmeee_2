@@ -23,10 +23,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import adapters.util.ImageDownloaderTask;
+import adapters.util.PopupWindow;
 import models.ChatDetail;
+import models.TrainerCourse;
+import utils.AsyncResponse;
+import utils.ServerGET;
 import utils.TransactionTypes;
+import utils.URLs;
 
-public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final ArrayList<ChatDetail> mChatDetail;
     public static Bitmap receiverProfileImage = null;
     private final int mSenderId;
@@ -137,7 +142,7 @@ public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHo
             imageReceiver.setImageBitmap(receiverProfileImage);
         }
     }
-    static class ReceiverCourseMessageViewHolder extends RecyclerView.ViewHolder {
+    static class ReceiverCourseMessageViewHolder extends RecyclerView.ViewHolder implements AsyncResponse{
         private final View itemView;
         private RoundedImageView roundedImageView;
         private Button btnReceiverCourseSend;
@@ -154,9 +159,22 @@ public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHo
             roundedImageView.setImageBitmap(receiverProfileImage);
             btnReceiverCourseSend.setText(chat.getMessage());
             txtReceiverSendDate.setText(chat.getMessageDate());
+            btnReceiverCourseSend.setOnClickListener(v-> {
+                ServerGET getCourse = new ServerGET(TransactionTypes.doUserClickChatDetailCourse);
+                getCourse.delegate = this;
+                getCourse.execute(URLs.GetSingleCourseWithId(chat.getCourseId()));
+            });
+        }
+
+
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        @Override
+        public <T> void processFinish(T result) {
+            new PopupWindow(itemView,itemView.getContext(),(TrainerCourse) result,TransactionTypes.USER_SEE_CHAT,TransactionTypes.LAYOUT_MESSAGE_SEND)
+                    .onButtonShowPopupWindowClick();
         }
     }
-    static class SenderCourseMessageViewHolder extends RecyclerView.ViewHolder {
+    static class SenderCourseMessageViewHolder extends RecyclerView.ViewHolder implements AsyncResponse {
         private final View itemView;
         private Button btnSenderCourseSend;
         private TextView txtSenderSendDate;
@@ -171,8 +189,18 @@ public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHo
             btnSenderCourseSend.setText(chat.getMessage());
             txtSenderSendDate.setText(chat.getMessageDate());
             btnSenderCourseSend.setOnClickListener(v-> {
-                //do click course
+                ServerGET getCourse = new ServerGET(TransactionTypes.doUserClickChatDetailCourse);
+                getCourse.delegate = this;
+                getCourse.execute(URLs.GetSingleCourseWithId(chat.getCourseId()));
             });
         }
+
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        @Override
+        public <T> void processFinish(T result) {
+            new PopupWindow(itemView,itemView.getContext(),(TrainerCourse) result,TransactionTypes.USER_SEE_CHAT,TransactionTypes.LAYOUT_MESSAGE_SEND)
+            .onButtonShowPopupWindowClick();
+        }
+
     }
 }

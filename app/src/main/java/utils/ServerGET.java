@@ -151,6 +151,10 @@ public class ServerGET extends AsyncTask<String, String, String> {
                         _returnSearch.add(_tempSearch);
                         delegate.processFinish(_returnSearch);
                     break;
+                    case TransactionTypes.doUserClickChatDetailCourse:
+                        TrainerCourse course = new Gson().fromJson(result,TrainerCourse.class);
+                        delegate.processFinish(course);
+                        break;
                 }
             } else {
                 delegate.processFinish("false");

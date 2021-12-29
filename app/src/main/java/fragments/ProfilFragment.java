@@ -1,5 +1,6 @@
 package fragments;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -43,6 +44,7 @@ public class ProfilFragment extends Fragment implements AsyncResponse,View.OnCli
     private RecyclerView.LayoutManager mLayoutManager;
     private View view;
     private ProgressBar profileProgressBar;
+    @SuppressLint("SetTextI18n")
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override
@@ -55,6 +57,7 @@ public class ProfilFragment extends Fragment implements AsyncResponse,View.OnCli
         SetupProfileButtons(rootView,StaticData.getUserData().getRoleID());
         //do get user data's from server json data here
         //now get user data's from json data
+        System.out.println(StaticData.getUserData().getUserProfileImageUrl());
         new ImageDownloaderTask(mUserProfileImage)
                 .execute(StaticData.getUserData().getUserProfileImageUrl());
         mUserProfileName.setText(StaticData.getUserData().getName());

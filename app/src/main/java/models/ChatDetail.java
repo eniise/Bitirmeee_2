@@ -21,7 +21,8 @@ public class ChatDetail {
     private int MessageFromId;
     @SerializedName("messageDate")
     private String MessageDate;
-    public ChatDetail(int chatId, String receiverImageUrl, String senderImageUrl, String receiverName, String senderName, int messageType, String message, int messageFromId, String messageDate) {
+    private int courseId;
+    public ChatDetail(int chatId, String receiverImageUrl, String senderImageUrl, String receiverName, String senderName, int messageType, String message, int messageFromId, String messageDate, int courseId) {
         ChatId = chatId;
         ReceiverImageUrl = receiverImageUrl;
         SenderImageUrl = senderImageUrl;
@@ -31,6 +32,7 @@ public class ChatDetail {
         Message = message;
         MessageFromId = messageFromId;
         MessageDate = messageDate;
+        this.courseId = courseId;
     }
     public ChatDetail(String message,String messageDate,int senderId,int messageType){
         this.Message = message;
@@ -108,5 +110,13 @@ public class ChatDetail {
 
     public void setMessageDate(String messageDate) {
         MessageDate = messageDate;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 }

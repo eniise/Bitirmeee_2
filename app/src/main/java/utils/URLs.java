@@ -84,4 +84,10 @@ public class URLs {
                 ServerInfo.API_LEVEL +
                 "User/SendMyMessage";
     }
+    public static String GetSingleCourseWithId(int courseId){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "TrainerCourse/GetSingleCourse?courseId="+courseId;
+    }
 }

@@ -19,9 +19,7 @@ public class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
 
     @Override
     protected void onPreExecute() {
-        Bitmap icon = BitmapFactory.decodeResource(bmImage.getContext().getResources(),
-                R.drawable.ic_baseline_hourglass_full_24);
-        this.bmImage.setImageBitmap(icon);
+
     }
 
     protected Bitmap doInBackground(String... urls) {
