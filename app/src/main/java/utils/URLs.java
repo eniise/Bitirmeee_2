@@ -90,4 +90,16 @@ public class URLs {
                 ServerInfo.API_LEVEL +
                 "TrainerCourse/GetSingleCourse?courseId="+courseId;
     }
+    public static String GetUserProfil(int userId){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "User/GetProfil?userId="+userId;
+    }
+    public static String ChangePassword(){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "User/ChangePassword";
+    }
 }

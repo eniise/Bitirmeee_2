@@ -104,6 +104,9 @@ public class ServerPOST extends AsyncTask<String, String, String> {
                     case TransactionTypes.doUserSendMessageWithCourse:
                          delegate.processFinish(true);
                         break;
+                    case TransactionTypes.doUserChangePassword:
+                        delegate.processFinish("true");
+                    break;
                 }
             }
             else {

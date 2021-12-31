@@ -2,6 +2,7 @@ package fragments;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 import adapters.TrainerCourseAdapter;
+import controllers.CourseUpload;
+import controllers.ProfilSettings;
 import models.TrainerCourse;
 import utils.AsyncResponse;
 import adapters.util.ImageDownloaderTask;
@@ -44,6 +47,8 @@ public class ProfilFragment extends Fragment implements AsyncResponse,View.OnCli
     private RecyclerView.LayoutManager mLayoutManager;
     private View view;
     private ProgressBar profileProgressBar;
+    private RoundedImageView btnBack;
+    private RoundedImageView btnProfileSettings;
     @SuppressLint("SetTextI18n")
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -57,7 +62,6 @@ public class ProfilFragment extends Fragment implements AsyncResponse,View.OnCli
         SetupProfileButtons(rootView,StaticData.getUserData().getRoleID());
         //do get user data's from server json data here
         //now get user data's from json data
-        System.out.println(StaticData.getUserData().getUserProfileImageUrl());
         new ImageDownloaderTask(mUserProfileImage)
                 .execute(StaticData.getUserData().getUserProfileImageUrl());
         mUserProfileName.setText(StaticData.getUserData().getName());
@@ -84,11 +88,20 @@ public class ProfilFragment extends Fragment implements AsyncResponse,View.OnCli
         mUserProfileLikeCount = v.findViewById(R.id.txtProfileLikeCount);
         mUserProfileRecylerView = v.findViewById(R.id.recylerUserProfile);
         mUserProfileName = v.findViewById(R.id.txtProfileNameSurname);
+        btnProfileSettings = v.findViewById(R.id.profileSettings);
+        btnProfileSettings.setOnClickListener(v1 -> {
+            startActivity(new Intent(getContext(), ProfilSettings.class));
+        });
+        btnBack = v.findViewById(R.id.profileBack);
+        btnBack.setVisibility(View.GONE);
     }
 
     @Override
     public void onClick(View v) {
         //buttons click -> course upload end course edit
+        if(v.getId() == R.id.btnProfileCourseUpload){
+            startActivity(new Intent(getContext(),CourseUpload.class));
+        }
     }
 
     @Override

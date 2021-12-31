@@ -30,4 +30,6 @@ public class TransactionTypes {
     public static final int doUserSearch=14;
     public static final int doUserSendMessageWithCourse=15;
     public static final int doUserClickChatDetailCourse=16;
+    public static final int doUserGetProfil=17;
+    public static final int doUserChangePassword=18;
 }

@@ -20,6 +20,7 @@ import models.ChatDetail;
 import models.CurrentChatLastMessageInfo;
 import models.TrainerCourse;
 import models.User;
+import models.Profil;
 
 public class ServerGET extends AsyncTask<String, String, String> {
     public ProgressDialog progressDialog;
@@ -154,7 +155,12 @@ public class ServerGET extends AsyncTask<String, String, String> {
                     case TransactionTypes.doUserClickChatDetailCourse:
                         TrainerCourse course = new Gson().fromJson(result,TrainerCourse.class);
                         delegate.processFinish(course);
-                        break;
+                    break;
+                    case TransactionTypes.doUserGetProfil:
+                        TrainerCourse[] profil = new Gson().fromJson(result, TrainerCourse[].class);
+                        ArrayList<TrainerCourse> _tmp = new ArrayList<>(Arrays.asList(profil));
+                        delegate.processFinish(_tmp);
+                    break;
                 }
             } else {
                 delegate.processFinish("false");

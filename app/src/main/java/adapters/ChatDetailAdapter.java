@@ -165,8 +165,6 @@ public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHo
                 getCourse.execute(URLs.GetSingleCourseWithId(chat.getCourseId()));
             });
         }
-
-
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public <T> void processFinish(T result) {
@@ -194,13 +192,15 @@ public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHo
                 getCourse.execute(URLs.GetSingleCourseWithId(chat.getCourseId()));
             });
         }
-
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public <T> void processFinish(T result) {
-            new PopupWindow(itemView,itemView.getContext(),(TrainerCourse) result,TransactionTypes.USER_SEE_CHAT,TransactionTypes.LAYOUT_MESSAGE_SEND)
+            new PopupWindow(itemView,
+                    itemView.getContext(),
+                    (TrainerCourse) result,
+                    TransactionTypes.USER_SEE_CHAT,
+                    TransactionTypes.LAYOUT_MESSAGE_SEND)
             .onButtonShowPopupWindowClick();
         }
-
     }
 }

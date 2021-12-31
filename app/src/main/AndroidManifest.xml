@@ -26,6 +26,12 @@
             android:theme="@style/Theme.Bitirme_2_Chat"/>
         <activity android:name="controllers.MessageInfo"
             android:theme="@style/Theme.Bitirme_2"/>
+        <activity android:name="controllers.UserProfil"
+            android:theme="@style/Theme.Bitirme_2"/>
+        <activity android:name="controllers.ProfilSettings"
+            android:theme="@style/Theme.Bitirme_2"/>
+        <activity android:name="controllers.CourseUpload"
+            android:theme="@style/Theme.Bitirme_2"/>
         <activity
             android:name="controllers.Login"
             android:exported="true"

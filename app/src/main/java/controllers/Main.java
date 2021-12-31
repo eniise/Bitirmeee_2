@@ -128,6 +128,8 @@ public class Main extends AppCompatActivity {
                     navListener.onNavigationItemSelected(bottomNav.getMenu().findItem(R.id.chat));
                     break;
             }
+        }else {
+            navListener.onNavigationItemSelected(bottomNav.getMenu().findItem(R.id.home));
         }
     }
 }

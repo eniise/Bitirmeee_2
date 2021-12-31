@@ -6,28 +6,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Spinner
-        android:id="@+id/spinner3"
+    <utils.MultiSpinner
+        android:id="@+id/spinnerDistrict"
         android:layout_width="122dp"
         android:layout_height="34dp"
         android:entries="@array/district"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.941"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.655"
+        app:layout_constraintStart_toEndOf="@+id/spinnerDays"
         app:layout_constraintTop_toBottomOf="@+id/swOther"
         app:layout_constraintVertical_bias="0.043"
         tools:ignore="HardcodedText,MissingConstraints" />
 
-    <Spinner
-        android:id="@+id/spinner2"
+    <utils.MultiSpinner
+        android:id="@+id/spinnerDays"
         android:layout_width="122dp"
         android:layout_height="34dp"
+        android:layout_marginStart="127dp"
         android:entries="@array/weekDays"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/spinnerIntervals"
         app:layout_constraintTop_toBottomOf="@+id/swOther"
         app:layout_constraintVertical_bias="0.043"
         tools:ignore="HardcodedText" />
@@ -36,9 +37,10 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
         android:drawSelectorOnTop="true"
         android:text="Day"
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerDays"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.256"
         app:layout_constraintStart_toEndOf="@+id/textView7"
@@ -51,20 +53,21 @@
         android:layout_height="wrap_content"
         android:drawSelectorOnTop="true"
         android:text="@string/enter_a_course_detail"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/txtCourseUploadDetail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.064"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerIntervals"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
         android:drawSelectorOnTop="true"
         android:text="@string/district"
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerDistrict"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.613"
         app:layout_constraintStart_toEndOf="@+id/textView8"
@@ -72,7 +75,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/txtCourseUploadName"
         android:layout_width="392dp"
         android:layout_height="42dp"
         android:ems="10"
@@ -94,7 +97,7 @@
         android:text="@string/online"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/txtCourseUploadName"
         app:layout_constraintVertical_bias="0.0" />
 
     <Switch
@@ -118,7 +121,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/swOnline"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/txtCourseUploadName"
         app:layout_constraintVertical_bias="0.03" />
 
     <Switch
@@ -129,11 +132,11 @@
         android:text="@string/student_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/swHome"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/txtCourseUploadName"
         app:layout_constraintVertical_bias="0.032" />
 
-    <Spinner
-        android:id="@+id/spinner"
+    <utils.MultiSpinner
+        android:id="@+id/spinnerIntervals"
         android:layout_width="114dp"
         android:layout_height="36dp"
         android:entries="@array/timeInterval"
@@ -149,9 +152,10 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
         android:drawSelectorOnTop="true"
         android:text="@string/time_interval"
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerIntervals"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.075"
         app:layout_constraintStart_toStartOf="parent"
@@ -159,7 +163,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/txtCourseUploadDetail"
         android:layout_width="395dp"
         android:layout_height="198dp"
         android:ems="10"
@@ -169,11 +173,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.687"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDays"
         app:layout_constraintVertical_bias="0.311" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/txtCourseUploadCost"
         android:layout_width="257dp"
         android:layout_height="42dp"
         android:ems="10"
@@ -183,10 +187,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerIntervals" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnCourseUpload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/course_upload"
@@ -194,7 +198,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.942"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine"
+        app:layout_constraintTop_toBottomOf="@+id/txtCourseUploadDetail"
         app:layout_constraintVertical_bias="0.066" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,6 +38,7 @@ public class MessageInfo extends AppCompatActivity implements View.OnClickListen
     private String mUserProfilUrl;
     private int mReceiverId;
     private AppCompatImageView mDeleteMessage;
+    private AppCompatImageView imageInfoBack;
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +59,10 @@ public class MessageInfo extends AppCompatActivity implements View.OnClickListen
         txtStartChatDate.setText(getStartChatInfo(bundle.getString("startChatDate")));
         mReceiverId = bundle.getInt("receiverUserId");
         mUserProfilUrl = bundle.getString("userProfil");
-
+        imageInfoBack = findViewById(R.id.imageInfoBack);
+        imageInfoBack.setOnClickListener(v -> {
+            onBackPressed();
+        });
     }
     private String getStartChatInfo(String date){
         return "You'r start with date : "+date;
