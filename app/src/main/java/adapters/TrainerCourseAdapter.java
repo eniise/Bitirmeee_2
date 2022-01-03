@@ -3,6 +3,7 @@ package adapters;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,21 +16,26 @@ import com.google.gson.Gson;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
+import adapters.util.DeleteCourse;
 import adapters.util.MessageShare;
 import adapters.util.PopupWindow;
+import controllers.CourseEdit;
+import controllers.CourseUpload;
 import controllers.UserProfil;
-import models.TrainerCourse;
-import models.UserLikes;
+import models.trainer.TrainerCourse;
+import models.user.UserLikes;
 import utils.AsyncResponse;
 import adapters.util.ImageDownloaderTask;
-import utils.MyAlertDialog;
-import utils.ServerGET;
-import utils.ServerPOST;
-import utils.StaticData;
-import utils.TransactionTypes;
-import utils.URLs;
+import utils.components.MyAlertDialog;
+import utils.server.ServerGET;
+import utils.server.ServerPOST;
+import utils.user.StaticData;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
@@ -42,6 +48,8 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
     private TrainerCourseAdapter.PostsViewHolder _postsViewHolder;
     private static TrainerCourse course;
     private String mPage;
+    private static final int VIEV_TYPE_EDIT = 1;
+    private static final int VIEW_TYPE_NORMAL = 2;
     @Override
     public <T> void processFinish(T result) {
         //if user like course && finished class type == holder set ui favorite
@@ -97,15 +105,26 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
         public RoundedImageView btnHomeLike;
         public RoundedImageView btnHomeStartChat;
         public TextView txtLikesCount;
-        public PostsViewHolder(View itemView) {
+        public RoundedImageView btnEditCourseDelete;
+        public RoundedImageView btnEditCourseEdit;
+        public TextView txtEditCourseName;
+        public TextView txtEditCourseDetail;
+        public PostsViewHolder(View itemView,int viewType) {
             super(itemView);
-            mHomeTrainerImage = itemView.findViewById(R.id.homeTrainerImage);
-            txtHomeTrainerName = itemView.findViewById(R.id.txtHomeTrainerName);
-            txtHomeTrainerDetail = itemView.findViewById(R.id.txtHomeTrainerDetail);
-            btnHomeShare = itemView.findViewById(R.id.btnHomeShare);
-            btnHomeLike = itemView.findViewById(R.id.btnHomeLike);
-            btnHomeStartChat = itemView.findViewById(R.id.btnHomeStartChat);
-            txtLikesCount = itemView.findViewById(R.id.txtHomeLikesCount);
+            if(viewType == VIEW_TYPE_NORMAL){
+                mHomeTrainerImage = itemView.findViewById(R.id.homeTrainerImage);
+                txtHomeTrainerName = itemView.findViewById(R.id.txtHomeTrainerName);
+                txtHomeTrainerDetail = itemView.findViewById(R.id.txtHomeTrainerDetail);
+                btnHomeShare = itemView.findViewById(R.id.btnHomeShare);
+                btnHomeLike = itemView.findViewById(R.id.btnHomeLike);
+                btnHomeStartChat = itemView.findViewById(R.id.btnHomeStartChat);
+                txtLikesCount = itemView.findViewById(R.id.txtHomeLikesCount);
+            }else if(viewType == VIEV_TYPE_EDIT){
+                btnEditCourseDelete = itemView.findViewById(R.id.btnEditCourseDelete);
+                btnEditCourseEdit = itemView.findViewById(R.id.btnEditCourseEdit);
+                txtEditCourseName = itemView.findViewById(R.id.txtEditCourseName);
+                txtEditCourseDetail = itemView.findViewById(R.id.txtEditCourseDetail);
+            }
         }
     }
     public TrainerCourseAdapter(ArrayList<TrainerCourse> exampleList, String page) {
@@ -113,58 +132,93 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
         mUrunlerList = exampleList;
     }
     @Override
-    public TrainerCourseAdapter.@NotNull PostsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.trainer_course_items, parent, false);
-        return new PostsViewHolder(v);
+    public TrainerCourseAdapter.@NotNull PostsViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
+        View v;
+        if(viewType == VIEW_TYPE_NORMAL){
+            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.trainer_course_items, parent, false);
+        }else {
+            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.edit_course_item, parent, false);
+        }
+        return new PostsViewHolder(v,viewType);
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(TrainerCourseAdapter.@NotNull PostsViewHolder holder, int position) {
         TrainerCourse currentItem = mUrunlerList.get(position);
-        _postsViewHolder = holder;
-        ServerGET isLikeCourseAsync = new ServerGET(TransactionTypes.isUserCourseLikeControl,holder);
-        isLikeCourseAsync.delegate = this;
-        isLikeCourseAsync.execute(URLs.isUserLikeCourse(
-                StaticData.getUserData().getUserId(),
-                currentItem.getmId()
-        ));
-        String detail = currentItem.getmDetail().length() > 100 ? currentItem.getmDetail().substring(0,100)+"..." : currentItem.getmDetail();
-        holder.txtHomeTrainerDetail.setText(detail);
-        holder.txtHomeTrainerName.setText(currentItem.getmName());
-        holder.txtLikesCount.setText(currentItem.getmLikeCount()+" user like this course");
-        holder.btnHomeStartChat.setOnClickListener(v -> {
-            new PopupWindow(holder.itemView,holder.itemView.getContext(),currentItem,TransactionTypes.USER_SEE_MAIN,TransactionTypes.LAYOUT_MESSAGE_SEND).onButtonShowPopupWindowClick();
-        });
-        holder.btnHomeLike.setOnClickListener(v -> {
+        if(mPage.equals("Home")) {
             _postsViewHolder = holder;
-            _v = v;
-            if(course == null || course != mUrunlerList.get(holder.getAdapterPosition())) {
-                course = mUrunlerList.get(holder.getAdapterPosition());
+            if(getItemCount() != 1)  {
+                ServerGET isLikeCourseAsync = new ServerGET(TransactionTypes.isUserCourseLikeControl, holder);
+                isLikeCourseAsync.delegate = this;
+                isLikeCourseAsync.execute(URLs.isUserLikeCourse(
+                        StaticData.getUserData().getUserId(),
+                        currentItem.getmId()
+                ));
+                String detail = currentItem.getmDetail().length() > 100 ? currentItem.getmDetail().substring(0, 100) + "..." : currentItem.getmDetail();
+                holder.txtHomeTrainerDetail.setText(detail);
+                holder.txtHomeTrainerName.setText(currentItem.getmName());
+                holder.txtLikesCount.setText(currentItem.getmLikeCount() + " user like this course");
+                holder.btnHomeStartChat.setOnClickListener(v -> {
+                    new PopupWindow(holder.itemView, holder.itemView.getContext(), currentItem, TransactionTypes.USER_SEE_MAIN, TransactionTypes.LAYOUT_MESSAGE_SEND).onButtonShowPopupWindowClick();
+                });
+                holder.btnHomeLike.setOnClickListener(v -> {
+                    _postsViewHolder = holder;
+                    _v = v;
+                    if (course == null || course != mUrunlerList.get(holder.getAdapterPosition())) {
+                        course = mUrunlerList.get(holder.getAdapterPosition());
+                    }
+                    ServerPOST postLike = new ServerPOST(null, TransactionTypes.doAddCourseLike, "Send likes..");
+                    postLike.delegate = this;
+                    postLike.execute(URLs.SendUserCourseLike(StaticData.getUserData().getUserId()), new Gson()
+                            .toJson(new UserLikes(0, StaticData.getUserData().getUserId(), course.getmId())));
+                    this._userId = StaticData.getUserData().getUserId();
+                    this._courseId = course.getmId();
+                    holder.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_24);
+                });
+                holder.btnHomeShare.setOnClickListener(v -> {
+                    new MessageShare(v, v.getContext(), currentItem, 1, TransactionTypes.LAYOUT_MESSAGE_SHARE).onButtonShowPopupWindowClick();
+                });
+                holder.mHomeTrainerImage.setOnClickListener(v -> {
+                    startActivity(v.getContext(), new Intent(v.getContext(), UserProfil.class).putExtra("userId", currentItem.getmUserId()), Bundle.EMPTY);
+                });
+                new ImageDownloaderTask(holder.mHomeTrainerImage).execute(currentItem.getmTrainerImage());
             }
-            ServerPOST postLike = new ServerPOST(null, TransactionTypes.doAddCourseLike,"Send likes..");
-            postLike.delegate = this;
-            postLike.execute(URLs.SendUserCourseLike(StaticData.getUserData().getUserId()),new Gson()
-                    .toJson(new UserLikes( 0,StaticData.getUserData().getUserId(),course.getmId())));
-            this._userId = StaticData.getUserData().getUserId();
-            this._courseId = course.getmId();
-             holder.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_24);
-        });
-        holder.btnHomeShare.setOnClickListener(v -> {
-            new MessageShare(v,v.getContext(),currentItem,1,TransactionTypes.LAYOUT_MESSAGE_SHARE).onButtonShowPopupWindowClick();
-        });
-        holder.mHomeTrainerImage.setOnClickListener(v -> {
-            startActivity(v.getContext(),
-                    new Intent(v.getContext(),
-                    UserProfil.class).putExtra("userId",currentItem.getmUserId()),
-                    Bundle.EMPTY);
-        });
-        new ImageDownloaderTask(holder.mHomeTrainerImage).execute(currentItem.getmTrainerImage());
+        }else if(mPage.equals("Edit")){
+            holder.txtEditCourseName.setText(currentItem.getmName());
+            holder.txtEditCourseDetail.setText(currentItem.getmDetail());
+            holder.btnEditCourseDelete.setOnClickListener(v -> {
+                new MyAlertDialog(v.getContext(),"Course delete process","Do you confirm that the deletion is irreversible?", R.drawable.ic_message_info)
+                        .ShowMessage()
+                        .setPositiveButton(R.string.okay,((dialog, which) -> {
+                            DeleteCourse _delete = new DeleteCourse(currentItem,v.getContext(),this,mUrunlerList);
+                            _delete.Delete();
+                        }))
+                        .setNegativeButton(R.string.hayir,(((dialog, which) -> {
+                            //
+                        })))
+                        .show();
+            });
+            holder.btnEditCourseEdit.setOnClickListener(v->{
+                startActivity(v.getContext(),
+                        new Intent(v.getContext(), CourseUpload.class)
+                                .putExtra("userSee",TransactionTypes.TRAINER_SEE_COURSE_EDIT)
+                                .putExtra("userId",StaticData.getUserData().getUserId())
+                                .putExtra("course", new Gson().toJson(currentItem))
+                        ,null);
+            });
+        }
     }
     @Override
     public int getItemCount() {
         return mUrunlerList.size();
     }
-
+    public void setItems(ArrayList<TrainerCourse> trainerCourses) {
+        mUrunlerList = trainerCourses;
+    }
+    @Override
+    public int getItemViewType(int position) {
+        return mUrunlerList.get(position).getmViewType();
+    }
 
     //unlike course and  real-time ui changed
     private class UserUnLikeCourse implements AsyncResponse{
@@ -187,7 +241,6 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
                 ArrayList<T> _temp = (ArrayList<T>) result;
                 boolean _result = (boolean) _temp.get(0);
                 PostsViewHolder v = (TrainerCourseAdapter.PostsViewHolder) _temp.get(1);
-                System.out.println(_result);
                 if(_result){
                     v.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_null_24);
                     int getLike = course.getmLikeCount()-1;

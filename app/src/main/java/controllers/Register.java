@@ -10,19 +10,18 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
 
 import com.enise.bitirme_2.R;
 import com.google.gson.Gson;
 
-import models.User;
+import models.user.User;
 import utils.AsyncResponse;
-import utils.MyAlertDialog;
-import utils.ServerPOST;
-import utils.TransactionTypes;
-import utils.URLs;
+import utils.components.MyAlertDialog;
+import utils.server.ServerPOST;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
 
 public class Register extends Activity implements AsyncResponse, CompoundButton.OnCheckedChangeListener {
     EditText txtRegisterMail;

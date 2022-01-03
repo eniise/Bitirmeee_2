@@ -1,8 +1,8 @@
-package models;
+package models.user;
 
 import com.google.gson.annotations.SerializedName;
 
-public class TrainerCourse {
+public class Profil {
     @SerializedName("id")
     private int mId;
     @SerializedName("userId")
@@ -31,7 +31,7 @@ public class TrainerCourse {
     private String mUserName;
     @SerializedName("userLikeCount")
     private int LikeCount;
-    public TrainerCourse(int mId, int mUserId, String mName, String mTypes, String mTimeIntervals, String mDays, String mDistrict, double mCost, String mDetail, int mLikeCount, String mTrainerImage, String mProfileImage, String mUserName, int likeCount) {
+    public Profil(int mId, int mUserId, String mName, String mTypes, String mTimeIntervals, String mDays, String mDistrict, double mCost, String mDetail, int mLikeCount, String mTrainerImage, String mProfileImage, String mUserName, int likeCount) {
         this.mId = mId;
         this.mUserId = mUserId;
         this.mName = mName;
@@ -47,7 +47,7 @@ public class TrainerCourse {
         this.mUserName = mUserName;
         this.LikeCount = likeCount;
     }
-    public TrainerCourse(){
+    public Profil(){
 
     }
 

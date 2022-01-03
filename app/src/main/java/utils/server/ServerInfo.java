@@ -1,4 +1,4 @@
-package utils;
+package utils.server;
 
 public class ServerInfo {
     public static int PortNumber = 80;

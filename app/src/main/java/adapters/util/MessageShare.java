@@ -11,25 +11,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.enise.bitirme_2.R;
 
 import java.util.ArrayList;
 
 import adapters.ChatContentAdapter;
-import models.ChatContent;
-import models.TrainerCourse;
+import models.chat.ChatContent;
+import models.trainer.TrainerCourse;
 import utils.AsyncResponse;
-import utils.ServerGET;
-import utils.StaticData;
-import utils.TransactionTypes;
-import utils.URLs;
+import utils.server.ServerGET;
+import utils.user.StaticData;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 

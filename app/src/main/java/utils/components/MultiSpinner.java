@@ -1,4 +1,4 @@
-package utils;
+package utils.components;
 
 import android.content.Context;
 import android.content.DialogInterface;

@@ -1,7 +1,6 @@
 package controllers;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,13 +21,12 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import models.ChatContent;
 import utils.AsyncResponse;
-import utils.MyAlertDialog;
-import utils.ServerPOST;
-import utils.StaticData;
-import utils.TransactionTypes;
-import utils.URLs;
+import utils.components.MyAlertDialog;
+import utils.server.ServerPOST;
+import utils.user.StaticData;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
 
 public class MessageInfo extends AppCompatActivity implements View.OnClickListener, AsyncResponse {
     private Bitmap image;

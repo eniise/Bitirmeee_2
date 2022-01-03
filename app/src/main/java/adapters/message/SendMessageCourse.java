@@ -1,6 +1,6 @@
 package adapters.message;
 
-import models.TrainerCourse;
+import models.trainer.TrainerCourse;
 import utils.AsyncResponse;
 
 public class SendMessageCourse implements AsyncResponse {

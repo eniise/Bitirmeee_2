@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -27,15 +26,14 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 import adapters.ChatContentAdapter;
-import models.Chat;
-import models.TrainerCourse;
+import models.chat.Chat;
+import models.trainer.TrainerCourse;
 import utils.AsyncResponse;
-import utils.MyAlertDialog;
-import utils.ServerGET;
-import utils.ServerPOST;
-import utils.StaticData;
-import utils.TransactionTypes;
-import utils.URLs;
+import utils.components.MyAlertDialog;
+import utils.server.ServerPOST;
+import utils.user.StaticData;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -146,44 +144,47 @@ public class PopupWindow implements AsyncResponse {
             if(types.indexOf(",")>0){
                 String[] split = types.split(",");
                 for (String i:split) {
-                    if (i.toLowerCase().equals("home")){
+                    String _tmp = i.replace(" ","");
+                    if (_tmp.equals("TrainerHome")){
                         swHome.setVisibility(View.VISIBLE);
-                    }else if(i.toLowerCase().equals("online")){
+                    }else if(_tmp.equals("Online")){
                         swOnline.setVisibility(View.VISIBLE);
-                    }else if(i.toLowerCase().equals("other")){
+                    }else if(_tmp.equals("Otherplace")){
                         swOther.setVisibility(View.VISIBLE);
-                    }else if(i.toLowerCase().equals("student")){
+                    }else if(_tmp.equals("Studenthome")){
                         swStudent.setVisibility(View.VISIBLE);
                     }
                 }
             }else {
-                if (types.toLowerCase().equals("home")){
-                    swHome.setVisibility(View.VISIBLE);
-                }else if(types.toLowerCase().equals("online")){
-                    swOnline.setVisibility(View.VISIBLE);
-                }else if(types.toLowerCase().equals("other")){
-                    swOther.setVisibility(View.VISIBLE);
-                }else if(types.toLowerCase().equals("student")){
-                    swStudent.setVisibility(View.VISIBLE);
+                switch (types) {
+                    case "Trainer Home":
+                        swHome.setVisibility(View.VISIBLE);
+                        break;
+                    case "Online":
+                        swOnline.setVisibility(View.VISIBLE);
+                        break;
+                    case "Other place":
+                        swOther.setVisibility(View.VISIBLE);
+                        break;
+                    case "Student home":
+                        swStudent.setVisibility(View.VISIBLE);
+                        break;
                 }
             }
         }
     }
     private void DetectAndSetIntervals(String intervals){
         if(intervals.length()>0){
-            System.out.println(mCourse.getmTimeIntervals()+" "+mCourse.getmTypes());
             txtIntervals.setText(String.valueOf("The instructor gives courses at the times : "+intervals));
         }
     }
     private void DetectAndSetDistict(String district){
         if(district.length()>0){
-            System.out.println(mCourse.getmTimeIntervals()+" "+mCourse.getmTypes());
             txtCity.setText(String.valueOf("The instructor gives courses at the district : "+district));
         }
     }
     private void DetectAndSetDays(String days){
         if(days.length()>0){
-            System.out.println(mCourse.getmTimeIntervals()+" "+mCourse.getmTypes());
             txtDays.setText(String.valueOf("The instructor gives courses at the days : "+days));
         }
     }

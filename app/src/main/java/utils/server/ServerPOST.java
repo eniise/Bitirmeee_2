@@ -1,4 +1,4 @@
-package utils;
+package utils.server;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -14,6 +14,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import adapters.TrainerCourseAdapter;
+import utils.AsyncResponse;
+import utils.extras.TransactionTypes;
 
 public class ServerPOST extends AsyncTask<String, String, String> {
     private ProgressDialog progressDialog;
@@ -24,7 +26,7 @@ public class ServerPOST extends AsyncTask<String, String, String> {
     public ServerPOST(ProgressDialog progressDialog, int transactionType, String islem) {
         if(progressDialog != null) {
             this.progressDialog = progressDialog;
-            this.progressDialog.setMessage(islem + ", lütfen bekleyiniz.");
+            this.progressDialog.setMessage(islem + ",please wait..");
         }
         this.transactionType = transactionType;
     }
@@ -38,7 +40,7 @@ public class ServerPOST extends AsyncTask<String, String, String> {
     protected void onPreExecute() {
         super.onPreExecute();
         if(progressDialog != null) {
-            progressDialog.setMessage("Kayıt tamamlanıyor..");
+            progressDialog.setMessage("Register process running...");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -107,6 +109,12 @@ public class ServerPOST extends AsyncTask<String, String, String> {
                     case TransactionTypes.doUserChangePassword:
                         delegate.processFinish("true");
                     break;
+                    case TransactionTypes.doTrainerCourseUpload:
+                        delegate.processFinish("true");
+                        break;
+                    case TransactionTypes.doTrainerUpdateMyCourse:
+                        delegate.processFinish("true");
+                        break;
                 }
             }
             else {

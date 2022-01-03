@@ -4,11 +4,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 
-import models.Chat;
+import models.chat.Chat;
 import utils.AsyncResponse;
-import utils.ServerPOST;
-import utils.TransactionTypes;
-import utils.URLs;
+import utils.server.ServerPOST;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
 
 public class SendMessage implements AsyncResponse {
     private int mReceiverId;

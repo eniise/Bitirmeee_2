@@ -1,8 +1,8 @@
-package models;
+package models.trainer;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Profil {
+public class TrainerCourse {
     @SerializedName("id")
     private int mId;
     @SerializedName("userId")
@@ -31,7 +31,9 @@ public class Profil {
     private String mUserName;
     @SerializedName("userLikeCount")
     private int LikeCount;
-    public Profil(int mId, int mUserId, String mName, String mTypes, String mTimeIntervals, String mDays, String mDistrict, double mCost, String mDetail, int mLikeCount, String mTrainerImage, String mProfileImage, String mUserName, int likeCount) {
+    @SerializedName("viewType")
+    private int mViewType;
+    public TrainerCourse(int mId, int mUserId, String mName, String mTypes, String mTimeIntervals, String mDays, String mDistrict, double mCost, String mDetail, int mLikeCount, String mTrainerImage, String mProfileImage, String mUserName, int likeCount) {
         this.mId = mId;
         this.mUserId = mUserId;
         this.mName = mName;
@@ -47,7 +49,7 @@ public class Profil {
         this.mUserName = mUserName;
         this.LikeCount = likeCount;
     }
-    public Profil(){
+    public TrainerCourse(){
 
     }
 
@@ -161,5 +163,13 @@ public class Profil {
 
     public void setLikeCount(int likeCount) {
         LikeCount = likeCount;
+    }
+
+    public int getmViewType() {
+        return mViewType;
+    }
+
+    public void setmViewType(int mViewType) {
+        this.mViewType = mViewType;
     }
 }

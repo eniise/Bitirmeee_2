@@ -1,6 +1,9 @@
 package controllers;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,11 +16,11 @@ import com.google.gson.Gson;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import utils.AsyncResponse;
-import utils.MyAlertDialog;
-import utils.ServerPOST;
-import utils.StaticData;
-import utils.TransactionTypes;
-import utils.URLs;
+import utils.components.MyAlertDialog;
+import utils.server.ServerPOST;
+import utils.user.StaticData;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
 
 public class ProfilSettings extends AppCompatActivity implements AsyncResponse {
     private EditText txtPassword1;
@@ -25,6 +28,7 @@ public class ProfilSettings extends AppCompatActivity implements AsyncResponse {
     private Button btnChange;
     Context context;
     private RoundedImageView profileSettingsBack;
+
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,12 @@ public class ProfilSettings extends AppCompatActivity implements AsyncResponse {
         profileSettingsBack = findViewById(R.id.profileSettingsBack);
         profileSettingsBack.setOnClickListener(v -> {
             onBackPressed();
+        });
+        Button btnChangeImage = findViewById(R.id.btnChangeImage);
+        btnChangeImage.setOnClickListener(v->{
+            Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+            photoPickerIntent.setType("image/*");
+            startActivityForResult(photoPickerIntent, 1);
         });
         btnChange.setOnClickListener(v -> {
             if(txtPassword1.getText().length() > 0){
@@ -72,5 +82,14 @@ public class ProfilSettings extends AppCompatActivity implements AsyncResponse {
                         })).show();
             }
         }
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1)
+            if (resultCode == Activity.RESULT_OK) {
+                Uri selectedImage = data.getData();
+                txtPassword1.setText(selectedImage.toString());
+            }
     }
 }

@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enise.bitirme_2.R;
@@ -19,17 +18,15 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-import adapters.util.ImageDownloaderTask;
 import adapters.util.PopupWindow;
-import models.ChatDetail;
-import models.TrainerCourse;
+import models.chat.ChatDetail;
+import models.trainer.TrainerCourse;
 import utils.AsyncResponse;
-import utils.ServerGET;
-import utils.TransactionTypes;
-import utils.URLs;
+import utils.server.ServerGET;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
 
 public class ChatDetailAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final ArrayList<ChatDetail> mChatDetail;

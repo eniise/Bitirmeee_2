@@ -1,6 +1,5 @@
 package fragments;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,28 +9,22 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enise.bitirme_2.R;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 
 import adapters.ChatContentAdapter;
-import adapters.TrainerCourseAdapter;
-import models.ChatContent;
-import models.TrainerCourse;
+import models.chat.ChatContent;
 import utils.AsyncResponse;
-import utils.ServerGET;
-import utils.StaticData;
-import utils.TransactionTypes;
-import utils.URLs;
+import utils.server.ServerGET;
+import utils.user.StaticData;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
 
 public class ChatFragment extends Fragment implements AsyncResponse, TextWatcher {
     private RecyclerView mRecyclerView;

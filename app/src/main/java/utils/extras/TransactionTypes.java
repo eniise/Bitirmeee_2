@@ -1,4 +1,4 @@
-package utils;
+package utils.extras;
 
 public class TransactionTypes {
     public static final int MESSAGE_TYPE_STRING = 1;
@@ -10,6 +10,8 @@ public class TransactionTypes {
     public static final int USER_CHAT_CONTENT_TYPE_SEARCH = 2;
     public static final int USER_SEE_CHAT = 1;
     public static final int USER_SEE_MAIN = 2;
+    public static final String TRAINER_SEE_COURSE_UPLOAD = "courseUpload";
+    public static final String TRAINER_SEE_COURSE_EDIT = "courseEdit";
     public static final String USER_COME_BACK = "userComeBackMain";
     public static final String LAYOUT_MESSAGE_SEND = "messageSend";
     public static final String LAYOUT_MESSAGE_SHARE = "courseShare";
@@ -30,6 +32,10 @@ public class TransactionTypes {
     public static final int doUserSearch=14;
     public static final int doUserSendMessageWithCourse=15;
     public static final int doUserClickChatDetailCourse=16;
-    public static final int doUserGetProfil=17;
+    public static final int doUserGetProfile =17;
     public static final int doUserChangePassword=18;
+    public static final int doTrainerCourseUpload=19;
+    public static final int doTrainerGetMyUploads =20;
+    public static final int doTrainerUpdateMyCourse=21;
+    public static final int doTrainerDeleteMyCourse=21;
 }

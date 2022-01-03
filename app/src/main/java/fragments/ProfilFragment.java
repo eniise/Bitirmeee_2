@@ -1,14 +1,15 @@
 package fragments;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -23,18 +24,20 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import adapters.TrainerCourseAdapter;
+import controllers.CourseEdit;
 import controllers.CourseUpload;
 import controllers.ProfilSettings;
-import models.TrainerCourse;
+import models.trainer.TrainerCourse;
 import utils.AsyncResponse;
 import adapters.util.ImageDownloaderTask;
-import utils.ServerGET;
-import utils.StaticData;
-import utils.TransactionTypes;
-import utils.URLs;
+import utils.server.ServerGET;
+import utils.user.StaticData;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
 
 public class ProfilFragment extends Fragment implements AsyncResponse,View.OnClickListener {
     private RoundedImageView btnProfileCourseUpload;
@@ -90,7 +93,7 @@ public class ProfilFragment extends Fragment implements AsyncResponse,View.OnCli
         mUserProfileName = v.findViewById(R.id.txtProfileNameSurname);
         btnProfileSettings = v.findViewById(R.id.profileSettings);
         btnProfileSettings.setOnClickListener(v1 -> {
-            startActivity(new Intent(getContext(), ProfilSettings.class));
+            startActivity(new Intent(getContext(), ProfilSettings.class).putExtra("userSee",TransactionTypes.TRAINER_SEE_COURSE_UPLOAD));
         });
         btnBack = v.findViewById(R.id.profileBack);
         btnBack.setVisibility(View.GONE);
@@ -100,7 +103,10 @@ public class ProfilFragment extends Fragment implements AsyncResponse,View.OnCli
     public void onClick(View v) {
         //buttons click -> course upload end course edit
         if(v.getId() == R.id.btnProfileCourseUpload){
-            startActivity(new Intent(getContext(),CourseUpload.class));
+            startActivity(new Intent(getContext(),CourseUpload.class).putExtra("userSee",TransactionTypes.TRAINER_SEE_COURSE_UPLOAD));
+        }
+        if(v.getId() == R.id.btnProfileCourseEdit){
+            startActivity(new Intent(getContext(), CourseEdit.class));
         }
     }
 
@@ -110,10 +116,12 @@ public class ProfilFragment extends Fragment implements AsyncResponse,View.OnCli
         mUserProfileRecylerView = view.findViewById(R.id.recylerUserProfile);
         mUserProfileRecylerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
-        mAdapter = new TrainerCourseAdapter(_lst,"Profile");
+        mAdapter = new TrainerCourseAdapter(_lst,"Home");
         mUserProfileRecylerView.setLayoutManager(mLayoutManager);
         mUserProfileRecylerView.setAdapter(mAdapter);
         mUserProfileRecylerView.setVisibility(View.VISIBLE);
         profileProgressBar.setVisibility(View.GONE);
     }
+
+
 }

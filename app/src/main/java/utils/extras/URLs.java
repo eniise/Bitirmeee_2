@@ -1,4 +1,6 @@
-package utils;
+package utils.extras;
+
+import utils.server.ServerInfo;
 
 public class URLs {
     public static final String LoginURL = ServerInfo.Host+
@@ -101,5 +103,29 @@ public class URLs {
                 ServerInfo.PortNumber +
                 ServerInfo.API_LEVEL +
                 "User/ChangePassword";
+    }
+    public static String UploadCourse(){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "TrainerCourse/UploadCourse";
+    }
+    public static String GetMyUploadCourses(int userId){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "TrainerCourse/GetMyUploads?userId="+userId;
+    }
+    public static String UpdateMyCourse(){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "TrainerCourse/UpdateMyCourse";
+    }
+    public static String DeleteMyCourse(){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "TrainerCourse/DeleteMyCourse";
     }
 }

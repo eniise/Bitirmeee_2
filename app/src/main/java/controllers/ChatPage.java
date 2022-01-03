@@ -33,14 +33,14 @@ import java.util.ArrayList;
 
 import adapters.ChatDetailAdapter;
 import adapters.message.SendMessage;
-import models.Chat;
-import models.ChatDetail;
-import models.CurrentChatLastMessageInfo;
+import models.chat.Chat;
+import models.chat.ChatDetail;
+import models.chat.CurrentChatLastMessageInfo;
 import utils.AsyncResponse;
-import utils.ServerGET;
-import utils.StaticData;
-import utils.TransactionTypes;
-import utils.URLs;
+import utils.server.ServerGET;
+import utils.user.StaticData;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
 
 public class ChatPage extends AppCompatActivity implements AsyncResponse, View.OnClickListener {
     private ServerGET getLastMessage;

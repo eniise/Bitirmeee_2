@@ -1,4 +1,4 @@
-package models;
+package models.chat;
 
 import com.google.gson.annotations.SerializedName;
 

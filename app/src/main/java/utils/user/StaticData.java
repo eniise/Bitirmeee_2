@@ -1,6 +1,6 @@
-package utils;
+package utils.user;
 
-import models.User;
+import models.user.User;
 
 public final class StaticData {
     private static User userData;

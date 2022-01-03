@@ -46,4 +46,16 @@
     <string name="otherplace_hastag">#otherplace</string>
     <string name="trainerhome_hastag">#trainerhome</string>
     <string name="studenthome">#studenthome</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="re_enter_password">Re enter password</string>
+    <string name="change_profile_image">Change Profile Image</string>
+    <string name="change_password">Change Password</string>
+    <string name="max">MAX :</string>
+    <string name="min">MIN :</string>
+    <string name="_0">0</string>
+    <string name="_0">0</string>
+    <string name="place_search">PLACE SEARCH</string>
+    <string name="enter_a_course_name">Enter a course name</string>
+    <string name="cost_search">COST SEARCH</string>
+    <string name="name_search">NAME SEARCH</string>
 </resources>

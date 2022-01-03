@@ -17,14 +17,14 @@ import com.enise.bitirme_2.R;
 import java.util.ArrayList;
 
 import adapters.TrainerCourseAdapter;
-import models.TrainerCourse;
+import models.trainer.TrainerCourse;
 import utils.AsyncResponse;
-import utils.ServerGET;
-import utils.StaticData;
-import utils.TransactionTypes;
-import utils.URLs;
+import utils.server.ServerGET;
+import utils.user.StaticData;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
 
-public class FragmentHome extends Fragment implements AsyncResponse {
+public class HomeFragment extends Fragment implements AsyncResponse {
     private ProgressDialog progressDialog;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -37,7 +37,7 @@ public class FragmentHome extends Fragment implements AsyncResponse {
         View rootView = inflater.inflate(R.layout.home_content, container, false);
         view = rootView;
         progressDialog = new ProgressDialog(view.getContext());
-        ServerGET serverGET = new ServerGET(progressDialog, TransactionTypes.doGetCourses,"Gönderiler yükleniyor..");
+        ServerGET serverGET = new ServerGET(TransactionTypes.doGetCourses);
         serverGET.delegate = this;
         serverGET.execute(URLs.GetCourses(StaticData.getUserData().getUserId()));
         return rootView;

@@ -15,23 +15,14 @@ import androidx.annotation.RequiresApi;
 
 import com.enise.bitirme_2.R;
 
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import utils.AsyncResponse;
-import utils.ServerGET;
-import utils.MyAlertDialog;
-import utils.StaticData;
-import utils.TransactionTypes;
-import utils.URLs;
+import utils.server.ServerGET;
+import utils.components.MyAlertDialog;
+import utils.user.StaticData;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
 
 public class Login extends Activity implements AsyncResponse {
     TextView registerPage;

@@ -1,7 +1,6 @@
 package controllers;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -10,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -26,9 +24,9 @@ import com.enise.bitirme_2.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import fragments.ChatFragment;
-import fragments.FragmentHome;
+import fragments.HomeFragment;
 import fragments.ProfilFragment;
-import utils.TransactionTypes;
+import utils.extras.TransactionTypes;
 
 public class Main extends AppCompatActivity {
     Toolbar mToolBar;
@@ -46,7 +44,7 @@ public class Main extends AppCompatActivity {
         mFrameLayout = findViewById(R.id.fragment_container);
         mParams = (RelativeLayout.LayoutParams) findViewById(R.id.fragment_container).getLayoutParams();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new FragmentHome()).commit();
+                new HomeFragment()).commit();
         context = this;
         SetupNavigationBar();
     }
@@ -65,7 +63,8 @@ public class Main extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.DetailFiltering:
-                Toast.makeText(context,"Detaylı arama sayfası ",Toast.LENGTH_LONG).show();
+                Intent _intent = new Intent(context,DetailFiltering.class);
+                startActivity(_intent);
                 break;
             case R.id.MapFiltering:
                 Intent intent = new Intent(context,Maps.class);
@@ -89,7 +88,7 @@ public class Main extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.home:
-                        selectedFragment = new FragmentHome();
+                        selectedFragment = new HomeFragment();
                         mToolBar.setVisibility(View.VISIBLE);
                         mFrameLayout.setLayoutParams(mParams);
                         item.setChecked(true);

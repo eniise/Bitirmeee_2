@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <utils.MultiSpinner
+    <utils.components.MultiSpinner
         android:id="@+id/spinnerDistrict"
         android:layout_width="122dp"
         android:layout_height="34dp"
@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.043"
         tools:ignore="HardcodedText,MissingConstraints" />
 
-    <utils.MultiSpinner
+    <utils.components.MultiSpinner
         android:id="@+id/spinnerDays"
         android:layout_width="122dp"
         android:layout_height="34dp"
@@ -135,7 +135,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtCourseUploadName"
         app:layout_constraintVertical_bias="0.032" />
 
-    <utils.MultiSpinner
+    <utils.components.MultiSpinner
         android:id="@+id/spinnerIntervals"
         android:layout_width="114dp"
         android:layout_height="36dp"

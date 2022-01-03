@@ -1,4 +1,4 @@
-package utils;
+package utils.server;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -15,12 +15,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import adapters.TrainerCourseAdapter;
-import models.ChatContent;
-import models.ChatDetail;
-import models.CurrentChatLastMessageInfo;
-import models.TrainerCourse;
-import models.User;
-import models.Profil;
+import models.chat.ChatContent;
+import models.chat.ChatDetail;
+import models.chat.CurrentChatLastMessageInfo;
+import models.trainer.TrainerCourse;
+import models.user.User;
+import utils.AsyncResponse;
+import utils.user.StaticData;
+import utils.extras.TransactionTypes;
 
 public class ServerGET extends AsyncTask<String, String, String> {
     public ProgressDialog progressDialog;
@@ -156,11 +158,16 @@ public class ServerGET extends AsyncTask<String, String, String> {
                         TrainerCourse course = new Gson().fromJson(result,TrainerCourse.class);
                         delegate.processFinish(course);
                     break;
-                    case TransactionTypes.doUserGetProfil:
+                    case TransactionTypes.doUserGetProfile:
                         TrainerCourse[] profil = new Gson().fromJson(result, TrainerCourse[].class);
                         ArrayList<TrainerCourse> _tmp = new ArrayList<>(Arrays.asList(profil));
                         delegate.processFinish(_tmp);
                     break;
+                    case TransactionTypes.doTrainerGetMyUploads:
+                        TrainerCourse[] myCourses = new Gson().fromJson(result,TrainerCourse[].class);
+                        ArrayList<TrainerCourse> _coursetemp = new ArrayList<>(Arrays.asList(myCourses));
+                        delegate.processFinish(_coursetemp);
+                        break;
                 }
             } else {
                 delegate.processFinish("false");

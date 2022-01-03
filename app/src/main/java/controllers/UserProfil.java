@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -20,11 +21,11 @@ import java.util.ArrayList;
 
 import adapters.TrainerCourseAdapter;
 import adapters.util.ImageDownloaderTask;
-import models.TrainerCourse;
+import models.trainer.TrainerCourse;
 import utils.AsyncResponse;
-import utils.ServerGET;
-import utils.TransactionTypes;
-import utils.URLs;
+import utils.server.ServerGET;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
 
 public class UserProfil extends AppCompatActivity implements AsyncResponse {
     private RoundedImageView btnProfileCourseUpload;
@@ -56,10 +57,10 @@ public class UserProfil extends AppCompatActivity implements AsyncResponse {
         int userId = bundle.getInt("userId");
         context = this;
         init();
-        ServerGET getMyLikes = new ServerGET(TransactionTypes.doUserGetProfil);
+        ServerGET getMyLikes = new ServerGET(TransactionTypes.doUserGetProfile);
         getMyLikes.delegate = this;
         getMyLikes.execute(URLs.GetUserProfil(userId));
-    }//05523845561
+    }
     void init(){
         mUserProfileImage = findViewById(R.id.imgProfile);
         mUserProfileLikeCount = findViewById(R.id.txtProfileLikeCount);
@@ -75,11 +76,11 @@ public class UserProfil extends AppCompatActivity implements AsyncResponse {
     @Override
     public <T> void processFinish(T result) {
         ArrayList<TrainerCourse> _lst = (ArrayList<TrainerCourse>) result;
-        if(_lst.size() > 0) {
+        if(_lst.size() > 1) {
             mUserProfileRecylerView = findViewById(R.id.recylerUserProfile);
             mUserProfileRecylerView.setHasFixedSize(true);
             mLayoutManager = new LinearLayoutManager(context);
-            mAdapter = new TrainerCourseAdapter(_lst, "Profile");
+            mAdapter = new TrainerCourseAdapter(_lst, "Home");
             mUserProfileRecylerView.setLayoutManager(mLayoutManager);
             mUserProfileRecylerView.setAdapter(mAdapter);
             mUserProfileRecylerView.setVisibility(View.VISIBLE);
@@ -93,6 +94,7 @@ public class UserProfil extends AppCompatActivity implements AsyncResponse {
             mUserProfileLikeCount.setText("User like score : "+_lst.get(0).getLikeCount());
             new ImageDownloaderTask(mUserProfileImage)
                     .execute(_lst.get(0).getmProfileImage());
+            profileProgressBar.setVisibility(View.GONE);
         }
     }
 }

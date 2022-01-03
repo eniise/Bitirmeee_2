@@ -5,8 +5,6 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,14 +26,14 @@ import java.util.ArrayList;
 import adapters.util.ImageDownloaderTask;
 import adapters.util.MessageShare;
 import controllers.ChatPage;
-import models.Chat;
-import models.ChatContent;
-import models.TrainerCourse;
+import models.chat.Chat;
+import models.chat.ChatContent;
+import models.trainer.TrainerCourse;
 import utils.AsyncResponse;
-import utils.ServerPOST;
-import utils.StaticData;
-import utils.TransactionTypes;
-import utils.URLs;
+import utils.server.ServerPOST;
+import utils.user.StaticData;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
 
 public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.ChatsViewHolder> implements AsyncResponse {
     private static ArrayList<ChatContent> mChatContents;
