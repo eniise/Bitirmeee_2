@@ -18,7 +18,6 @@
     <string name="time_interval">Time Interval</string>
     <string name="enter_a_course_detail">Enter a course detail</string>
     <string name="district">District</string>
-    <string name="enter_a_course_name">Enter a course name</string>
     <string name="online">Online</string>
     <string name="other_place">Other Place</string>
     <string name="trainer_home">Trainer Home</string>
@@ -52,7 +51,6 @@
     <string name="change_password">Change Password</string>
     <string name="max">MAX :</string>
     <string name="min">MIN :</string>
-    <string name="_0">0</string>
     <string name="_0">0</string>
     <string name="place_search">PLACE SEARCH</string>
     <string name="enter_a_course_name">Enter a course name</string>

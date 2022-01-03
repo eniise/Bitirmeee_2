@@ -1,5 +1,6 @@
 package adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -141,13 +142,14 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
         }
         return new PostsViewHolder(v,viewType);
     }
+    @SuppressLint("DefaultLocale")
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(TrainerCourseAdapter.@NotNull PostsViewHolder holder, int position) {
         TrainerCourse currentItem = mUrunlerList.get(position);
         if(mPage.equals("Home")) {
             _postsViewHolder = holder;
-            if(getItemCount() != 1)  {
+            if(getItemCount() >= 1)  {
                 ServerGET isLikeCourseAsync = new ServerGET(TransactionTypes.isUserCourseLikeControl, holder);
                 isLikeCourseAsync.delegate = this;
                 isLikeCourseAsync.execute(URLs.isUserLikeCourse(
@@ -157,7 +159,7 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
                 String detail = currentItem.getmDetail().length() > 100 ? currentItem.getmDetail().substring(0, 100) + "..." : currentItem.getmDetail();
                 holder.txtHomeTrainerDetail.setText(detail);
                 holder.txtHomeTrainerName.setText(currentItem.getmName());
-                holder.txtLikesCount.setText(currentItem.getmLikeCount() + " user like this course");
+                holder.txtLikesCount.setText(String.format("%d user like this course", currentItem.getmLikeCount()));
                 holder.btnHomeStartChat.setOnClickListener(v -> {
                     new PopupWindow(holder.itemView, holder.itemView.getContext(), currentItem, TransactionTypes.USER_SEE_MAIN, TransactionTypes.LAYOUT_MESSAGE_SEND).onButtonShowPopupWindowClick();
                 });

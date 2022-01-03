@@ -34,6 +34,10 @@
             android:theme="@style/Theme.Bitirme_2"/>
         <activity android:name="controllers.CourseEdit"
             android:theme="@style/Theme.Bitirme_2"/>
+        <activity android:name="controllers.SearchResultPage"
+            android:theme="@style/Theme.Bitirme_2"/>
+        <activity android:name="controllers.DetailFiltering"
+            android:theme="@style/Theme.Bitirme_2"/>
         <activity
             android:name="controllers.Login"
             android:exported="true"

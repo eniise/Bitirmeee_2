@@ -128,4 +128,22 @@ public class URLs {
                 ServerInfo.API_LEVEL +
                 "TrainerCourse/DeleteMyCourse";
     }
+    public static String SearchCost(float max,float min){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "Search/SearchCost?max="+max+"&min="+min;
+    }
+    public static String SearchName(String courseName){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "Search/SearchName?courseName="+courseName;
+    }
+    public static String SearchPlace(String placeName){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "Search/SearchPlace?placeName="+placeName;
+    }
 }

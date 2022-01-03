@@ -168,6 +168,9 @@ public class ServerGET extends AsyncTask<String, String, String> {
                         ArrayList<TrainerCourse> _coursetemp = new ArrayList<>(Arrays.asList(myCourses));
                         delegate.processFinish(_coursetemp);
                         break;
+                    case TransactionTypes.doSearch:
+                        delegate.processFinish(result);
+                        break;
                 }
             } else {
                 delegate.processFinish("false");

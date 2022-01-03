@@ -26,19 +26,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13"
-        app:layout_constraintVertical_bias="0.053" />
+        app:layout_constraintVertical_bias="0.28" />
 
     <Switch
         android:id="@+id/swOtherPlaceSearch"
         android:layout_width="135dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="364dp"
+        android:layout_marginTop="8dp"
         android:text="@string/other_place"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swOnlineSearch"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/swOnlineSearch" />
 
     <Switch
         android:id="@+id/swOnlineSearch"
@@ -50,21 +49,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/swStudentSearch"
         app:layout_constraintTop_toBottomOf="@+id/textView13"
-        app:layout_constraintVertical_bias="0.076" />
+        app:layout_constraintVertical_bias="0.442" />
 
     <Switch
         android:id="@+id/swHomeSearch"
         android:layout_width="135dp"
         android:layout_height="42dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="412dp"
         android:text="@string/trainer_home"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/swOnlineSearch"
-        app:layout_constraintTop_toBottomOf="@+id/textView13"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <TextView
         android:id="@+id/textView2"
@@ -136,10 +133,10 @@
         android:id="@+id/btnPlaceSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/ic_baseline_search_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toEndOf="@+id/swOtherPlaceSearch"
         app:layout_constraintTop_toBottomOf="@+id/swHomeSearch" />
 
