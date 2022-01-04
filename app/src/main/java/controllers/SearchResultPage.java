@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.enise.bitirme_2.R;
 import com.google.gson.Gson;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +22,7 @@ import adapters.TrainerCourseAdapter;
 import models.trainer.TrainerCourse;
 
 public class SearchResultPage extends AppCompatActivity {
-
+    private RoundedImageView btnSearchContentBack;
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,10 @@ public class SearchResultPage extends AppCompatActivity {
     }
     void init(ArrayList<TrainerCourse> output){
         RecyclerView mRecyclerView = findViewById(R.id.searchContentRecyler);
+        btnSearchContentBack = findViewById(R.id.btnSearchContentBack);
+        btnSearchContentBack.setOnClickListener(v -> {
+            onBackPressed();
+        });
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         RecyclerView.Adapter mAdapter = new TrainerCourseAdapter(output, "Home");

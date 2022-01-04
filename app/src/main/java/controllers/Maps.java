@@ -1,7 +1,9 @@
 package controllers;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -18,13 +20,24 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-public class Maps extends AppCompatActivity implements OnMapReadyCallback {
+import models.trainer.TrainerCourse;
+import utils.AsyncResponse;
+import utils.components.MyAlertDialog;
+import utils.extras.TransactionTypes;
+import utils.extras.URLs;
+import utils.server.ServerGET;
+
+public class Maps extends AppCompatActivity implements OnMapReadyCallback, AsyncResponse {
     private GoogleMap mMap;
     Context context;
     @Override
@@ -66,16 +79,40 @@ public class Maps extends AppCompatActivity implements OnMapReadyCallback {
                     .setTitle("İlçe bulundu")
                     .setMessage(find_ilce+" isimli ilçeye tıkladınız, bu ilçedeki öğretmenler anasayfada listelensin mi?")
                     .setPositiveButton(R.string.yonlendir, (dialog, which) -> {
-                        Toast.makeText(context,"API geliştireyim seni yönlendiririm.",Toast.LENGTH_LONG).show();
+                        ServerGET serverGET = new ServerGET(TransactionTypes.doSearch);
+                        serverGET.delegate = this;
+                        serverGET.execute(URLs.SearchDistrict(find_ilce));
                     })
                     .setNegativeButton(R.string.hayir, ((dialog, which) -> {
-                        Toast.makeText(context,"Madem öyle defol başka bir ilçe bul.",Toast.LENGTH_LONG).show();
+
                     }))
                     .setIcon(R.drawable.ic_baseline_info_24)
                     .show();
         }
         catch (IndexOutOfBoundsException | IOException e){
             Toast.makeText(context,"Tıkladığın yerden ilçe bilgisi alamadım. Başka bir yere tıkla.",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public <T> void processFinish(T result) {
+        if(result.getClass() == String.class){
+            TrainerCourse[] courses = null;
+            try {
+                courses = new Gson().fromJson(String.valueOf(result), TrainerCourse[].class);
+                if(courses.length > 0) {
+                    startActivity(new Intent(this, SearchResultPage.class).putExtra("result", String.valueOf(result)));
+                    @SuppressLint("ResourceType") Snackbar snackbar = Snackbar.make(this,findViewById(android.R.id.content),"Found!", BaseTransientBottomBar.LENGTH_LONG);
+                    snackbar.show();
+                }else {
+                    @SuppressLint("ResourceType") Snackbar snackbar = Snackbar.make(this, findViewById(android.R.id.content), "Not Found!", BaseTransientBottomBar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            }catch (JsonSyntaxException ex){
+                ex.printStackTrace();
+                @SuppressLint("ResourceType") Snackbar snackbar = Snackbar.make(this,findViewById(android.R.id.content),"Not Found!", BaseTransientBottomBar.LENGTH_LONG);
+                snackbar.show();
+            }
         }
     }
 }

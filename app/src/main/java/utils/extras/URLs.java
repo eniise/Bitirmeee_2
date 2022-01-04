@@ -146,4 +146,10 @@ public class URLs {
                 ServerInfo.API_LEVEL +
                 "Search/SearchPlace?placeName="+placeName;
     }
+    public static String SearchDistrict(String districtName){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "Search/SearchDistrict?district="+districtName;
+    }
 }

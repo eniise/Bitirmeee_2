@@ -35,8 +35,8 @@ public class Register extends Activity implements AsyncResponse, CompoundButton.
     RadioButton rdRegisterGenderFamale;
     RadioButton rdRegisterGenderMale;
     private int RoleId=0;
-    private final String Famale = "https://www.pngkit.com/png/full/391-3919484_bayan-retmen-profil-kafa-kadn-female-user-icon.png";
-    private final String Male = "https://www.pngkit.com/png/full/203-2035270_user-man-profile-male-face-gui-user-user.png";
+    private final String Famale = "https://tibatu.com/wp-content/uploads/2020/10/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg";
+    private final String Male = "https://tibatu.com/wp-content/uploads/2020/10/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg";
     private String mUserSelectedGender = "";
     private boolean mUserGenderType = false;
     @Override
