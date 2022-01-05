@@ -26,6 +26,7 @@ import utils.extras.URLs;
 
 public class Login extends Activity implements AsyncResponse {
     TextView registerPage;
+    TextView forgotPassword;
     EditText txtMail;
     EditText txtPassword;
     Button btnLogin;
@@ -42,6 +43,10 @@ public class Login extends Activity implements AsyncResponse {
         registerPage.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), Register.class);
             startActivity(intent);
+        });
+        forgotPassword = findViewById(R.id.loginForgotPassword);
+        forgotPassword.setOnClickListener(v -> {
+            startActivity(new Intent(this,ForgotPassword.class));
         });
         btnLogin.setOnClickListener(v -> {
             String mail = txtMail.getText().toString();

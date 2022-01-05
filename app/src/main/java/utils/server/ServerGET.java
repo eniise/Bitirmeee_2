@@ -19,6 +19,7 @@ import models.chat.ChatContent;
 import models.chat.ChatDetail;
 import models.chat.CurrentChatLastMessageInfo;
 import models.trainer.TrainerCourse;
+import models.user.ForgotPassword;
 import models.user.User;
 import utils.AsyncResponse;
 import utils.user.StaticData;
@@ -94,6 +95,10 @@ public class ServerGET extends AsyncTask<String, String, String> {
                 switch (transactionType) {
                     case TransactionTypes.doLogin:
                         User u = new Gson().fromJson(result, User.class);
+                        if(u.getUserId() == 0) {
+                            delegate.processFinish("false");
+                            break;
+                        }
                         StaticData.setUserData(new User(u.getUserId()
                                 , u.getMail()
                                 , u.getName()
@@ -169,6 +174,9 @@ public class ServerGET extends AsyncTask<String, String, String> {
                         delegate.processFinish(_coursetemp);
                         break;
                     case TransactionTypes.doSearch:
+                        delegate.processFinish(result);
+                        break;
+                    case TransactionTypes.doForgotPassword:
                         delegate.processFinish(result);
                         break;
                 }

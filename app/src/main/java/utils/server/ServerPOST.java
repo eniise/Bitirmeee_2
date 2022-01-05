@@ -67,7 +67,6 @@ public class ServerPOST extends AsyncTask<String, String, String> {
                 while ((responseLine = br.readLine()) != null) {
                     response.append(responseLine.trim());
                 }
-                //System.out.println(response.toString());
                 return response.toString();
             }
         } catch (IOException e) {
@@ -83,7 +82,7 @@ public class ServerPOST extends AsyncTask<String, String, String> {
             }
         }
         if(result != null) {
-            if (result.equals("true")) {
+            if (result.equals("true") || !result.equals("false")) {
                 switch (transactionType) {
                     case TransactionTypes.doRegister:
                         delegate.processFinish("true");
@@ -98,7 +97,7 @@ public class ServerPOST extends AsyncTask<String, String, String> {
                         delegate.processFinish(_temp);
                         break;
                     case TransactionTypes.doSendMessage:
-                        System.out.println("your message has been send.");
+                        delegate.processFinish("true");
                     break;
                     case TransactionTypes.doUserDeleteMessage:
                         delegate.processFinish(true);
@@ -114,6 +113,12 @@ public class ServerPOST extends AsyncTask<String, String, String> {
                         break;
                     case TransactionTypes.doTrainerUpdateMyCourse:
                         delegate.processFinish("true");
+                        break;
+                    case TransactionTypes.doChangePassword:
+                        delegate.processFinish("true");
+                        break;
+                    case TransactionTypes.doSearch:
+                        delegate.processFinish(result);
                         break;
                 }
             }

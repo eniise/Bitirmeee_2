@@ -7,11 +7,15 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.enise.bitirme_2.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,6 +29,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -37,18 +43,25 @@ import utils.extras.TransactionTypes;
 import utils.extras.URLs;
 import utils.server.ServerGET;
 
-public class Maps extends AppCompatActivity implements OnMapReadyCallback, AsyncResponse {
+public class Maps extends Fragment implements OnMapReadyCallback, AsyncResponse {
     private GoogleMap mMap;
     Context context;
+    View view;
+    SupportMapFragment mapFragment;
+    public Maps(SupportMapFragment mapFragment){
+        this.mapFragment = mapFragment;
+    }
+    @Nullable
+    @org.jetbrains.annotations.Nullable
     @Override
-    protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_maps);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        assert mapFragment != null;
+    public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_maps,container,false);
+        //SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+          //      .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        context = this;
+        context = rootView.getContext();
+        view = rootView;
+        return rootView;
     }
 
     @Override
@@ -81,7 +94,7 @@ public class Maps extends AppCompatActivity implements OnMapReadyCallback, Async
                     .setPositiveButton(R.string.yonlendir, (dialog, which) -> {
                         ServerGET serverGET = new ServerGET(TransactionTypes.doSearch);
                         serverGET.delegate = this;
-                        serverGET.execute(URLs.SearchDistrict(find_ilce));
+                        //serverGET.execute(URLs.SearchDistrict(find_ilce));
                     })
                     .setNegativeButton(R.string.hayir, ((dialog, which) -> {
 
@@ -97,22 +110,22 @@ public class Maps extends AppCompatActivity implements OnMapReadyCallback, Async
     @Override
     public <T> void processFinish(T result) {
         if(result.getClass() == String.class){
-            TrainerCourse[] courses = null;
-            try {
-                courses = new Gson().fromJson(String.valueOf(result), TrainerCourse[].class);
-                if(courses.length > 0) {
-                    startActivity(new Intent(this, SearchResultPage.class).putExtra("result", String.valueOf(result)));
-                    @SuppressLint("ResourceType") Snackbar snackbar = Snackbar.make(this,findViewById(android.R.id.content),"Found!", BaseTransientBottomBar.LENGTH_LONG);
-                    snackbar.show();
-                }else {
-                    @SuppressLint("ResourceType") Snackbar snackbar = Snackbar.make(this, findViewById(android.R.id.content), "Not Found!", BaseTransientBottomBar.LENGTH_LONG);
-                    snackbar.show();
-                }
-            }catch (JsonSyntaxException ex){
-                ex.printStackTrace();
-                @SuppressLint("ResourceType") Snackbar snackbar = Snackbar.make(this,findViewById(android.R.id.content),"Not Found!", BaseTransientBottomBar.LENGTH_LONG);
-                snackbar.show();
-            }
+            //TrainerCourse[] courses = null;
+           // try {
+                //courses = new Gson().fromJson(String.valueOf(result), TrainerCourse[].class);
+               // if(courses.length > 0) {
+                    //startActivity(new Intent(this, SearchResultPage.class).putExtra("result", String.valueOf(result)));
+                   // @SuppressLint("ResourceType") Snackbar snackbar = Snackbar.make(context,view.findViewById(android.R.id.content),"Found!", BaseTransientBottomBar.LENGTH_LONG);
+                   // snackbar.show();
+              //  }else {
+                //    @SuppressLint("ResourceType") Snackbar snackbar = Snackbar.make(context,view.findViewById(android.R.id.content), "Not Found!", BaseTransientBottomBar.LENGTH_LONG);
+                  //  snackbar.show();
+               // }
+            //}catch (JsonSyntaxException ex){
+              //  ex.printStackTrace();
+               // @SuppressLint("ResourceType") Snackbar snackbar = Snackbar.make(context,view.findViewById(android.R.id.content),"Not Found!", BaseTransientBottomBar.LENGTH_LONG);
+               // snackbar.show();
+           // }
         }
     }
 }

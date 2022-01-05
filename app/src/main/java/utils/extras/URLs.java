@@ -128,28 +128,40 @@ public class URLs {
                 ServerInfo.API_LEVEL +
                 "TrainerCourse/DeleteMyCourse";
     }
-    public static String SearchCost(float max,float min){
+    public static String SearchCost(){
         return ServerInfo.Host +
                 ServerInfo.PortNumber +
                 ServerInfo.API_LEVEL +
-                "Search/SearchCost?max="+max+"&min="+min;
+                "Search/SearchCost";
     }
-    public static String SearchName(String courseName){
+    public static String SearchName(){
         return ServerInfo.Host +
                 ServerInfo.PortNumber +
                 ServerInfo.API_LEVEL +
-                "Search/SearchName?courseName="+courseName;
+                "Search/SearchName";
     }
-    public static String SearchPlace(String placeName){
+    public static String SearchPlace(){
         return ServerInfo.Host +
                 ServerInfo.PortNumber +
                 ServerInfo.API_LEVEL +
-                "Search/SearchPlace?placeName="+placeName;
+                "Search/SearchPlace";
     }
-    public static String SearchDistrict(String districtName){
+    public static String SearchDistrict(){
         return ServerInfo.Host +
                 ServerInfo.PortNumber +
                 ServerInfo.API_LEVEL +
-                "Search/SearchDistrict?district="+districtName;
+                "Search/SearchDistrict";
+    }
+    public static String ForgotPassword(String mail){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "User/ForgotPassword?mail="+mail;
+    }
+    public static String ForgotPasswordChange(){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "User/ForgotPasswordChange";
     }
 }

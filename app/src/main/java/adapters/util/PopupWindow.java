@@ -193,7 +193,7 @@ public class PopupWindow implements AsyncResponse {
     public <T> void processFinish(T result) {
         if(result.getClass() == Boolean.class)
             if ((boolean) result){
-                new MyAlertDialog(mContext,"Successfuly","Message has been send.",R.drawable.ic_message_info)
+                new MyAlertDialog(mContext,"Successfully","Message has been send.",R.drawable.ic_message_info)
                         .ShowMessage()
                         .setPositiveButton(R.string.okay, ((dialog, which) -> {
                             this.mPopupWindow.dismiss();

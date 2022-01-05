@@ -39,4 +39,6 @@ public class TransactionTypes {
     public static final int doTrainerUpdateMyCourse=21;
     public static final int doTrainerDeleteMyCourse=21;
     public static final int doSearch=22;
+    public static final int doForgotPassword=23;
+    public static final int doChangePassword=24;
 }

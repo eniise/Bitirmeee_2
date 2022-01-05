@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txSearchtDistrictName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="22dp"
+        android:background="@drawable/course_hastag_style"
+        android:text=""
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintStart_toEndOf="@+id/btnSearchBack"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/btnSearchBack"
@@ -67,8 +83,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="92dp"
         android:text="@string/max"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -77,44 +93,44 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="92dp"
         android:text="@string/min"
-        app:layout_constraintStart_toEndOf="@+id/txtSearchMax"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txtSearchMax"
         android:layout_width="93dp"
         android:layout_height="39dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="256dp"
+        android:layout_marginTop="72dp"
         android:ems="10"
         android:inputType="numberSigned"
         android:text="@string/_0"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txtSearchMin"
         android:layout_width="93dp"
         android:layout_height="39dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="72dp"
         android:ems="10"
         android:inputType="numberSigned"
         android:text="@string/_0"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/btnCostSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="92dp"
         android:background="@drawable/ic_baseline_search_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.236"
+        app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toEndOf="@+id/txtSearchMin"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -122,7 +138,7 @@
         android:id="@+id/btnCourseNameSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="84dp"
         android:background="@drawable/ic_baseline_search_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.194"
@@ -133,10 +149,10 @@
         android:id="@+id/btnPlaceSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/ic_baseline_search_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintHorizontal_bias="0.211"
         app:layout_constraintStart_toEndOf="@+id/swOtherPlaceSearch"
         app:layout_constraintTop_toBottomOf="@+id/swHomeSearch" />
 
@@ -144,7 +160,7 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="44dp"
         android:text="@string/cost_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
@@ -166,7 +182,7 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:text="@string/place_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.469"
@@ -185,4 +201,19 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <FrameLayout
+        android:id="@+id/fragmentMapsEmbbed"
+        android:layout_width="match_parent"
+        android:layout_height="336dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swOtherPlaceSearch" >
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/map2"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

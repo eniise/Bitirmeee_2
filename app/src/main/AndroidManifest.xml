@@ -38,6 +38,10 @@
             android:theme="@style/Theme.Bitirme_2"/>
         <activity android:name="controllers.DetailFiltering"
             android:theme="@style/Theme.Bitirme_2"/>
+        <activity android:name="controllers.ForgotPassword"
+            android:theme="@style/Theme.Bitirme_2"/>
+        <activity android:name="controllers.CodeControl"
+            android:theme="@style/Theme.Bitirme_2"/>
         <activity
             android:name="controllers.Login"
             android:exported="true"
