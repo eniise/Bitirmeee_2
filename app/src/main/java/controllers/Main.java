@@ -40,7 +40,7 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
         mToolBar = findViewById(R.id.toolbar);
-        SetApplicationToolbar(mToolBar);
+        SetApplicationToolbar();
         mFrameLayout = findViewById(R.id.fragment_container);
         mParams = (RelativeLayout.LayoutParams) findViewById(R.id.fragment_container).getLayoutParams();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -66,14 +66,10 @@ public class Main extends AppCompatActivity {
                 Intent _intent = new Intent(context,DetailFiltering.class);
                 startActivity(_intent);
                 break;
-            case R.id.MapFiltering:
-                Intent intent = new Intent(context,Maps.class);
-                startActivity(intent);
-                break;
         }
         return true;
     }
-    private void SetApplicationToolbar(Toolbar toolbar){
+    private void SetApplicationToolbar(){
         setActionBar(mToolBar);
         mToolBar.inflateMenu(R.menu.ust_menu);
         getActionBar().setTitle("");
@@ -122,10 +118,8 @@ public class Main extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         if(bundle != null){
             int mTransactionType = bundle.getInt(TransactionTypes.USER_COME_BACK);
-            switch (mTransactionType){
-                case TransactionTypes.USER_DELETE_MESSAGE:
-                    navListener.onNavigationItemSelected(bottomNav.getMenu().findItem(R.id.chat));
-                    break;
+            if (mTransactionType == TransactionTypes.USER_DELETE_MESSAGE) {
+                navListener.onNavigationItemSelected(bottomNav.getMenu().findItem(R.id.chat));
             }
         }else {
             navListener.onNavigationItemSelected(bottomNav.getMenu().findItem(R.id.home));

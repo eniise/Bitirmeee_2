@@ -33,7 +33,9 @@ public class TrainerCourse {
     private int LikeCount;
     @SerializedName("viewType")
     private int mViewType;
-    public TrainerCourse(int mId, int mUserId, String mName, String mTypes, String mTimeIntervals, String mDays, String mDistrict, double mCost, String mDetail, int mLikeCount, String mTrainerImage, String mProfileImage, String mUserName, int likeCount) {
+    @SerializedName("seeCount")
+    private int mSeeCount;
+    public TrainerCourse(int mId, int mUserId, String mName, String mTypes, String mTimeIntervals, String mDays, String mDistrict, double mCost, String mDetail, int mLikeCount, String mTrainerImage, String mProfileImage, String mUserName, int likeCount, int mSeeCount) {
         this.mId = mId;
         this.mUserId = mUserId;
         this.mName = mName;
@@ -48,6 +50,7 @@ public class TrainerCourse {
         this.mProfileImage = mProfileImage;
         this.mUserName = mUserName;
         this.LikeCount = likeCount;
+        this.mSeeCount = mSeeCount;
     }
     public TrainerCourse(){
 
@@ -172,4 +175,14 @@ public class TrainerCourse {
     public void setmViewType(int mViewType) {
         this.mViewType = mViewType;
     }
+
+
+    public int getmSeeCount() {
+        return mSeeCount;
+    }
+
+    public void setmSeeCount(int mSeeCount) {
+        this.mSeeCount = mSeeCount;
+    }
+
 }

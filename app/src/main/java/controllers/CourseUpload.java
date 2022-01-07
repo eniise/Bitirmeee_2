@@ -126,8 +126,8 @@ public class CourseUpload extends AppCompatActivity implements MultiSpinner.Mult
                                     "",
                                     "",
                                     "",
-                                    0
-                                    );
+                                    0,
+                                    0);
 
                             if(userSee.equals(TransactionTypes.TRAINER_SEE_COURSE_UPLOAD)) {
                                 ServerPOST postCourse = new ServerPOST(TransactionTypes.doTrainerCourseUpload);

@@ -110,6 +110,7 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
         public RoundedImageView btnEditCourseEdit;
         public TextView txtEditCourseName;
         public TextView txtEditCourseDetail;
+        public TextView txtSeeCount;
         public PostsViewHolder(View itemView,int viewType) {
             super(itemView);
             if(viewType == VIEW_TYPE_NORMAL){
@@ -120,6 +121,7 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
                 btnHomeLike = itemView.findViewById(R.id.btnHomeLike);
                 btnHomeStartChat = itemView.findViewById(R.id.btnHomeStartChat);
                 txtLikesCount = itemView.findViewById(R.id.txtHomeLikesCount);
+                txtSeeCount = itemView.findViewById(R.id.txtSeeCount);
             }else if(viewType == VIEV_TYPE_EDIT){
                 btnEditCourseDelete = itemView.findViewById(R.id.btnEditCourseDelete);
                 btnEditCourseEdit = itemView.findViewById(R.id.btnEditCourseEdit);
@@ -150,6 +152,7 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
         if(mPage.equals("Home")) {
             _postsViewHolder = holder;
             if(getItemCount() >= 1)  {
+                holder.txtSeeCount.setText(String.valueOf(currentItem.getmSeeCount()));
                 ServerGET isLikeCourseAsync = new ServerGET(TransactionTypes.isUserCourseLikeControl, holder);
                 isLikeCourseAsync.delegate = this;
                 isLikeCourseAsync.execute(URLs.isUserLikeCourse(

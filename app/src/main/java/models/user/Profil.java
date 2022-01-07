@@ -31,7 +31,10 @@ public class Profil {
     private String mUserName;
     @SerializedName("userLikeCount")
     private int LikeCount;
-    public Profil(int mId, int mUserId, String mName, String mTypes, String mTimeIntervals, String mDays, String mDistrict, double mCost, String mDetail, int mLikeCount, String mTrainerImage, String mProfileImage, String mUserName, int likeCount) {
+    @SerializedName("seeCount")
+    private int seeCount;
+
+    public Profil(int mId, int mUserId, String mName, String mTypes, String mTimeIntervals, String mDays, String mDistrict, double mCost, String mDetail, int mLikeCount, String mTrainerImage, String mProfileImage, String mUserName, int likeCount, int seeCount) {
         this.mId = mId;
         this.mUserId = mUserId;
         this.mName = mName;
@@ -46,6 +49,7 @@ public class Profil {
         this.mProfileImage = mProfileImage;
         this.mUserName = mUserName;
         this.LikeCount = likeCount;
+        this.seeCount = seeCount;
     }
     public Profil(){
 
@@ -161,5 +165,13 @@ public class Profil {
 
     public void setLikeCount(int likeCount) {
         LikeCount = likeCount;
+    }
+
+    public int getSeeCount() {
+        return seeCount;
+    }
+
+    public void setSeeCount(int seeCount) {
+        this.seeCount = seeCount;
     }
 }

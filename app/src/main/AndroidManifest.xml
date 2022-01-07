@@ -18,9 +18,6 @@
         <activity
             android:name="controllers.Main"
             android:theme="@style/Theme.Bitirme_2" />
-        <activity
-            android:name="controllers.Maps"
-            android:theme="@style/Theme.Bitirme_2" />
         <activity android:name="controllers.ChatPage"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.Bitirme_2_Chat"/>
@@ -42,8 +39,10 @@
             android:theme="@style/Theme.Bitirme_2"/>
         <activity android:name="controllers.CodeControl"
             android:theme="@style/Theme.Bitirme_2"/>
+        <activity android:name="controllers.Login"
+            android:theme="@style/Theme.Bitirme_2"/>
         <activity
-            android:name="controllers.Login"
+            android:name="controllers.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.Bitirme_2">
             <intent-filter>
