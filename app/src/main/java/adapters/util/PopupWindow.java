@@ -120,7 +120,7 @@ public class PopupWindow implements AsyncResponse {
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void SetData(android.widget.PopupWindow popupWindow){
-        new ImageDownloaderTask(_ProfileImage).execute(mCourse.getmTrainerImage());
+        new ImageDownloaderTask(_ProfileImage).execute(URLs.GetPhoto(mCourse.getmUserId()));
         txtTrainerName.setText(mCourse.getmName());
         txtDetail.setText(mCourse.getmDetail());
         swStudent.setVisibility(View.GONE);

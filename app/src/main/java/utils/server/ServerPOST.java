@@ -51,6 +51,7 @@ public class ServerPOST extends AsyncTask<String, String, String> {
             URL url = new URL (strings[0]);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("POST");
+
             con.setRequestProperty("Content-Type", "application/json; utf-8");
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);

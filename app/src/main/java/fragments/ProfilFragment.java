@@ -61,7 +61,7 @@ public class ProfilFragment extends Fragment implements AsyncResponse,View.OnCli
         //do get user data's from server json data here
         //now get user data's from json data
         new ImageDownloaderTask(mUserProfileImage)
-                .execute(StaticData.getUserData().getUserProfileImageUrl());
+                .execute(URLs.GetPhoto(StaticData.getUserData().getUserId()));
         mUserProfileName.setText(StaticData.getUserData().getName());
         mUserProfileLikeCount.setText("Your like score : "+StaticData.getUserData().getUserLikesCount());
         ServerGET getMyLikes = new ServerGET(TransactionTypes.doGetMyLikeCourses);

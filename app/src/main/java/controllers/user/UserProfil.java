@@ -26,6 +26,7 @@ import utils.AsyncResponse;
 import utils.server.ServerGET;
 import utils.extras.TransactionTypes;
 import utils.extras.URLs;
+import utils.user.StaticData;
 
 public class UserProfil extends AppCompatActivity implements AsyncResponse {
     private RoundedImageView btnProfileCourseUpload;
@@ -88,12 +89,12 @@ public class UserProfil extends AppCompatActivity implements AsyncResponse {
             mUserProfileName.setText(_lst.get(0).getmUserName());
             mUserProfileLikeCount.setText("User like score : "+_lst.get(0).getLikeCount());
             new ImageDownloaderTask(mUserProfileImage)
-                    .execute(_lst.get(0).getmProfileImage());
+                    .execute(URLs.GetPhoto(StaticData.getUserData().getUserId()));
         }else {
             mUserProfileName.setText(_lst.get(0).getmUserName());
             mUserProfileLikeCount.setText("User like score : "+_lst.get(0).getLikeCount());
             new ImageDownloaderTask(mUserProfileImage)
-                    .execute(_lst.get(0).getmProfileImage());
+                    .execute(URLs.GetPhoto(StaticData.getUserData().getUserId()));
             profileProgressBar.setVisibility(View.GONE);
         }
     }

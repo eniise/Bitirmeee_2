@@ -81,7 +81,7 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
         }
         @RequiresApi(api = Build.VERSION_CODES.O)
         public void SetData(ChatContent contents, TrainerCourse trainerCourse){
-            new ImageDownloaderTask(mChatContentReceiverImage).execute(contents.getUserProfileImageUrl());
+            new ImageDownloaderTask(mChatContentReceiverImage).execute(URLs.GetPhoto(contents.getReceiverId()));
             mChatContentReceiverName.setText(String.valueOf(contents.getUserName()));
             mChatContentReceiverLastMessage.setText(String.valueOf(contents.getLastMessage()));
             String _time = DetectSendTime(contents.getLastMessageTime());
@@ -140,7 +140,7 @@ public class ChatContentAdapter extends RecyclerView.Adapter<ChatContentAdapter.
     public void onBindViewHolder(ChatContentAdapter.@NotNull ChatsViewHolder holder, int position) {
         ChatContent mCurrentItem = mChatContents.get(position);
         if(mCurrentItem.isUserSearch() == 0) {
-            new ImageDownloaderTask(holder.mChatContentReceiverImage).execute(mCurrentItem.getUserProfileImageUrl());
+            new ImageDownloaderTask(holder.mChatContentReceiverImage).execute(URLs.GetPhoto(mCurrentItem.getReceiverId()));
             holder.mChatContentReceiverName.setText(String.valueOf(mCurrentItem.getUserName()));
             holder.mChatContentReceiverLastMessage.setText(String.valueOf(mCurrentItem.getLastMessage()));
             String _time = DetectSendTime(mCurrentItem.getLastMessageTime());

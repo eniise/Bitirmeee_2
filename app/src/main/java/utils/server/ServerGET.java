@@ -176,6 +176,10 @@ public class ServerGET extends AsyncTask<String, String, String> {
                     case TransactionTypes.doSearch:
                         delegate.processFinish(result);
                         break;
+                    case TransactionTypes.doReSendMailCode:
+                        ForgotPassword forgotPassword = new Gson().fromJson(result,ForgotPassword.class);
+                        delegate.processFinish(forgotPassword);
+                        break;
                     case TransactionTypes.doForgotPassword:
                         delegate.processFinish(result);
                         break;

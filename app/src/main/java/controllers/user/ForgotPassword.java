@@ -51,7 +51,9 @@ public class ForgotPassword extends AppCompatActivity implements AsyncResponse {
             if(!result.equals("false")){
                 models.user.ForgotPassword forgotPassword = new Gson().fromJson(String.valueOf(result), models.user.ForgotPassword.class);
                 if(forgotPassword.getUserId() != 0) {
-                    startActivity(new Intent(this, CodeControl.class).putExtra("data", String.valueOf(result)));
+                    startActivity(new Intent(this, CodeControl.class)
+                            .putExtra("data", String.valueOf(result))
+                            .putExtra("mail",String.valueOf(txtForgotMailAddress.getText().toString())));
                 }else {
                     @SuppressLint("ResourceType") Snackbar snackbar = Snackbar.make(this,findViewById(android.R.id.content),"E-mail address not found!", BaseTransientBottomBar.LENGTH_LONG);
                     snackbar.show();

@@ -183,7 +183,7 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
                 holder.mHomeTrainerImage.setOnClickListener(v -> {
                     startActivity(v.getContext(), new Intent(v.getContext(), UserProfil.class).putExtra("userId", currentItem.getmUserId()), Bundle.EMPTY);
                 });
-                new ImageDownloaderTask(holder.mHomeTrainerImage).execute(currentItem.getmTrainerImage());
+                new ImageDownloaderTask(holder.mHomeTrainerImage).execute(URLs.GetPhoto(currentItem.getmUserId()));
             }
         }else if(mPage.equals("Edit")){
             holder.txtEditCourseName.setText(currentItem.getmName());

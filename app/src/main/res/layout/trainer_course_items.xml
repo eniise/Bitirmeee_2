@@ -79,7 +79,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/txtHomeTrainerDetail"
         app:layout_constraintTop_toBottomOf="@+id/txtHomeTrainerDetail"
-        app:layout_constraintVertical_bias="0.361"
+        app:layout_constraintVertical_bias="0.333"
         app:riv_oval="true" />
 
     <TextView
@@ -89,7 +89,7 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.255"
         app:layout_constraintStart_toEndOf="@+id/txtHomeTrainerDetail"
         app:layout_constraintTop_toBottomOf="@+id/btnHomeUserSeeCount"
         app:layout_constraintVertical_bias="0.0" />
@@ -114,13 +114,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="31dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:inputType="textMultiLine"
         android:padding="4dp"
         android:textColor="@color/white"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.684"
+        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtHomeTrainerName"
         app:layout_constraintWidth_percent="0.75" />

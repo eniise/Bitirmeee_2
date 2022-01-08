@@ -164,4 +164,10 @@ public class URLs {
                 ServerInfo.API_LEVEL +
                 "User/ForgotPasswordChange";
     }
+    public static String GetPhoto(int userId){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "User/GetMyPhoto?userId="+userId;
+    }
 }
