@@ -1,4 +1,4 @@
-package controllers;
+package controllers.course;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;

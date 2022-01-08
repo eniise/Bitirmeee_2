@@ -1,12 +1,8 @@
 package fragments;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,13 +20,12 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import adapters.TrainerCourseAdapter;
-import controllers.CourseEdit;
-import controllers.CourseUpload;
-import controllers.ProfilSettings;
+import controllers.course.CourseEdit;
+import controllers.course.CourseUpload;
+import controllers.user.ProfilSettings;
 import models.trainer.TrainerCourse;
 import utils.AsyncResponse;
 import adapters.util.ImageDownloaderTask;
@@ -86,6 +81,11 @@ public class ProfilFragment extends Fragment implements AsyncResponse,View.OnCli
                 btnProfileCourseEdit.setVisibility(View.VISIBLE);
                 btnProfileCourseEdit.setOnClickListener(this);
             }
+        }else{
+            btnProfileCourseEdit = v.findViewById(R.id.btnProfileCourseUpload);
+            btnProfileCourseUpload = v.findViewById(R.id.btnProfileCourseEdit);
+            btnProfileCourseEdit.setVisibility(View.GONE);
+            btnProfileCourseUpload.setVisibility(View.GONE);
         }
         mUserProfileImage = v.findViewById(R.id.imgProfile);
         mUserProfileLikeCount = v.findViewById(R.id.txtProfileLikeCount);

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.user;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -17,6 +17,7 @@ import com.enise.bitirme_2.R;
 
 import java.util.concurrent.ExecutionException;
 
+import controllers.pages.Main;
 import utils.AsyncResponse;
 import utils.server.ServerGET;
 import utils.components.MyAlertDialog;
@@ -39,14 +40,14 @@ public class Login extends Activity implements AsyncResponse {
         registerPage = findViewById(R.id.registerPage);
         btnLogin = findViewById(R.id.btnLogin);
         txtMail = findViewById(R.id.txtMailAddress);
-        txtPassword = findViewById(R.id.txtPassword);
+        txtPassword = findViewById(R.id.txtLoginPassword);
         registerPage.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), Register.class);
             startActivity(intent);
         });
         forgotPassword = findViewById(R.id.loginForgotPassword);
         forgotPassword.setOnClickListener(v -> {
-            startActivity(new Intent(this,ForgotPassword.class));
+            startActivity(new Intent(this, ForgotPassword.class));
         });
         btnLogin.setOnClickListener(v -> {
             String mail = txtMail.getText().toString();
@@ -94,7 +95,7 @@ public class Login extends Activity implements AsyncResponse {
     public void processFinish(Object output) {
         if(String.valueOf(output).equals("true")){
             System.out.println(StaticData.getUserData().getMail());
-            Intent intent = new Intent(this,Main.class);
+            Intent intent = new Intent(this, Main.class);
             startActivity(intent);
             finish();
         }

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.user;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,7 +13,9 @@ import com.enise.bitirme_2.R;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.makeramen.roundedimageview.RoundedImageView;
 
+import controllers.pages.CodeControl;
 import utils.AsyncResponse;
 import utils.extras.TransactionTypes;
 import utils.extras.URLs;
@@ -22,6 +24,7 @@ import utils.server.ServerGET;
 public class ForgotPassword extends AppCompatActivity implements AsyncResponse {
     EditText txtForgotMailAddress;
     Button btnSendCode;
+    RoundedImageView forgotBack;
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,11 @@ public class ForgotPassword extends AppCompatActivity implements AsyncResponse {
     void init(){
         txtForgotMailAddress = findViewById(R.id.txtForgotMailAddress);
         btnSendCode = findViewById(R.id.btnSendCode);
+        forgotBack = findViewById(R.id.forgotBack);
+        forgotBack.setOnClickListener(v -> {
+            onBackPressed();
+            finish();
+        });
         btnSendCode.setOnClickListener(v -> {
             ServerGET controlGet = new ServerGET(TransactionTypes.doForgotPassword);
             controlGet.delegate = this;

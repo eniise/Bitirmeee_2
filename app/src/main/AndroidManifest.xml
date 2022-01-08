@@ -13,36 +13,36 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA-99NRffwvYNWfROFtGC3x6gX0ve6WBzI" />
         <activity
-            android:name="controllers.Register"
+            android:name="controllers.user.Register"
             android:theme="@style/Theme.Bitirme_2" />
         <activity
-            android:name="controllers.Main"
+            android:name="controllers.pages.Main"
             android:theme="@style/Theme.Bitirme_2" />
-        <activity android:name="controllers.ChatPage"
+        <activity android:name="controllers.pages.ChatPage"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.Bitirme_2_Chat"/>
-        <activity android:name="controllers.MessageInfo"
+        <activity android:name="controllers.pages.MessageInfo"
             android:theme="@style/Theme.Bitirme_2"/>
-        <activity android:name="controllers.UserProfil"
+        <activity android:name="controllers.user.UserProfil"
             android:theme="@style/Theme.Bitirme_2"/>
-        <activity android:name="controllers.ProfilSettings"
+        <activity android:name="controllers.user.ProfilSettings"
             android:theme="@style/Theme.Bitirme_2"/>
-        <activity android:name="controllers.CourseUpload"
+        <activity android:name="controllers.course.CourseUpload"
             android:theme="@style/Theme.Bitirme_2"/>
-        <activity android:name="controllers.CourseEdit"
+        <activity android:name="controllers.course.CourseEdit"
             android:theme="@style/Theme.Bitirme_2"/>
-        <activity android:name="controllers.SearchResultPage"
+        <activity android:name="controllers.pages.SearchResultPage"
             android:theme="@style/Theme.Bitirme_2"/>
-        <activity android:name="controllers.DetailFiltering"
+        <activity android:name="controllers.pages.DetailFiltering"
             android:theme="@style/Theme.Bitirme_2"/>
-        <activity android:name="controllers.ForgotPassword"
+        <activity android:name="controllers.user.ForgotPassword"
             android:theme="@style/Theme.Bitirme_2"/>
-        <activity android:name="controllers.CodeControl"
+        <activity android:name="controllers.pages.CodeControl"
             android:theme="@style/Theme.Bitirme_2"/>
-        <activity android:name="controllers.Login"
+        <activity android:name="controllers.user.Login"
             android:theme="@style/Theme.Bitirme_2"/>
         <activity
-            android:name="controllers.SplashScreen"
+            android:name="controllers.pages.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.Bitirme_2">
             <intent-filter>

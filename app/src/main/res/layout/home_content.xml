@@ -7,7 +7,7 @@
     android:animateLayoutChanges="true"
     android:background="@color/white"
     android:layout_height="match_parent"
-    tools:context="controllers.ChatPage">
+    tools:context="controllers.pages.Main">
     <View
         android:id="@+id/viewBackground"
         android:layout_width="match_parent"
@@ -23,10 +23,11 @@
         android:clipToPadding="false"
         android:orientation="vertical"
         android:overScrollMode="never"
-        android:visibility="gone"
+        android:visibility="visible"
         android:padding="5dp"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="50dp"
+        android:background="@color/md_amber_100"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="@+id/viewBackground"
         tools:ignore="MissingConstraints" />

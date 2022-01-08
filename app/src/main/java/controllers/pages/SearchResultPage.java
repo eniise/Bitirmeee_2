@@ -1,4 +1,4 @@
-package controllers;
+package controllers.pages;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

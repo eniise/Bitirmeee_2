@@ -1,4 +1,4 @@
-package controllers;
+package controllers.user;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 
 import com.enise.bitirme_2.R;
 import com.google.gson.Gson;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import models.user.User;
 import utils.AsyncResponse;
@@ -39,6 +40,7 @@ public class Register extends Activity implements AsyncResponse, CompoundButton.
     private final String Male = "https://tibatu.com/wp-content/uploads/2020/10/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg";
     private String mUserSelectedGender = "";
     private boolean mUserGenderType = false;
+    private RoundedImageView regisBack;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,11 +74,13 @@ public class Register extends Activity implements AsyncResponse, CompoundButton.
                                 .putExtra("mail",txtRegisterMail.getText().toString())
                                 .putExtra("password",txtRegisterPassword.getText().toString());
                         startActivity(intent);
+                        finish();
                     }))
                     .show();
         }
     }
     private  void SetLayout(){
+        regisBack = findViewById(R.id.regisBack);
         txtRegisterMail = findViewById(R.id.txtRegisterMail);
         txtRegisterName = findViewById(R.id.txtRegisterName);
         txtRegisterSurName = findViewById(R.id.txtRegisterSurName);
@@ -90,6 +94,10 @@ public class Register extends Activity implements AsyncResponse, CompoundButton.
         rdRegisterGenderFamale.setOnCheckedChangeListener(this);
         rdRegisterStudent.setOnCheckedChangeListener(this);
         rdRegisterTrainer.setOnCheckedChangeListener(this);
+        regisBack.setOnClickListener(v -> {
+            onBackPressed();
+            finish();
+        });
     }
     //detect user register fields. and show messages.
     private boolean DetectFreeSpace(View v){

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.pages;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -21,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.enise.bitirme_2.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import fragments.ChatFragment;
 import fragments.HomeFragment;
@@ -33,7 +32,7 @@ public class Main extends AppCompatActivity {
     Context context;
     private FrameLayout mFrameLayout;
     private RelativeLayout.LayoutParams mParams;
-    private BottomNavigationView bottomNav;
+    private com.ismaeldivita.chipnavigation.ChipNavigationBar bottomNav;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,18 +75,17 @@ public class Main extends AppCompatActivity {
     }
     private void SetupNavigationBar(){
         bottomNav = findViewById(R.id.alt_menu);
-        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        bottomNav.setOnItemSelectedListener(navListener);
     }
     @SuppressLint("NonConstantResourceId")
-    private final BottomNavigationView.OnNavigationItemSelectedListener navListener =
+    private final ChipNavigationBar.OnItemSelectedListener navListener =
             item -> {
                 Fragment selectedFragment = null;
-                switch (item.getItemId()) {
+                switch (item) {
                     case R.id.home:
                         selectedFragment = new HomeFragment();
                         mToolBar.setVisibility(View.VISIBLE);
                         mFrameLayout.setLayoutParams(mParams);
-                        item.setChecked(true);
                         break;
                     case R.id.chat:
                         selectedFragment = new ChatFragment();
@@ -95,7 +93,6 @@ public class Main extends AppCompatActivity {
                         RelativeLayout.LayoutParams _tmp = new RelativeLayout.LayoutParams(mParams);
                         _tmp.topMargin = 0;
                         mFrameLayout.setLayoutParams(_tmp);
-                        item.setChecked(true);
                         break;
                     case R.id.profil:
                         selectedFragment = new ProfilFragment();
@@ -103,12 +100,10 @@ public class Main extends AppCompatActivity {
                         RelativeLayout.LayoutParams _tmp2 = new RelativeLayout.LayoutParams(mParams);
                         _tmp2.topMargin = 0;
                         mFrameLayout.setLayoutParams(_tmp2);
-                        item.setChecked(true);
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         selectedFragment).commit();
-                return true;
             };
 
     @Override
@@ -119,10 +114,10 @@ public class Main extends AppCompatActivity {
         if(bundle != null){
             int mTransactionType = bundle.getInt(TransactionTypes.USER_COME_BACK);
             if (mTransactionType == TransactionTypes.USER_DELETE_MESSAGE) {
-                navListener.onNavigationItemSelected(bottomNav.getMenu().findItem(R.id.chat));
+                bottomNav.setItemSelected(bottomNav.findViewById(R.id.chat).getId(),true);
             }
         }else {
-            navListener.onNavigationItemSelected(bottomNav.getMenu().findItem(R.id.home));
+            bottomNav.setItemSelected(bottomNav.findViewById(R.id.home).getId(),true);
         }
     }
 }

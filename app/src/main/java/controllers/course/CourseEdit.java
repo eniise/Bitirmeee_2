@@ -1,4 +1,4 @@
-package controllers;
+package controllers.course;
 
 import android.os.Bundle;
 import android.view.View;

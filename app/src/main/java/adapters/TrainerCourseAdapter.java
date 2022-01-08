@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +17,13 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import adapters.util.DeleteCourse;
 import adapters.util.MessageShare;
 import adapters.util.PopupWindow;
-import controllers.CourseEdit;
-import controllers.CourseUpload;
-import controllers.UserProfil;
+import controllers.course.CourseUpload;
+import controllers.user.UserProfil;
 import models.trainer.TrainerCourse;
 import models.user.UserLikes;
 import utils.AsyncResponse;

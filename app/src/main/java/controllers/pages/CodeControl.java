@@ -1,4 +1,4 @@
-package controllers;
+package controllers.pages;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -9,11 +9,13 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.enise.bitirme_2.R;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import models.user.ForgotPassword;
 import utils.AsyncResponse;
@@ -31,6 +33,8 @@ public class CodeControl extends AppCompatActivity implements AsyncResponse{
     private TextView changeReEnterPassword;
     private Button btnChangePassword;
     models.user.ForgotPassword forgotPassword = null;
+    private ConstraintLayout changePasswordLayout;
+    RoundedImageView closeControlPage;
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,11 @@ public class CodeControl extends AppCompatActivity implements AsyncResponse{
         forgotPassword = new Gson().fromJson(data, ForgotPassword.class);
     }
     void init(){
+        closeControlPage = findViewById(R.id.closeControlPage);
+        closeControlPage.setOnClickListener(v -> {
+            onBackPressed();
+            finish();
+        });
         txtCodeControl = findViewById(R.id.txtCodeControl);
         btnCodeControl = findViewById(R.id.btnCodeControl);
         btnCodeControl.setOnClickListener(v -> {
@@ -49,9 +58,8 @@ public class CodeControl extends AppCompatActivity implements AsyncResponse{
                 changePassword = findViewById(R.id.changePassword);
                 changeReEnterPassword = findViewById(R.id.changeReEnterPassword);
                 btnChangePassword = findViewById(R.id.btnChangePassword);
-                changePassword.setVisibility(View.VISIBLE);
-                changeReEnterPassword.setVisibility(View.VISIBLE);
-                btnChangePassword.setVisibility(View.VISIBLE);
+                changePasswordLayout = findViewById(R.id.changePasswordLayout);
+                changePasswordLayout.setVisibility(View.VISIBLE);
                 btnChangePassword.setOnClickListener(v1 -> {
                     if(changePassword.getText().length() > 0){
                         if(changeReEnterPassword.getText().length() > 0){

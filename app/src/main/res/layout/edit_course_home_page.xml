@@ -7,7 +7,7 @@
     android:animateLayoutChanges="true"
     android:background="@color/white"
     android:layout_height="match_parent"
-    tools:context="controllers.CourseEdit">
+    tools:context="controllers.course.CourseEdit">
     <View
         android:id="@+id/viewEditCourseBackground"
         android:layout_width="match_parent"

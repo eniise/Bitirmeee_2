@@ -56,4 +56,6 @@
     <string name="enter_a_course_name">Enter a course name</string>
     <string name="cost_search">COST SEARCH</string>
     <string name="name_search">NAME SEARCH</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account? Sign up.</string>
+    <string name="send_code">Send code</string>
 </resources>

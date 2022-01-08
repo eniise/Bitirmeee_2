@@ -1,4 +1,4 @@
-package controllers;
+package controllers.pages;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -7,9 +7,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +43,6 @@ import utils.AsyncResponse;
 import utils.components.MyAlertDialog;
 import utils.extras.TransactionTypes;
 import utils.extras.URLs;
-import utils.server.ServerGET;
 import utils.server.ServerPOST;
 
 public class DetailFiltering extends AppCompatActivity implements AsyncResponse,OnMapReadyCallback {

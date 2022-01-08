@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 import adapters.util.ImageDownloaderTask;
 import adapters.util.MessageShare;
-import controllers.ChatPage;
+import controllers.pages.ChatPage;
 import models.chat.Chat;
 import models.chat.ChatContent;
 import models.trainer.TrainerCourse;

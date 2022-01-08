@@ -1,136 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/btnSingUp"
-        android:layout_width="144dp"
-        android:layout_height="56dp"
-        android:text="@string/sign_up"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.932"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegisterPassword"
-        app:layout_constraintVertical_bias="0.569" />
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="374dp"
-        android:layout_height="44dp"
-        android:text="@string/e_techeducation_registration_page"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058" />
-
-    <EditText
-        android:id="@+id/txtRegisterName"
-        android:layout_width="333dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:hint="@string/name"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-        app:layout_constraintVertical_bias="0.027" />
-
-    <EditText
-        android:id="@+id/txtRegisterSurName"
-        android:layout_width="333dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:hint="@string/sur_name"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegisterName"
-        app:layout_constraintVertical_bias="0.074" />
-
-    <EditText
-        android:id="@+id/txtRegisterMail"
-        android:layout_width="333dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:hint="@string/e_mail_address"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegisterSurName"
-        app:layout_constraintVertical_bias="0.093" />
-
-    <EditText
-        android:id="@+id/txtRegisterPassword"
-        android:layout_width="333dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegisterMail"
-        app:layout_constraintVertical_bias="0.122" />
-
-    <RadioButton
-        android:id="@+id/rdRegisterTrainer"
+    android:layout_height="match_parent"
+    android:background="@color/md_purple_200"
+    tools:context="controllers.user.Register">
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/regisBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/i_m_trainer"
-        app:layout_constraintBottom_toTopOf="@+id/btnSingUp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.126"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegisterPassword"
-        app:layout_constraintVertical_bias="0.543" />
+        android:src="@drawable/ic_back"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        />
 
-    <RadioButton
-        android:id="@+id/rdRegisterStudent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/i_m_student"
-        app:layout_constraintBottom_toTopOf="@+id/btnSingUp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.78"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegisterPassword"
-        app:layout_constraintVertical_bias="0.547" />
+    <ScrollView
+        android:layout_below="@id/regisBack"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        tools:context="in.insideandroid.template.LoginActivity">
 
-    <RadioButton
-        android:id="@+id/rdRegisterGenderFamale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="I am Famale"
-        app:layout_constraintBottom_toTopOf="@+id/rdRegisterTrainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.139"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegisterPassword"
-        app:layout_constraintVertical_bias="0.612" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:scrollbarThumbHorizontal="@null"
+            android:scrollbarThumbVertical="@null">
 
-    <RadioButton
-        android:id="@+id/rdRegisterGenderMale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="I am Male"
-        app:layout_constraintBottom_toTopOf="@+id/rdRegisterTrainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toEndOf="@+id/rdRegisterGenderFamale"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegisterPassword"
-        app:layout_constraintVertical_bias="0.612" />
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/e_techeducation_registration_page"
+                    android:textColor="#696969"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="16dp"
+                    android:textStyle="bold" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:cardBackgroundColor="@color/colorTextInputBackground"
+                    android:layout_margin="4dp"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp">
+                    <EditText
+                        android:id="@+id/txtRegisterName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:drawableTint="@color/black"
+                        android:background="@android:color/transparent"
+                        android:drawableStart="@drawable/ic_baseline_account_box_24"
+                        android:drawablePadding="12dp"
+                        android:hint="@string/name"
+                        android:inputType="textEmailAddress"
+                        android:imeOptions="actionNext"
+                        android:minWidth="320dp"
+                        android:minHeight="45dp"
+                        android:singleLine="true" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    app:cardBackgroundColor="@color/colorTextInputBackground"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp">
+                        <EditText
+                            android:id="@+id/txtRegisterSurName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:background="@android:color/transparent"
+                            android:drawableStart="@drawable/ic_baseline_account_box_24"
+                            android:drawablePadding="12dp"
+                            android:hint="@string/sur_name"
+                            android:imeOptions="actionNext"
+                            android:minWidth="320dp"
+                            android:minHeight="45dp"
+                            android:singleLine="true" />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    app:cardBackgroundColor="@color/colorTextInputBackground"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp">
+
+                        <EditText
+                            android:id="@+id/txtRegisterMail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:background="@android:color/transparent"
+                            android:drawableTint="@color/black"
+                            android:drawableStart="@drawable/ic_baseline_mail_24"
+                            android:drawablePadding="12dp"
+                            android:hint="@string/e_mail_address"
+                            android:inputType="textEmailAddress"
+                            android:imeOptions="actionNext"
+                            android:minWidth="320dp"
+                            android:minHeight="45dp"
+                            android:singleLine="true" />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    app:cardBackgroundColor="@color/colorTextInputBackground"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        app:hintEnabled="false"
+                        app:passwordToggleEnabled="true">
+
+                        <EditText
+                            android:id="@+id/txtRegisterPassword"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:background="@android:color/transparent"
+                            android:drawableStart="@drawable/ic_lock_24"
+                            android:drawablePadding="12dp"
+                            android:hint="@string/password"
+                            android:imeOptions="actionNext"
+                            android:inputType="textPassword"
+                            android:minWidth="320dp"
+                            android:minHeight="45dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/md_purple_200"
+                    android:layout_margin="4dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/md_purple_200">
+
+                        <RadioButton
+                            android:id="@+id/rdRegisterGenderFamale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="I am Famale"
+                            android:background="@color/md_purple_200"
+                           />
+                        <RadioButton
+                            android:id="@+id/rdRegisterGenderMale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/md_purple_200"
+                            android:text="I am Male" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="4dp"
+                    android:background="@color/md_purple_200">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/md_purple_200">
+
+                        <RadioButton
+                            android:id="@+id/rdRegisterTrainer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/md_purple_200"
+                            android:text="@string/i_m_trainer" />
+
+                        <RadioButton
+                            android:id="@+id/rdRegisterStudent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/i_m_student"
+                            android:background="@color/md_purple_200"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.cardview.widget.CardView>
+                <Button
+                    android:id="@+id/btnSingUp"
+                    style="@style/Button1"
+                    android:layout_width="342dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/sign_up" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+</RelativeLayout>

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.user;
 
 import android.app.Activity;
 import android.content.Context;

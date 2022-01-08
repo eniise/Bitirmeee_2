@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background_receiver_message"
+    android:background="@drawable/trainer_course_items_background"
     android:padding="4dp"
     android:layout_marginTop="4dp"
     android:layout_marginStart="4dp"
@@ -16,13 +16,14 @@
         android:id="@+id/homeTrainerImage"
         android:layout_width="54dp"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
         android:background="@drawable/background_chat_input"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.014"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024"
+        app:layout_constraintVertical_bias="0.031"
         app:riv_oval="true" />
 
     <com.makeramen.roundedimageview.RoundedImageView
@@ -33,10 +34,10 @@
         android:src="@drawable/ic_baseline_favorite_null_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintHorizontal_bias="0.193"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtHomeTrainerDetail"
-        app:layout_constraintVertical_bias="0.022"
+        app:layout_constraintVertical_bias="0.03"
         app:riv_oval="true" />
 
     <com.makeramen.roundedimageview.RoundedImageView
@@ -75,10 +76,10 @@
         android:src="@drawable/ic_round_visibility_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/txtHomeTrainerDetail"
         app:layout_constraintTop_toBottomOf="@+id/txtHomeTrainerDetail"
-        app:layout_constraintVertical_bias="0.454"
+        app:layout_constraintVertical_bias="0.361"
         app:riv_oval="true" />
 
     <TextView
@@ -88,22 +89,22 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/txtHomeTrainerDetail"
         app:layout_constraintTop_toBottomOf="@+id/btnHomeUserSeeCount"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/txtHomeTrainerName"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:padding="4dp"
         android:textColor="@color/white"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toEndOf="@id/homeTrainerImage"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.75" />
@@ -113,15 +114,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="31dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="20dp"
         android:inputType="textMultiLine"
         android:padding="4dp"
         android:textColor="@color/white"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/homeTrainerImage"
-        app:layout_constraintStart_toStartOf="@+id/homeTrainerImage"
+        app:layout_constraintHorizontal_bias="0.684"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtHomeTrainerName"
         app:layout_constraintWidth_percent="0.75" />
 
@@ -129,11 +129,11 @@
         android:id="@+id/txtHomeLikesCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:text="NULL"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnHomeLike" />
 

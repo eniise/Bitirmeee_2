@@ -1,4 +1,4 @@
-package controllers;
+package controllers.pages;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
