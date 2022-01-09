@@ -22,8 +22,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp"
-        >
+        android:layout_marginBottom="50dp">
 
     </FrameLayout>
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
@@ -45,15 +44,15 @@
         android:layout_marginStart="11dp"
         android:layout_marginTop="0dp"
         android:background="@drawable/forgot_password_code_control_background"
-        android:backgroundTint="@color/md_blue_grey_900"
+        android:backgroundTint="@color/colorIcon"
         android:drawableStart="@drawable/ic_round_search_24"
         android:drawablePadding="12dp"
-        android:drawableTint="@color/md_amber_600"
+        android:drawableTint="@color/black"
         android:hint="Enter course name"
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
         android:minWidth="320dp"
         android:minHeight="45dp"
         android:singleLine="true"
-        android:textColorHint="@color/white" />
+        android:textColorHint="@color/black" />
 </RelativeLayout>

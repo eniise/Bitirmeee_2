@@ -5,6 +5,7 @@
     android:id="@+id/login_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ee"
     android:theme="@style/Theme.Bitirme_2">
 
     <TextView
@@ -21,15 +22,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.072"
-        tools:text="Welcome to e-Tech Education " />
+        tools:text="Welcome to e-TechEducation " />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="185dp"
         android:layout_height="21dp"
-        android:background="@color/white"
+        android:background="@color/actionbarOpacity"
         android:text="@string/do_you_have_a_account_sign_on"
-        android:textColor="#3F51B5"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +43,7 @@
         android:layout_width="158dp"
         android:layout_height="27dp"
         android:text="@string/click_here_and_register"
-        android:textColor="#2196F3"
+        android:textColor="@color/ask"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,8 +56,9 @@
         android:id="@+id/textView4"
         android:layout_width="220dp"
         android:layout_height="30dp"
+        android:background="@color/actionbarOpacity"
         android:text="@string/user_name_or_mail_address"
-        android:textColor="#3F51B5"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +72,7 @@
         android:layout_width="87dp"
         android:layout_height="27dp"
         android:text="@string/password"
-        android:textColor="#3F51B5"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,6 +84,7 @@
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="330dp"
         android:layout_height="38dp"
+        android:backgroundTint="@color/white"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -110,6 +113,7 @@
         android:layout_height="67dp"
         android:background="@color/md_amber_600"
         android:text="@string/login"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.798"

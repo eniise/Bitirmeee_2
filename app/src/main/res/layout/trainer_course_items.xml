@@ -72,6 +72,7 @@
         android:id="@+id/btnHomeUserSeeCount"
         android:layout_width="25dp"
         android:layout_height="27dp"
+        android:background="@color/white"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_round_visibility_24"
         app:layout_constraintBottom_toBottomOf="parent"
