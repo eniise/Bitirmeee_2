@@ -17,15 +17,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginBottom="50dp"
         tools:layout_editor_absoluteX="10dp" />
+
     <View
         android:id="@+id/headerBackground"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/border"
-        android:backgroundTint="@color/md_blue_grey_900"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toTopOf="@id/viewSupporter"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        tools:layout_editor_absoluteX="10dp" />
 
     <EditText
         android:id="@+id/txtSearchUser"
@@ -34,9 +35,9 @@
         android:layout_marginTop="16dp"
         android:padding="5dp"
         android:imeOptions="actionGo"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/black"
         android:background="@null"
-        android:textColorHint="@color/colorAccent"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/headerBackground"
         app:layout_constraintHorizontal_bias="0.397"
         app:layout_constraintStart_toStartOf="parent"
