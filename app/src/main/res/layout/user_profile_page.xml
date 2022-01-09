@@ -16,7 +16,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/message_background_content_top"
-        android:backgroundTint="@color/colorAccent"
+        android:backgroundTint="@color/actionbarOpacity"
         app:layout_constraintBottom_toTopOf="@+id/recylerUserProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
