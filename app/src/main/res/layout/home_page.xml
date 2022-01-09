@@ -48,12 +48,12 @@
         android:backgroundTint="@color/md_blue_grey_900"
         android:drawableStart="@drawable/ic_round_search_24"
         android:drawablePadding="12dp"
-        android:drawableTint="@color/black"
+        android:drawableTint="@color/md_amber_600"
         android:hint="Enter course name"
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
         android:minWidth="320dp"
         android:minHeight="45dp"
         android:singleLine="true"
-        android:textColorHint="@color/colorAccent" />
+        android:textColorHint="@color/white" />
 </RelativeLayout>

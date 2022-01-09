@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/border"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/md_amber_600"
         app:layout_constraintBottom_toTopOf="@id/viewSupporter"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="10dp" />
@@ -37,7 +37,7 @@
         android:imeOptions="actionGo"
         android:textColor="@color/black"
         android:background="@null"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/headerBackground"
         app:layout_constraintHorizontal_bias="0.397"
         app:layout_constraintStart_toStartOf="parent"
