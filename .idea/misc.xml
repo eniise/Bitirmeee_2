@@ -4,6 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/chat_content.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/course_upload.xml" value="0.34601449275362317" />
+        <entry key="app/src/main/res/layout/edit_course_home_page.xml" value="0.34601449275362317" />
+        <entry key="app/src/main/res/layout/edit_course_item.xml" value="0.34601449275362317" />
+        <entry key="app/src/main/res/layout/filtering_page.xml" value="0.34601449275362317" />
+        <entry key="app/src/main/res/layout/forgot_password.xml" value="0.34601449275362317" />
         <entry key="app/src/main/res/layout/login_page.xml" value="0.34601449275362317" />
         <entry key="app/src/main/res/layout/regis_page.xml" value="0.34601449275362317" />
         <entry key="app/src/main/res/layout/search_content.xml" value="0.34601449275362317" />
