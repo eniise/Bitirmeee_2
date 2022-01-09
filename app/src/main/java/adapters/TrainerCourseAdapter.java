@@ -83,7 +83,6 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
                 course.setmLikeCount(getLike);
             }
         }
-
     }
     private Object mGetClassType(Object object){
         return object.getClass();

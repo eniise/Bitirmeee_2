@@ -71,13 +71,7 @@ public class MultiSpinner extends androidx.appcompat.widget.AppCompatSpinner imp
         builder.setMultiChoiceItems(
                 items.toArray(new CharSequence[items.size()]), selected, this);
         builder.setPositiveButton(android.R.string.ok,
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
+                (dialog, which) -> dialog.cancel());
         builder.setOnCancelListener(this);
         builder.show();
         return true;
