@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,26 +7,22 @@
     android:id="@+id/topToolbar"
     android:theme="@style/Theme.Bitirme_2"
     app:title=" "
-    android:background="@drawable/course_content_background"
+    android:background="@color/white"
     >
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="5dp"
-    android:foregroundGravity="center"
-    >
-    <TextView
-        android:id="@+id/applicationName"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintEnd_toEndOf="@id/topToolbar"
-        android:text="@string/app_text"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-black"
-        android:textSize="15sp"
-        tools:ignore="NotSibling" />
-</androidx.constraintlayout.widget.ConstraintLayout>
-</Toolbar>
+        <EditText
+            android:id="@+id/txtRegisterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/md_deep_purple_A400"
+            android:background="@drawable/forgot_password_code_control_background"
+            android:drawableStart="@drawable/ic_round_search_24"
+            android:drawablePadding="12dp"
+            android:drawableTint="@color/black"
+            android:hint="@string/name"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:minWidth="320dp"
+            android:minHeight="45dp"
+            android:singleLine="true"
+            />
+</androidx.appcompat.widget.Toolbar>

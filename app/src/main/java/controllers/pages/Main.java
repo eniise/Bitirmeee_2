@@ -5,18 +5,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toolbar;
+import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.enise.bitirme_2.R;
@@ -39,6 +43,10 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
         mToolBar = findViewById(R.id.toolbar);
+        mToolBar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.ic_baseline_notes_24));
+        mToolBar.setNavigationOnClickListener(v -> {
+            System.out.println(v.getId());
+        });
         SetApplicationToolbar();
         mFrameLayout = findViewById(R.id.fragment_container);
         mParams = (RelativeLayout.LayoutParams) findViewById(R.id.fragment_container).getLayoutParams();
@@ -69,9 +77,8 @@ public class Main extends AppCompatActivity {
         return true;
     }
     private void SetApplicationToolbar(){
-        setActionBar(mToolBar);
+        setSupportActionBar(mToolBar);
         mToolBar.inflateMenu(R.menu.ust_menu);
-        getActionBar().setTitle("");
     }
     private void SetupNavigationBar(){
         bottomNav = findViewById(R.id.alt_menu);
@@ -119,5 +126,19 @@ public class Main extends AppCompatActivity {
         }else {
             bottomNav.setItemSelected(bottomNav.findViewById(R.id.home).getId(),true);
         }
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_MENU:
+                Intent _intent = new Intent(context,DetailFiltering.class);
+                startActivity(_intent);
+                break;
+
+            default:
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
+
     }
 }

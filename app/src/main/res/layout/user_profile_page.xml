@@ -7,6 +7,22 @@
     android:background="@drawable/profile_content_background"
     >
 
+    <View
+        android:id="@+id/viewBackground"
+        android:layout_width="405dp"
+        android:layout_height="266dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/message_background_content_top"
+        android:backgroundTint="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/recylerUserProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.005" />
+
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/profileSettings"
         android:layout_width="30dp"
@@ -18,7 +34,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9"
-        app:riv_border_color="@color/black" />
+        android:backgroundTint="@color/white"
+        app:riv_border_color="@color/white" />
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/profileBack"
@@ -64,7 +81,6 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="60dp"
-        android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,7 +111,7 @@
         android:orientation="vertical"
         android:overScrollMode="always"
         android:padding="5dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

@@ -77,8 +77,8 @@ public class UserProfil extends AppCompatActivity implements AsyncResponse {
     @Override
     public <T> void processFinish(T result) {
         ArrayList<TrainerCourse> _lst = (ArrayList<TrainerCourse>) result;
-        if(_lst.size() > 1) {
-            mUserProfileRecylerView = findViewById(R.id.recylerUserProfile);
+        mUserProfileRecylerView = findViewById(R.id.recylerUserProfile);
+        if(_lst.size() >= 1 && _lst.get(0).getmTrainerImage() != null) {
             mUserProfileRecylerView.setHasFixedSize(true);
             mLayoutManager = new LinearLayoutManager(context);
             mAdapter = new TrainerCourseAdapter(_lst, "Home");
@@ -96,6 +96,7 @@ public class UserProfil extends AppCompatActivity implements AsyncResponse {
             new ImageDownloaderTask(mUserProfileImage)
                     .execute(URLs.GetPhoto(StaticData.getUserData().getUserId()));
             profileProgressBar.setVisibility(View.GONE);
+            mUserProfileRecylerView.setVisibility(View.GONE);
         }
     }
 }

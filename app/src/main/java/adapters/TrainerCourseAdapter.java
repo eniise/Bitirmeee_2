@@ -108,6 +108,7 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
         public TextView txtEditCourseName;
         public TextView txtEditCourseDetail;
         public TextView txtSeeCount;
+        public TextView txtTrainerCost;
         public PostsViewHolder(View itemView,int viewType) {
             super(itemView);
             if(viewType == VIEW_TYPE_NORMAL){
@@ -119,6 +120,7 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
                 btnHomeStartChat = itemView.findViewById(R.id.btnHomeStartChat);
                 txtLikesCount = itemView.findViewById(R.id.txtHomeLikesCount);
                 txtSeeCount = itemView.findViewById(R.id.txtSeeCount);
+                txtTrainerCost = itemView.findViewById(R.id.txtTrainerCost);
             }else if(viewType == VIEV_TYPE_EDIT){
                 btnEditCourseDelete = itemView.findViewById(R.id.btnEditCourseDelete);
                 btnEditCourseEdit = itemView.findViewById(R.id.btnEditCourseEdit);
@@ -148,8 +150,9 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
         TrainerCourse currentItem = mUrunlerList.get(position);
         if(mPage.equals("Home")) {
             _postsViewHolder = holder;
-            if(getItemCount() >= 1)  {
+            if(getItemCount() >= 1 && currentItem.getmTrainerImage() != null)  {
                 holder.txtSeeCount.setText(String.valueOf(currentItem.getmSeeCount()));
+                holder.txtTrainerCost.setText(String.valueOf(currentItem.getmCost())+"₺");
                 ServerGET isLikeCourseAsync = new ServerGET(TransactionTypes.isUserCourseLikeControl, holder);
                 isLikeCourseAsync.delegate = this;
                 isLikeCourseAsync.execute(URLs.isUserLikeCourse(
@@ -161,7 +164,11 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
                 holder.txtHomeTrainerName.setText(currentItem.getmName());
                 holder.txtLikesCount.setText(String.format("%d user like this course", currentItem.getmLikeCount()));
                 holder.btnHomeStartChat.setOnClickListener(v -> {
-                    new PopupWindow(holder.itemView, holder.itemView.getContext(), currentItem, TransactionTypes.USER_SEE_MAIN, TransactionTypes.LAYOUT_MESSAGE_SEND).onButtonShowPopupWindowClick();
+                    new PopupWindow(holder.itemView, holder.itemView.getContext()
+                            , currentItem
+                            , TransactionTypes.USER_SEE_MAIN
+                            , TransactionTypes.LAYOUT_MESSAGE_SEND)
+                            .onButtonShowPopupWindowClick();
                 });
                 holder.btnHomeLike.setOnClickListener(v -> {
                     _postsViewHolder = holder;
@@ -178,10 +185,12 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
                     holder.btnHomeLike.setImageResource(R.drawable.ic_baseline_favorite_24);
                 });
                 holder.btnHomeShare.setOnClickListener(v -> {
-                    new MessageShare(v, v.getContext(), currentItem, 1, TransactionTypes.LAYOUT_MESSAGE_SHARE).onButtonShowPopupWindowClick();
+                    new MessageShare(v, v.getContext(), currentItem, 1, TransactionTypes.LAYOUT_MESSAGE_SHARE)
+                            .onButtonShowPopupWindowClick();
                 });
                 holder.mHomeTrainerImage.setOnClickListener(v -> {
-                    startActivity(v.getContext(), new Intent(v.getContext(), UserProfil.class).putExtra("userId", currentItem.getmUserId()), Bundle.EMPTY);
+                    startActivity(v.getContext(), new Intent(v.getContext(), UserProfil.class)
+                            .putExtra("userId", currentItem.getmUserId()), Bundle.EMPTY);
                 });
                 new ImageDownloaderTask(holder.mHomeTrainerImage).execute(URLs.GetPhoto(currentItem.getmUserId()));
             }
