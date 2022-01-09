@@ -180,7 +180,7 @@
                             android:id="@+id/rdRegisterGenderFamale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@color/actionbarOpacity"
+                            android:background="@color/white"
                             android:text="I am Famale" />
 
                         <RadioButton
