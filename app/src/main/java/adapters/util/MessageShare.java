@@ -1,8 +1,11 @@
 package adapters.util;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,6 +15,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -29,6 +34,7 @@ import utils.extras.TransactionTypes;
 import utils.extras.URLs;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+import static com.enise.bitirme_2.R.*;
 
 public class MessageShare extends PopupWindow implements AsyncResponse, TextWatcher {
     private EditText txtSearchUser;
@@ -49,7 +55,7 @@ public class MessageShare extends PopupWindow implements AsyncResponse, TextWatc
             searchingView.setVisibility(View.GONE);
             chatContent.setVisibility(View.GONE);
         }
-        mRecyclerView = view.findViewById(R.id.chatContentRecyler);
+        mRecyclerView = view.findViewById(id.chatContentRecyler);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(view.getContext());
         mAdapter = new ChatContentAdapter(_lst,TransactionTypes.LAYOUT_MESSAGE_SHARE,mCourse,this);
@@ -64,12 +70,12 @@ public class MessageShare extends PopupWindow implements AsyncResponse, TextWatc
     public void onButtonShowPopupWindowClick() {
         LayoutInflater inflater = (LayoutInflater)
                 mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.chat_content, null);
+        View popupView = inflater.inflate(layout.chat_content, null);
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = true;
         final android.widget.PopupWindow popupWindow = new android.widget.PopupWindow(popupView, width, height, focusable);
-        popupWindow.setAnimationStyle(R.style.popupWindow);
+        popupWindow.setAnimationStyle(style.popupWindow);
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         popupWindow.setFocusable(true);
         popupWindow.update();
@@ -82,10 +88,10 @@ public class MessageShare extends PopupWindow implements AsyncResponse, TextWatc
     @Override
     public void init(View popupView) {
         view = popupView;
-        chatContent = popupView.findViewById(R.id.chatContent);
-        txtSearchUser = popupView.findViewById(R.id.txtSearchUser);
+        chatContent = popupView.findViewById(id.chatContent);
+        txtSearchUser = popupView.findViewById(id.txtSearchUser);
         txtSearchUser.addTextChangedListener(this);
-        searchingView = popupView.findViewById(R.id.searchingView);
+        searchingView = popupView.findViewById(id.searchingView);
         ServerGET getMyContent = new ServerGET(TransactionTypes.doGetMyChatContent);
         getMyContent.delegate = this;
         getMyContent.execute(URLs.GetChatContent(StaticData.getUserData().getUserId()));

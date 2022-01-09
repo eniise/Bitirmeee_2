@@ -42,4 +42,5 @@ public class TransactionTypes {
     public static final int doForgotPassword=23;
     public static final int doChangePassword=24;
     public static final int doReSendMailCode=25;
+    public static final int doUserSearchCourse=26;
 }

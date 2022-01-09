@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.enise.bitirme_2.R;
 import com.google.gson.Gson;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,6 +46,7 @@ public class CourseUpload extends AppCompatActivity implements MultiSpinner.Mult
     private static final List<String> _selectedIntervals= new ArrayList<>();
     private String userSee;
     private Bundle pageBundle;
+    private RoundedImageView backCourseUpload;
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,11 @@ public class CourseUpload extends AppCompatActivity implements MultiSpinner.Mult
     @SuppressLint("SetTextI18n")
     void init(){
         userSee = pageBundle.getString("userSee");
+        backCourseUpload = findViewById(R.id.backCourseUpload);
+        backCourseUpload.setOnClickListener(v -> {
+            onBackPressed();
+            finish();
+        });
         spinnerDistrict = findViewById(R.id.spinnerDistrict);
         spinnerDays = findViewById(R.id.spinnerDays);
         spinnerIntervals = findViewById(R.id.spinnerIntervals);

@@ -183,6 +183,11 @@ public class ServerGET extends AsyncTask<String, String, String> {
                     case TransactionTypes.doForgotPassword:
                         delegate.processFinish(result);
                         break;
+                    case TransactionTypes.doUserSearchCourse:
+                        TrainerCourse[] courses_ = new Gson().fromJson(result,TrainerCourse[].class);
+                        ArrayList<TrainerCourse> _courses = new ArrayList<>(Arrays.asList(courses_));
+                        delegate.processFinish(_courses);
+                        break;
                 }
             } else {
                 delegate.processFinish("false");

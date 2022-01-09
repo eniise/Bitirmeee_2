@@ -73,6 +73,12 @@ public class DetailFiltering extends AppCompatActivity implements AsyncResponse,
     }
     void init(){
         txSearchtDistrictName = findViewById(R.id.txSearchtDistrictName);
+        txSearchtDistrictName.setOnClickListener(v -> {
+            if(districtName.length()>0) {
+                districtName = "";
+                txSearchtDistrictName.setText("");
+            }
+        });
         btnSearchBack = findViewById(R.id.btnSearchBack);
         btnPlaceSearch = findViewById(R.id.btnPlaceSearch);
         btnSearchBack.setOnClickListener(v -> {

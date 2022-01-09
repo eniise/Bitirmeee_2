@@ -5,29 +5,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="controllers.user.ProfilSettings"
+    android:background="@color/md_red_300"
     >
+
+    <View
+        android:id="@+id/viewBackground"
+        android:layout_width="405dp"
+        android:layout_height="266dp"
+        android:background="@drawable/border"
+        android:backgroundTint="@color/md_teal_A700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.096" />
+
+    <View
+        android:id="@+id/viewBackground2"
+        android:layout_width="405dp"
+        android:layout_height="266dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/border"
+        android:backgroundTint="@color/md_teal_700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewBackground" />
 
     <EditText
         android:id="@+id/txtRePassword"
-        android:layout_width="331dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="48dp"
-        android:ems="10"
-        android:hint="@string/enter_new_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/forgot_password_code_control_background"
+        android:backgroundTint="@color/md_blue_grey_900"
+        android:drawableStart="@drawable/ic_lock_24"
+        android:drawableTint="@color/black"
+        android:hint="@string/password"
+        android:imeOptions="actionNext"
         android:inputType="textPassword"
+        android:minWidth="320dp"
+        android:minHeight="45dp"
+        android:singleLine="true"
+        android:textColorHint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.604"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/viewBackground" />
 
     <EditText
         android:id="@+id/txtRePassword2"
-        android:layout_width="331dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
-        android:ems="10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/forgot_password_code_control_background"
+        android:backgroundTint="@color/md_blue_grey_900"
+        android:drawableStart="@drawable/ic_lock_24"
+        android:drawableTint="@color/black"
         android:hint="@string/re_enter_password"
+        android:imeOptions="actionNext"
         android:inputType="textPassword"
+        android:minWidth="320dp"
+        android:minHeight="45dp"
+        android:singleLine="true"
+        android:textColorHint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.604"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRePassword" />
 
@@ -47,6 +89,7 @@
     <Button
         android:id="@+id/btnChange"
         android:layout_width="181dp"
+        style="@style/Button1"
         android:layout_height="49dp"
         android:layout_marginTop="20dp"
         android:text="@string/change_password"
@@ -57,25 +100,26 @@
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imgPreview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnChangeImage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.42"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnChange"
-        app:layout_constraintVertical_bias="0.233" />
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:riv_oval="true"
+        app:layout_constraintBottom_toBottomOf="@+id/viewBackground2"
+        app:layout_constraintEnd_toEndOf="@+id/viewBackground2"
+        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintStart_toStartOf="@+id/viewBackground2"
+        app:layout_constraintTop_toTopOf="@+id/viewBackground2"
+        app:layout_constraintVertical_bias="0.109" />
 
     <Button
         android:id="@+id/btnChangeImage"
+        style="@style/Button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="264dp"
         android:text="@string/change_profile_image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnChange"
-        app:layout_constraintVertical_bias="0.221" />
+        app:layout_constraintBottom_toBottomOf="@+id/viewBackground2"
+        app:layout_constraintEnd_toEndOf="@+id/viewBackground2"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="@+id/viewBackground2"
+        app:layout_constraintTop_toTopOf="@+id/viewBackground2"
+        app:layout_constraintVertical_bias="0.958" />
 </androidx.constraintlayout.widget.ConstraintLayout>

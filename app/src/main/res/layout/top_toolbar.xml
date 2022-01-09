@@ -9,20 +9,4 @@
     app:title=" "
     android:background="@color/white"
     >
-        <EditText
-            android:id="@+id/txtRegisterName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/md_deep_purple_A400"
-            android:background="@drawable/forgot_password_code_control_background"
-            android:drawableStart="@drawable/ic_round_search_24"
-            android:drawablePadding="12dp"
-            android:drawableTint="@color/black"
-            android:hint="@string/name"
-            android:imeOptions="actionNext"
-            android:inputType="textEmailAddress"
-            android:minWidth="320dp"
-            android:minHeight="45dp"
-            android:singleLine="true"
-            />
 </androidx.appcompat.widget.Toolbar>

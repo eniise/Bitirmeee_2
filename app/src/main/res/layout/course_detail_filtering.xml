@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    >
 
     <TextView
         android:id="@+id/txSearchtDistrictName"
@@ -20,12 +22,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
     <com.makeramen.roundedimageview.RoundedImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        />
-
-    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/btnSearchBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,21 +36,28 @@
 
     <Switch
         android:id="@+id/swStudentSearch"
-        android:layout_width="106dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="344dp"
+        android:layout_width="135dp"
+        android:layout_height="42dp"
+        android:background="@drawable/forgot_password_code_control_background"
+        android:backgroundTint="@color/md_blue_grey_900"
         android:text="@string/student_home"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/colorAccent"
+        android:thumbTint="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@+id/swOtherPlaceSearch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13"
         app:layout_constraintVertical_bias="0.28" />
 
     <Switch
         android:id="@+id/swOtherPlaceSearch"
+        android:backgroundTint="@color/md_blue_grey_900"
+        android:background="@drawable/forgot_password_code_control_background"
         android:layout_width="135dp"
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
+        android:thumbTint="@color/colorAccent"
         android:text="@string/other_place"
+        android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,35 +65,53 @@
 
     <Switch
         android:id="@+id/swOnlineSearch"
-        android:layout_width="118dp"
-        android:layout_height="47dp"
+        android:layout_width="121dp"
+        android:layout_height="41dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="368dp"
+        android:background="@drawable/forgot_password_code_control_background"
+        android:backgroundTint="@color/md_blue_grey_900"
         android:text="@string/online"
+        android:textColor="@color/colorAccent"
+        android:thumbTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/swStudentSearch"
         app:layout_constraintTop_toBottomOf="@+id/textView13"
-        app:layout_constraintVertical_bias="0.442" />
+        app:layout_constraintVertical_bias="0.423" />
 
     <Switch
         android:id="@+id/swHomeSearch"
-        android:layout_width="127dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="135dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="4dp"
+        android:background="@drawable/forgot_password_code_control_background"
+        android:backgroundTint="@color/md_blue_grey_900"
         android:text="@string/trainer_home"
+        android:textColor="@color/colorAccent"
+        android:thumbTint="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/swOtherPlaceSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/swOnlineSearch"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintTop_toBottomOf="@+id/textView13"
+        app:layout_constraintVertical_bias="0.1" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="216dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginStart="204dp"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/forgot_password_code_control_background"
+        android:backgroundTint="@color/md_blue_grey_900"
+        android:drawSelectorOnTop="true"
         android:text="@string/max"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -99,8 +120,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/forgot_password_code_control_background"
+        android:backgroundTint="@color/md_blue_grey_900"
+        android:drawSelectorOnTop="true"
         android:text="@string/min"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -108,11 +135,21 @@
         android:id="@+id/txtSearchMax"
         android:layout_width="93dp"
         android:layout_height="39dp"
-        android:layout_marginStart="256dp"
+        android:layout_marginStart="244dp"
         android:layout_marginTop="72dp"
-        android:ems="10"
+        android:background="@drawable/forgot_password_code_control_background"
+        android:backgroundTint="@color/md_blue_grey_900"
+        android:drawableStart="@drawable/ic_baseline_attach_money_24"
+        android:drawablePadding="12dp"
+        android:hint="0"
+        android:imeOptions="actionNext"
         android:inputType="numberSigned"
-        android:text="@string/_0"
+        android:minWidth="320dp"
+        android:minHeight="45dp"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -122,9 +159,19 @@
         android:layout_height="39dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="72dp"
-        android:ems="10"
+        android:background="@drawable/forgot_password_code_control_background"
+        android:backgroundTint="@color/md_blue_grey_900"
+        android:hint="0"
+        android:drawableStart="@drawable/ic_baseline_attach_money_24"
+        android:drawablePadding="12dp"
+        android:imeOptions="actionNext"
         android:inputType="numberSigned"
-        android:text="@string/_0"
+        android:textColor="@color/colorAccent"
+        android:minWidth="320dp"
+        android:minHeight="45dp"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:textColorHint="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -132,10 +179,10 @@
         android:id="@+id/btnCostSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="84dp"
         android:background="@drawable/ic_baseline_search_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintHorizontal_bias="0.804"
         app:layout_constraintStart_toEndOf="@+id/txtSearchMin"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -143,7 +190,7 @@
         android:id="@+id/btnCourseNameSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="92dp"
         android:background="@drawable/ic_baseline_search_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.194"
@@ -156,19 +203,27 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/ic_baseline_search_24"
+        app:layout_constraintBottom_toBottomOf="@+id/swOtherPlaceSearch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.211"
+        app:layout_constraintHorizontal_bias="0.155"
         app:layout_constraintStart_toEndOf="@+id/swOtherPlaceSearch"
-        app:layout_constraintTop_toBottomOf="@+id/swHomeSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/swHomeSearch"
+        app:layout_constraintVertical_bias="0.23" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
+        android:background="@drawable/forgot_password_code_control_background"
+        android:backgroundTint="@color/md_blue_grey_900"
+        android:drawSelectorOnTop="true"
         android:text="@string/cost_search"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -177,7 +232,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
+        android:background="@drawable/forgot_password_code_control_background"
+        android:backgroundTint="@color/md_blue_grey_900"
+        android:drawSelectorOnTop="true"
         android:text="@string/name_search"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.463"
         app:layout_constraintStart_toStartOf="parent"
@@ -188,7 +249,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@drawable/forgot_password_code_control_background"
+        android:backgroundTint="@color/md_blue_grey_900"
+        android:drawSelectorOnTop="true"
         android:text="@string/place_search"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.469"
         app:layout_constraintStart_toStartOf="parent"
@@ -199,9 +266,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:ems="10"
+        android:background="@drawable/forgot_password_code_control_background"
+        android:backgroundTint="@color/md_blue_grey_900"
         android:hint="@string/enter_a_course_name"
+        android:imeOptions="actionNext"
         android:inputType="textPersonName"
+        android:minWidth="320dp"
+        android:minHeight="45dp"
+        android:singleLine="true"
+        android:textColorHint="@color/colorAccent"
+        android:textAlignment="center"
+        android:drawableStart="@drawable/ic_round_edit_24"
+        android:drawablePadding="12dp"
+        android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -210,15 +287,17 @@
     <FrameLayout
         android:id="@+id/fragmentMapsEmbbed"
         android:layout_width="match_parent"
-        android:layout_height="336dp"
+        android:layout_height="346dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swOtherPlaceSearch" >
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/swOtherPlaceSearch">
+
         <fragment
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/map2"
-            android:name="com.google.android.gms.maps.SupportMapFragment" />
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

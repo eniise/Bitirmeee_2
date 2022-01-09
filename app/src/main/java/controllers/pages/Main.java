@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import fragments.ChatFragment;
 import fragments.HomeFragment;
 import fragments.ProfilFragment;
+import utils.components.MyAlertDialog;
 import utils.extras.TransactionTypes;
 
 public class Main extends AppCompatActivity {
@@ -37,6 +39,7 @@ public class Main extends AppCompatActivity {
     private FrameLayout mFrameLayout;
     private RelativeLayout.LayoutParams mParams;
     private com.ismaeldivita.chipnavigation.ChipNavigationBar bottomNav;
+    private EditText txtSearchCourse;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,16 +47,14 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.home_page);
         mToolBar = findViewById(R.id.toolbar);
         mToolBar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.ic_baseline_notes_24));
-        mToolBar.setNavigationOnClickListener(v -> {
-            System.out.println(v.getId());
-        });
         SetApplicationToolbar();
+        txtSearchCourse = findViewById(R.id.txtSearchCourse);
+        SetupNavigationBar();
         mFrameLayout = findViewById(R.id.fragment_container);
         mParams = (RelativeLayout.LayoutParams) findViewById(R.id.fragment_container).getLayoutParams();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment()).commit();
+                new HomeFragment(txtSearchCourse)).commit();
         context = this;
-        SetupNavigationBar();
     }
 
     @SuppressLint("RestrictedApi")
@@ -90,9 +91,10 @@ public class Main extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 switch (item) {
                     case R.id.home:
-                        selectedFragment = new HomeFragment();
+                        selectedFragment = new HomeFragment(txtSearchCourse);
                         mToolBar.setVisibility(View.VISIBLE);
                         mFrameLayout.setLayoutParams(mParams);
+                        txtSearchCourse.setVisibility(View.VISIBLE);
                         break;
                     case R.id.chat:
                         selectedFragment = new ChatFragment();
@@ -100,6 +102,7 @@ public class Main extends AppCompatActivity {
                         RelativeLayout.LayoutParams _tmp = new RelativeLayout.LayoutParams(mParams);
                         _tmp.topMargin = 0;
                         mFrameLayout.setLayoutParams(_tmp);
+                        txtSearchCourse.setVisibility(View.GONE);
                         break;
                     case R.id.profil:
                         selectedFragment = new ProfilFragment();
@@ -107,6 +110,7 @@ public class Main extends AppCompatActivity {
                         RelativeLayout.LayoutParams _tmp2 = new RelativeLayout.LayoutParams(mParams);
                         _tmp2.topMargin = 0;
                         mFrameLayout.setLayoutParams(_tmp2);
+                        txtSearchCourse.setVisibility(View.GONE);
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

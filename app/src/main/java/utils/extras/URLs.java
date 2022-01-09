@@ -170,4 +170,10 @@ public class URLs {
                 ServerInfo.API_LEVEL +
                 "User/GetMyPhoto?userId="+userId;
     }
+    public static String SearchCourse(String courseName){
+        return ServerInfo.Host +
+                ServerInfo.PortNumber +
+                ServerInfo.API_LEVEL +
+                "TrainerCourse/SearchCourse?courseName="+courseName;
+    }
 }

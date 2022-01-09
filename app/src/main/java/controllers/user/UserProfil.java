@@ -89,12 +89,12 @@ public class UserProfil extends AppCompatActivity implements AsyncResponse {
             mUserProfileName.setText(_lst.get(0).getmUserName());
             mUserProfileLikeCount.setText("User like score : "+_lst.get(0).getLikeCount());
             new ImageDownloaderTask(mUserProfileImage)
-                    .execute(URLs.GetPhoto(StaticData.getUserData().getUserId()));
+                    .execute(URLs.GetPhoto(_lst.get(0).getmUserId()));
         }else {
             mUserProfileName.setText(_lst.get(0).getmUserName());
             mUserProfileLikeCount.setText("User like score : "+_lst.get(0).getLikeCount());
             new ImageDownloaderTask(mUserProfileImage)
-                    .execute(URLs.GetPhoto(StaticData.getUserData().getUserId()));
+                    .execute(URLs.GetPhoto(_lst.get(0).getmUserId()));
             profileProgressBar.setVisibility(View.GONE);
             mUserProfileRecylerView.setVisibility(View.GONE);
         }
