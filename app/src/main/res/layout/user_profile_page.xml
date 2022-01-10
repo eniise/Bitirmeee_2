@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ee"
+    android:background="@drawable/profile_content_background"
     >
 
     <View
@@ -16,7 +16,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/message_background_content_top"
-        android:backgroundTint="@color/md_amber_600"
+        android:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/recylerUserProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +41,7 @@
         android:id="@+id/profileBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/ic_back"
-        android:backgroundTint="@color/black"
+        android:src="@drawable/ic_back"
         app:layout_constraintBottom_toTopOf="@+id/imgProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.041"
@@ -76,7 +75,6 @@
         app:layout_constraintStart_toEndOf="@+id/imgProfile"
         app:layout_constraintTop_toBottomOf="@+id/profileSettings"
         app:riv_border_color="@color/black" />
-
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imgProfile"

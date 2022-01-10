@@ -5,16 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@drawable/ee"
+    android:background="@drawable/border"
     android:layout_height="match_parent"
     tools:context="controllers.pages.ChatPage">
     <View
         android:id="@+id/viewBackground"
-        android:background="@drawable/ee"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"
-
         app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginBottom="50dp"
         />
@@ -22,7 +21,8 @@
         android:id="@+id/headerBackground"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/md_amber_600"
+        android:background="@drawable/border"
+        android:backgroundTint="@color/md_blue_grey_900"
         app:layout_constraintBottom_toTopOf="@id/viewSupporter"
         app:layout_constraintTop_toTopOf="parent"
         />
@@ -34,9 +34,9 @@
         android:layout_marginTop="16dp"
         android:padding="5dp"
         android:imeOptions="actionGo"
-        android:textColor="@color/white"
+        android:textColor="@color/colorAccent"
         android:background="@null"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="@+id/headerBackground"
         app:layout_constraintHorizontal_bias="0.397"
         app:layout_constraintStart_toStartOf="parent"

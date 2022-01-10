@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#92C68DE4">
+
+    <TextView
+        android:id="@+id/textView41"
+        android:layout_width="272dp"
+        android:layout_height="51dp"
+        android:text="Trainer Information"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.276" />
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="289dp"
+        android:layout_height="88dp"
+        android:background="#83E91E63"
+        android:text="e-TechEducation Trainer Profile Page"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.085" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="188dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="270dp"
+        android:layout_height="105dp"
+        android:text="Melisa 27 years old  Math Calculus"
+        android:textColor="#1C1A1A"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="251dp" />
+
+    <TextView
+        android:id="@+id/textView44"
+        android:layout_width="363dp"
+        android:layout_height="156dp"
+        android:text="Hey everyone!  I graduated from HKU. I had experience about calculus. Linear Algebra"
+        android:textColor="#1C1A1A"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="419dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
