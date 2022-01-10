@@ -27,7 +27,7 @@ import utils.server.ServerGET;
 import utils.server.ServerPOST;
 
 public class CodeControl extends AppCompatActivity implements AsyncResponse{
-    private static final int millisFuture = 180000;
+    private static final int millisFuture = 30000;
     private static final int countDownInterval = 1000;
     private TextView txtCodeControl;
     private Button btnCodeControl;

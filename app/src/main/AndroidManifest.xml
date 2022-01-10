@@ -10,9 +10,9 @@
     <application tools:ignore="ExtraText"
         android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
-        >
-
+        android:icon="@drawable/logo"
+        android:label="@string/application_label"
+        android:usesCleartextTraffic="true">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA-99NRffwvYNWfROFtGC3x6gX0ve6WBzI" />
@@ -21,7 +21,8 @@
             android:theme="@style/Theme.Bitirme_2" />
         <activity
             android:name="controllers.pages.Main"
-            android:theme="@style/Theme.Bitirme_2" />
+            android:theme="@style/Theme.Bitirme_2"
+            />
         <activity android:name="controllers.pages.ChatPage"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.Bitirme_2_Chat"/>
@@ -51,7 +52,6 @@
             android:theme="@style/Theme.Bitirme_2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

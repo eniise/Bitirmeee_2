@@ -1,6 +1,5 @@
 package controllers.user;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
@@ -8,10 +7,9 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.enise.bitirme_2.R;
 
@@ -25,7 +23,7 @@ import utils.user.StaticData;
 import utils.extras.TransactionTypes;
 import utils.extras.URLs;
 
-public class Login extends Activity implements AsyncResponse {
+public class Login extends AppCompatActivity implements AsyncResponse {
     TextView registerPage;
     TextView forgotPassword;
     EditText txtMail;
@@ -54,24 +52,21 @@ public class Login extends Activity implements AsyncResponse {
             String password = txtPassword.getText().toString();
             if(mail.length() != 0 && password.length() != 0 ) {
                 doLoginDialog = new ProgressDialog(v.getContext());
-                ServerGET task =  new ServerGET(doLoginDialog, TransactionTypes.doLogin, "Giriş yapılıyor");
+                ServerGET task =  new ServerGET(doLoginDialog, TransactionTypes.doLogin, "Login process is running");
                 task.delegate = this;
                 try {
                     task.execute(URLs.LoginURL + "userMail="+mail+"&userPassword="+password).get();
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
-
             }else {
-                new MyAlertDialog(v.getContext(),"Alanlar boş olamaz","Mail Adresi veya şifre alanı boş olamaz.",R.drawable.ic_baseline_info_24)
+                new MyAlertDialog(v.getContext(),"Fields can not be empty","Mail field or password field can not be empty.",R.drawable.ic_baseline_info_24)
                         .ShowMessage()
                         .setPositiveButton(R.string.okay,((dialog, which) -> {
                             if(txtMail.getText().toString().length() == 0)
                                 txtMail.requestFocus();
                             else if(txtPassword.getText().length() == 0)
                                 txtPassword.requestFocus();
-                            else
-                                Toast.makeText(v.getContext(), "Boş alan algılanmadı.", Toast.LENGTH_SHORT).show();
                         }))
                         .show();
             }
@@ -93,19 +88,20 @@ public class Login extends Activity implements AsyncResponse {
 
     @Override
     public void processFinish(Object output) {
-        if(String.valueOf(output).equals("true")){
-            System.out.println(StaticData.getUserData().getMail());
-            Intent intent = new Intent(this, Main.class);
-            startActivity(intent);
-            finish();
-        }
-        if(String.valueOf(output).equals("false")){
-            new MyAlertDialog(this,"Hatalı giriş","Mail adresi veya şifre hatalı",R.drawable.ic_baseline_info_24)
-                    .ShowMessage()
-                    .setPositiveButton(R.string.okay,((dialog, which) -> {
-                        txtMail.requestFocus();
-                    }))
-                    .show();
+        if(output.getClass() == String.class){
+            if(String.valueOf(output).equals("true")) {
+                Intent intent = new Intent(this, Main.class);
+                startActivity(intent);
+                finish();
+            }
+            else if(String.valueOf(output).equals("false")){
+                new MyAlertDialog(this,"Login error","Mail address or password is incorrect",R.drawable.ic_baseline_info_24)
+                        .ShowMessage()
+                        .setPositiveButton(R.string.okay,((dialog, which) -> {
+                            txtMail.requestFocus();
+                        }))
+                        .show();
+            }
         }
     }
 }

@@ -53,6 +53,7 @@ public class ProfilSettings extends AppCompatActivity implements AsyncResponse {
     Context context;
     private RoundedImageView profileSettingsBack;
     private RoundedImageView imgPreview;
+    private RoundedImageView btnQuit;
     String picturePath;
     Uri selectedImage;
     Bitmap photo;
@@ -67,6 +68,18 @@ public class ProfilSettings extends AppCompatActivity implements AsyncResponse {
     }
     @SuppressLint("IntentReset")
     void init(){
+        btnQuit = findViewById(R.id.btnQuit);
+        btnQuit.setOnClickListener(v -> {
+            new MyAlertDialog(v.getContext(),"Logout process","You are about to log out, do you confirm?",R.drawable.ic_message_info)
+                    .ShowMessage()
+                    .setPositiveButton(R.string.okay,(dialog, which) -> {
+                        StaticData.setUserData(null);
+                        finishAndRemoveTask();
+                    }).setNegativeButton(R.string.no,(dialog, which) -> {
+
+                    })
+                    .show();
+        });
         txtPassword1 = findViewById(R.id.txtRePassword);
         txtPassword2 = findViewById(R.id.txtRePassword2);
         btnChange = findViewById(R.id.btnChange);

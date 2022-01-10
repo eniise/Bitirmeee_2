@@ -189,7 +189,7 @@ public class ChatPage extends AppCompatActivity implements AsyncResponse, View.O
         receiverUserName = bundle.getString("receiverName");
         mStartChatDate = bundle.getString("startChatDate");
         receiverUserImage = bundle.getString("receiverImage");
-        new BitmapTask().execute(receiverUserImage);
+        new BitmapTask().execute(URLs.GetPhoto(receiverId));
         mProgressBar = findViewById(R.id.progressBar);
         mReceiverName = findViewById(R.id.txtReceiverName);
         mReceiverName.setText(receiverUserName);

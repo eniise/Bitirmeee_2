@@ -112,15 +112,17 @@ public class ProfilFragment extends Fragment implements AsyncResponse,View.OnCli
 
     @Override
     public <T> void processFinish(T result) {
-        ArrayList<TrainerCourse> _lst = (ArrayList<TrainerCourse>) result;
-        mUserProfileRecylerView = view.findViewById(R.id.recylerUserProfile);
-        mUserProfileRecylerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mAdapter = new TrainerCourseAdapter(_lst,"Home");
-        mUserProfileRecylerView.setLayoutManager(mLayoutManager);
-        mUserProfileRecylerView.setAdapter(mAdapter);
-        mUserProfileRecylerView.setVisibility(View.VISIBLE);
-        profileProgressBar.setVisibility(View.GONE);
+        if(result.getClass() == ArrayList.class) {
+            ArrayList<TrainerCourse> _lst = (ArrayList<TrainerCourse>) result;
+            mUserProfileRecylerView = view.findViewById(R.id.recylerUserProfile);
+            mUserProfileRecylerView.setHasFixedSize(true);
+            mLayoutManager = new LinearLayoutManager(getContext());
+            mAdapter = new TrainerCourseAdapter(_lst, "Home");
+            mUserProfileRecylerView.setLayoutManager(mLayoutManager);
+            mUserProfileRecylerView.setAdapter(mAdapter);
+            mUserProfileRecylerView.setVisibility(View.VISIBLE);
+            profileProgressBar.setVisibility(View.GONE);
+        }
     }
 
 

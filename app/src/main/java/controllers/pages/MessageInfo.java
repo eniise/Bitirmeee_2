@@ -71,7 +71,7 @@ public class MessageInfo extends AppCompatActivity implements View.OnClickListen
         if(v.getId() == R.id.deleteMessages){
             new MyAlertDialog(v.getContext(),"Are you sure?","Deletion cannot be undone.",R.drawable.ic_round_delete_24)
                     .ShowMessage()
-                    .setNegativeButton(R.string.hayir, (dialog, which) -> {
+                    .setNegativeButton(R.string.no, (dialog, which) -> {
                         //user enter NO
                     })
                     .setPositiveButton(R.string.okay, ((dialog, which) -> {

@@ -113,7 +113,12 @@ public class DetailFiltering extends AppCompatActivity implements AsyncResponse,
             ServerPOST searchCost = new ServerPOST(TransactionTypes.doSearch);
             searchCost.delegate = this;
             if (txtSearchMax.getText().length() > 0 && txtSearchMin.getText().length() > 0) {
-                SearchDto searchDto = new SearchDto(Float.parseFloat(txtSearchMax.getText().toString()),Float.parseFloat(txtSearchMin.getText().toString()),"","",districtName.length()>2 ? districtName : "");
+                SearchDto searchDto = new SearchDto(
+                        Float.parseFloat(txtSearchMax.getText().toString())
+                        ,Float.parseFloat(txtSearchMin.getText().toString())
+                        ,""
+                        ,""
+                        ,districtName.length()>2 ? districtName : "");
                 searchCost.execute(URLs.SearchCost(),new Gson().toJson(searchDto));
             } else {
                 new MyAlertDialog(this, "Not null", "Please enter cost max and min", R.drawable.ic_message_info)
@@ -182,6 +187,7 @@ public class DetailFiltering extends AppCompatActivity implements AsyncResponse,
     @Override
     public void onMapReady(@NonNull @NotNull GoogleMap googleMap) {
         mMap = googleMap;
+        //37.0587509,37.3100969,
         LatLng antep = new LatLng(37.0587509, 37.3100968);
         mMap.addMarker(new MarkerOptions()
                 .position(antep)
@@ -206,14 +212,14 @@ public class DetailFiltering extends AppCompatActivity implements AsyncResponse,
             new AlertDialog.Builder(context)
                     .setTitle("District found")
                     .setMessage(find_ilce+" -> Save selected district information to search details??")
-                    .setPositiveButton(R.string.yonlendir, (dialog, which) -> {
+                    .setPositiveButton(R.string.mark_on_the_map, (dialog, which) -> {
                         //ServerGET serverGET = new ServerGET(TransactionTypes.doSearch);
                         //serverGET.delegate = this;
                         //serverGET.execute(URLs.SearchDistrict(find_ilce));
                         this.districtName = find_ilce;
                         txSearchtDistrictName.setText(find_ilce);
                     })
-                    .setNegativeButton(R.string.hayir, ((dialog, which) -> {
+                    .setNegativeButton(R.string.no, ((dialog, which) -> {
 
                     }))
                     .setIcon(R.drawable.ic_baseline_info_24)

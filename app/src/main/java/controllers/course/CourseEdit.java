@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enise.bitirme_2.R;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ public class CourseEdit extends AppCompatActivity implements AsyncResponse {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ProgressBar mHomeContentProgressBar;
+    private RoundedImageView editCourseBack;
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,10 @@ public class CourseEdit extends AppCompatActivity implements AsyncResponse {
         ServerGET serverGET = new ServerGET(TransactionTypes.doTrainerGetMyUploads);
         serverGET.delegate = this;
         serverGET.execute(URLs.GetMyUploadCourses(StaticData.getUserData().getUserId()));
+        editCourseBack = findViewById(R.id.editCourseBack);
+        editCourseBack.setOnClickListener(v -> {
+            onBackPressed();
+        });
     }
 
     @Override

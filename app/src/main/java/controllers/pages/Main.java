@@ -130,6 +130,7 @@ public class Main extends AppCompatActivity {
         }else {
             bottomNav.setItemSelected(bottomNav.findViewById(R.id.home).getId(),true);
         }
+        bottomNav.setItemSelected(bottomNav.findViewById(R.id.home).getId(),true);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

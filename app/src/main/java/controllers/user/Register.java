@@ -36,8 +36,8 @@ public class Register extends Activity implements AsyncResponse, CompoundButton.
     RadioButton rdRegisterGenderFamale;
     RadioButton rdRegisterGenderMale;
     private int RoleId=0;
-    private final String Famale = "https://tibatu.com/wp-content/uploads/2020/10/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg";
-    private final String Male = "https://tibatu.com/wp-content/uploads/2020/10/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg";
+    private final String Famale = "C:\\inetpub\\wwwroot\\Uploads\\images.jpeg";
+    private final String Male = "C:\\inetpub\\wwwroot\\Uploads\\images.jpeg";
     private String mUserSelectedGender = "";
     private boolean mUserGenderType = false;
     private RoundedImageView regisBack;
@@ -57,7 +57,7 @@ public class Register extends Activity implements AsyncResponse, CompoundButton.
                         mUserSelectedGender,
                         mUserGenderType,
                         0);
-                ServerPOST post = new ServerPOST(doRegisterDialog, TransactionTypes.doRegister,"Kayıt yapılıyor...");
+                ServerPOST post = new ServerPOST(doRegisterDialog, TransactionTypes.doRegister,"Register process is running...");
                 post.delegate = this;
                 post.execute(URLs.RegisterURL,new Gson().toJson(user));
             }
@@ -67,7 +67,7 @@ public class Register extends Activity implements AsyncResponse, CompoundButton.
     @Override
     public void processFinish(Object output) {
         if(String.valueOf(output).equals("true")){
-            new MyAlertDialog(this,"Kayıt tamamlandı","Kayıt işleminiz başarılı, anasayfaya yönlendiriyorum.",R.drawable.ic_baseline_info_24)
+            new MyAlertDialog(this,"Register completed","Register process successfully, re-direct to login screen.",R.drawable.ic_baseline_info_24)
                     .ShowMessage()
                     .setNegativeButton(R.string.okay,((dialog, which) -> {
                         Intent intent = new Intent(this,Login.class)

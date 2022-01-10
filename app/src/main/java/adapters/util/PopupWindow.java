@@ -140,52 +140,60 @@ public class PopupWindow implements AsyncResponse {
         });
     }
     private void DetectAndSetPlan(String types){
-        if(types.length()>0){
-            if(types.indexOf(",")>0){
-                String[] split = types.split(",");
-                for (String i:split) {
-                    String _tmp = i.replace(" ","");
-                    if (_tmp.equals("TrainerHome")){
-                        swHome.setVisibility(View.VISIBLE);
-                    }else if(_tmp.equals("Online")){
-                        swOnline.setVisibility(View.VISIBLE);
-                    }else if(_tmp.equals("Otherplace")){
-                        swOther.setVisibility(View.VISIBLE);
-                    }else if(_tmp.equals("Studenthome")){
-                        swStudent.setVisibility(View.VISIBLE);
+        if(types != null) {
+            if (types.length() > 0) {
+                if (types.indexOf(",") > 0) {
+                    String[] split = types.split(",");
+                    for (String i : split) {
+                        String _tmp = i.replace(" ", "");
+                        if (_tmp.equals("TrainerHome")) {
+                            swHome.setVisibility(View.VISIBLE);
+                        } else if (_tmp.equals("Online")) {
+                            swOnline.setVisibility(View.VISIBLE);
+                        } else if (_tmp.equals("Otherplace")) {
+                            swOther.setVisibility(View.VISIBLE);
+                        } else if (_tmp.equals("Studenthome")) {
+                            swStudent.setVisibility(View.VISIBLE);
+                        }
                     }
-                }
-            }else {
-                switch (types) {
-                    case "Trainer Home":
-                        swHome.setVisibility(View.VISIBLE);
-                        break;
-                    case "Online":
-                        swOnline.setVisibility(View.VISIBLE);
-                        break;
-                    case "Other place":
-                        swOther.setVisibility(View.VISIBLE);
-                        break;
-                    case "Student home":
-                        swStudent.setVisibility(View.VISIBLE);
-                        break;
+                } else {
+                    switch (types) {
+                        case "Trainer Home":
+                            swHome.setVisibility(View.VISIBLE);
+                            break;
+                        case "Online":
+                            swOnline.setVisibility(View.VISIBLE);
+                            break;
+                        case "Other place":
+                            swOther.setVisibility(View.VISIBLE);
+                            break;
+                        case "Student home":
+                            swStudent.setVisibility(View.VISIBLE);
+                            break;
+                    }
                 }
             }
         }
     }
     private void DetectAndSetIntervals(String intervals){
-        if(intervals.length()>0){
-            txtIntervals.setText(String.valueOf("The instructor gives courses at the times : "+intervals));
+        if(intervals != null) {
+            if (intervals.length() > 0) {
+                txtIntervals.setText(String.valueOf("The instructor gives courses at the times : " + intervals));
+            }
         }
     }
     private void DetectAndSetDistict(String district){
-        if(district.length()>0){
-            txtCity.setText(String.valueOf("The instructor gives courses at the district : "+district));
+        if(district != null){
+            if(district.length()>0){
+                txtCity.setText(String.valueOf("The instructor gives courses at the district : "+district));
+            }
         }
     }
     private void DetectAndSetDays(String days){
-        if(days.length()>0){
-            txtDays.setText(String.valueOf("The instructor gives courses at the days : "+days));
+        if(days != null) {
+            if (days.length() > 0) {
+                txtDays.setText(String.valueOf("The instructor gives courses at the days : " + days));
+            }
         }
     }
 

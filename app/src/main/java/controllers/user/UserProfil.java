@@ -28,6 +28,8 @@ import utils.extras.TransactionTypes;
 import utils.extras.URLs;
 import utils.user.StaticData;
 
+import static android.os.Process.killProcess;
+
 public class UserProfil extends AppCompatActivity implements AsyncResponse {
     private RoundedImageView btnProfileCourseUpload;
     private RoundedImageView btnProfileCourseEdit;
@@ -40,7 +42,7 @@ public class UserProfil extends AppCompatActivity implements AsyncResponse {
     private RecyclerView.LayoutManager mLayoutManager;
     private ProgressBar profileProgressBar;
     private Context context;
-    private RoundedImageView btnProfileSettings;
+    private RoundedImageView btnProfileSettings,btnQuit;
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,33 +72,35 @@ public class UserProfil extends AppCompatActivity implements AsyncResponse {
         btnBack = findViewById(R.id.profileBack);
         btnBack.setVisibility(View.VISIBLE);
         btnBack.setOnClickListener(v -> {
-            finish();
+            onBackPressed();
         });
     }
     @SuppressLint("SetTextI18n")
     @Override
     public <T> void processFinish(T result) {
-        ArrayList<TrainerCourse> _lst = (ArrayList<TrainerCourse>) result;
-        mUserProfileRecylerView = findViewById(R.id.recylerUserProfile);
-        if(_lst.size() >= 1 && _lst.get(0).getmTrainerImage() != null) {
-            mUserProfileRecylerView.setHasFixedSize(true);
-            mLayoutManager = new LinearLayoutManager(context);
-            mAdapter = new TrainerCourseAdapter(_lst, "Home");
-            mUserProfileRecylerView.setLayoutManager(mLayoutManager);
-            mUserProfileRecylerView.setAdapter(mAdapter);
-            mUserProfileRecylerView.setVisibility(View.VISIBLE);
-            profileProgressBar.setVisibility(View.GONE);
-            mUserProfileName.setText(_lst.get(0).getmUserName());
-            mUserProfileLikeCount.setText("User like score : "+_lst.get(0).getLikeCount());
-            new ImageDownloaderTask(mUserProfileImage)
-                    .execute(URLs.GetPhoto(_lst.get(0).getmUserId()));
-        }else {
-            mUserProfileName.setText(_lst.get(0).getmUserName());
-            mUserProfileLikeCount.setText("User like score : "+_lst.get(0).getLikeCount());
-            new ImageDownloaderTask(mUserProfileImage)
-                    .execute(URLs.GetPhoto(_lst.get(0).getmUserId()));
-            profileProgressBar.setVisibility(View.GONE);
-            mUserProfileRecylerView.setVisibility(View.GONE);
+        if(result.getClass() == ArrayList.class) {
+            ArrayList<TrainerCourse> _lst = (ArrayList<TrainerCourse>) result;
+            mUserProfileRecylerView = findViewById(R.id.recylerUserProfile);
+            if (_lst.size() >= 1 && _lst.get(0).getmTrainerImage() != null) {
+                mUserProfileRecylerView.setHasFixedSize(true);
+                mLayoutManager = new LinearLayoutManager(context);
+                mAdapter = new TrainerCourseAdapter(_lst, "Home");
+                mUserProfileRecylerView.setLayoutManager(mLayoutManager);
+                mUserProfileRecylerView.setAdapter(mAdapter);
+                mUserProfileRecylerView.setVisibility(View.VISIBLE);
+                profileProgressBar.setVisibility(View.GONE);
+                mUserProfileName.setText(_lst.get(0).getmUserName());
+                mUserProfileLikeCount.setText("User like score : " + _lst.get(0).getLikeCount());
+                new ImageDownloaderTask(mUserProfileImage)
+                        .execute(URLs.GetPhoto(_lst.get(0).getmUserId()));
+            } else {
+                mUserProfileName.setText(_lst.get(0).getmUserName());
+                mUserProfileLikeCount.setText("User like score : " + _lst.get(0).getLikeCount());
+                new ImageDownloaderTask(mUserProfileImage)
+                        .execute(URLs.GetPhoto(_lst.get(0).getmUserId()));
+                profileProgressBar.setVisibility(View.GONE);
+                mUserProfileRecylerView.setVisibility(View.GONE);
+            }
         }
     }
 }

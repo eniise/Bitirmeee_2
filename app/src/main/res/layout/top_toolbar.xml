@@ -7,6 +7,6 @@
     android:id="@+id/topToolbar"
     android:theme="@style/Theme.Bitirme_2"
     app:title=" "
-    android:background="@color/white"
+    android:background="@color/md_amber_600"
     >
 </androidx.appcompat.widget.Toolbar>

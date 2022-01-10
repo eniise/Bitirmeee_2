@@ -30,9 +30,9 @@ public class ServerGET extends AsyncTask<String, String, String> {
     private final int transactionType;
     public AsyncResponse delegate = null;
     private TrainerCourseAdapter.PostsViewHolder holder;
-    public ServerGET(ProgressDialog progressDialog, int transactionType, String islem){
+    public ServerGET(ProgressDialog progressDialog, int transactionType, String processName){
         this.progressDialog = progressDialog;
-        this.progressDialog.setMessage(islem+", please wait..");
+        this.progressDialog.setMessage(processName+", please wait..");
         this.transactionType = transactionType;
     }
     public ServerGET(int transactionType, TrainerCourseAdapter.PostsViewHolder holder){
@@ -53,7 +53,6 @@ public class ServerGET extends AsyncTask<String, String, String> {
     protected String doInBackground(String... params) {
         HttpURLConnection connection = null;
         BufferedReader reader = null;
-        System.out.println(params.length > 1 ? params[0]+" "+params[1] : params[0]);
         try {
             URL url = new URL(params[0]);
             connection = (HttpURLConnection) url.openConnection();
@@ -65,6 +64,7 @@ public class ServerGET extends AsyncTask<String, String, String> {
             while ((line = reader.readLine()) != null) {
                 buffer.append(line).append("\n");
             }
+            System.out.println(params[0]);
             return buffer.toString();
         } catch (IOException e) {
             e.printStackTrace();

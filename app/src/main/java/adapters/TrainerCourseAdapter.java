@@ -203,7 +203,7 @@ public class TrainerCourseAdapter extends RecyclerView.Adapter<TrainerCourseAdap
                             DeleteCourse _delete = new DeleteCourse(currentItem,v.getContext(),this,mUrunlerList);
                             _delete.Delete();
                         }))
-                        .setNegativeButton(R.string.hayir,(((dialog, which) -> {
+                        .setNegativeButton(R.string.no,(((dialog, which) -> {
                             //
                         })))
                         .show();

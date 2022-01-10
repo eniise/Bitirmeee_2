@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_blue_grey_700"
+    android:background="@drawable/ee"
     android:orientation="vertical"
     android:fillViewport="true"
     android:fitsSystemWindows="true"
@@ -29,7 +29,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="32dp"
-                android:src="@drawable/logo"
+                android:src="@drawable/was"
                 android:scaleType="centerInside"/>
 
             <TextView
@@ -38,8 +38,8 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
                 android:text="@string/wellcome_to_e_tech_education"
-                android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textColor="@color/md_amber_600"
+                android:textSize="22sp"
                 android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
@@ -111,31 +111,36 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                style="@style/TextyButton"
+                style="@style/Button1"
                 android:id="@+id/loginForgotPassword"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_gravity="right"
-                android:padding="10dp"
+                android:textColor="@color/md_blue_700"
                 android:layout_marginRight="24dp"
-                android:text="Forgot password?" />
+                android:text="@string/forgot_password"
+                android:textSize="12sp"
+                tools:ignore="RtlHardcoded" />
 
             <Button
                 android:id="@+id/btnLogin"
                 style="@style/Button1"
-                android:layout_width="342dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
+                android:textColor="@color/black"
                 android:text="@string/common_signin_button_text" />
 
             <TextView
-                style="@style/TextyButton"
+                style="@style/Button1"
                 android:id="@+id/registerPage"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:padding="20dp"
+                android:layout_marginTop="4dp"
+                android:textSize="10sp"
+                android:textColor="@color/md_blue_700"
                 android:text="@string/don_t_have_an_account_sign_up" />
         </LinearLayout>
 
